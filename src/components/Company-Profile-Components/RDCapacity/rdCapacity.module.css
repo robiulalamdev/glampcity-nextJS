@@ -1,0 +1,40 @@
+@media screen and (max-width: 1000px) {
+    .mainTable {
+        border: 0;
+        background: red;
+    }
+
+    .mainTable caption {
+        font-size: 1.3em;
+    }
+
+    .mainTable thead {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .mainTable tr {
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .mainTable td {
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    .mainTable td::before {
+        content: attr(data-label);
+        float: left;
+    }
+
+    .mainTable td:last-child {
+        border-bottom: 0;
+    }
+}
