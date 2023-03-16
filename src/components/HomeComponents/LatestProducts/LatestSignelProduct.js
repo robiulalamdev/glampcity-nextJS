@@ -30,7 +30,7 @@ const LatestSignelProduct = ({ product, wishlistItem }) => {
             <div className='flex flex-col items-start gap-2'>
                 <span className='text-gray-900 text-sm md:text-md font-bold text-left '>{product.title}</span>
                 <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product.price}</span>
-                <span className='text-gray-400 text-sm text-left'>{product.description.slice(0, 40) + '...'}</span>
+                <span className='text-gray-400 text-sm text-left'>{product.description?.slice(0, 40) + '...'}</span>
             </div>
             <button onClick={() => dispatch(setCartItems([...cartItems, product]))} className='w-36 lg:w-48 h-7 md:h-9 mx-auto bg-primary flex justify-center items-center rounded-[50px]'>
                 <h1 className='text-white font-semibold md:font-bold'>Buy Now</h1>

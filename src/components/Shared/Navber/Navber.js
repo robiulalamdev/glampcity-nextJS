@@ -77,7 +77,7 @@ const Navber = () => {
                 </div>
                 {
                     userInfo ? <div className='flex items-center gap-2'>
-                        <h1 className='font-bold text-blue-900 hidden sm:block'>{userInfo?.name.slice(0, 12)}</h1>
+                        <h1 className='font-bold text-blue-900 hidden sm:block'>{userInfo?.name?.slice(0, 12)}</h1>
                         <div onClick={() => dispatch(setOpenUserProfileSidebar(true))}
                             className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
                             <span>{userInfo?.name?.slice(0, 1)} </span>
