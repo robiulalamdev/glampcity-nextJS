@@ -15,8 +15,8 @@ import { useDispatch } from 'react-redux';
 
 
 const index = ({ data }) => {
-    const dispatch = useDispatch()
-    dispatch(setCategories(data))
+    // const dispatch = useDispatch()
+    // dispatch(setCategories(data))
     return (
         <section className=''>
             <div className='bg-[#faf8f8]'>

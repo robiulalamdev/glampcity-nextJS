@@ -16,15 +16,15 @@ const ProductCard = ({ product }) => {
         dispatch(setWishlistItems(getWishlistItems))
     }
     return (
-        <div className='relative w-full mx-auto flex flex-col justify-center items-center gap-2 rounded-xl p-2 hover:bg-blue-100 cursor-pointer hover:shadow hover:shadow-blue-400 duration-300 bg-white mt-6'>
-            <div className='relative w-full h-24 md:h-28 overflow-hidden'>
-                <Image className='w-full h-28 rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
+        <div className='relative w-full mx-auto flex flex-col justify-center items-center gap-2 rounded-xl p-2 hover:bg-blue-100 cursor-pointer hover:shadow-xl hover:shadow-purple-100 duration-300 bg-white mt-6'>
+            <div className='relative w-full h-28 overflow-hidden'>
+                <Image className='w-full h-28 object-cover rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
                 {wishlised ?
                     <Image onClick={() => handleWishlistRemove(product.id)}
-                        className='w-8 absolute top-3 right-3' src={love2} alt="" />
+                        className='w-8 absolute top-3 right-3 hover:scale-125 duration-200' src={love2} alt="" />
                     :
                     <Image onClick={() => dispatch(setWishlistItems([...wishlistItems, product]))}
-                        className='w-8 absolute top-3 right-3' src={love} alt="" />
+                        className='w-8 absolute top-3 right-3 hover:scale-125 duration-200' src={love} alt="" />
                 }
             </div>
             <div className='flex flex-col items-start gap-2 px-3'>

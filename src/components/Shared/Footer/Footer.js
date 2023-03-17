@@ -41,11 +41,11 @@ const Footer = () => {
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>Customer Services</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p>Help Center</p>
-                            <p>Report Abuse</p>
-                            <p>Open Case</p>
-                            <p>Policies And Rules</p>
-                            <p>Get Paid for Your Feedback</p>
+                            <p className='hover:text-primary duration-150' >Help Center</p>
+                            <p className='hover:text-primary duration-150' >Report Abuse</p>
+                            <p className='hover:text-primary duration-150' >Open Case</p>
+                            <p className='hover:text-primary duration-150' >Policies And Rules</p>
+                            <p className='hover:text-primary duration-150' >Get Paid for Your Feedback</p>
                         </div>
                     </div>
 
@@ -53,11 +53,11 @@ const Footer = () => {
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>About US</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p>About</p>
-                            <p>Contact us</p>
-                            <p>Sitemap</p>
-                            <p>Blog</p>
-                            <p>Notice</p>
+                            <p className='hover:text-primary duration-150' >About</p>
+                            <p className='hover:text-primary duration-150' >Contact us</p>
+                            <p className='hover:text-primary duration-150' >Sitemap</p>
+                            <p className='hover:text-primary duration-150' >Blog</p>
+                            <p className='hover:text-primary duration-150' >Notice</p>
                         </div>
                     </div>
 
@@ -65,11 +65,11 @@ const Footer = () => {
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>Source</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p>Resources</p>
-                            <p>All Categories</p>
-                            <p>Request for Quoteation</p>
-                            <p>Ready to Ship</p>
-                            <p>Buyer Partners</p>
+                            <p className='hover:text-primary duration-150' >Resources</p>
+                            <p className='hover:text-primary duration-150' >All Categories</p>
+                            <p className='hover:text-primary duration-150' >Request for Quoteation</p>
+                            <p className='hover:text-primary duration-150' >Ready to Ship</p>
+                            <p className='hover:text-primary duration-150' >Buyer Partners</p>
                         </div>
                     </div>
 
@@ -77,18 +77,18 @@ const Footer = () => {
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>Sell</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p>Supplier memberships</p>
-                            <p>Learning Center</p>
-                            <p>Partner Program</p>
+                            <p className='hover:text-primary duration-150' >Supplier memberships</p>
+                            <p className='hover:text-primary duration-150' >Learning Center</p>
+                            <p className='hover:text-primary duration-150' >Partner Program</p>
                         </div>
                     </div>
                     <div>
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>Trade Services</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p>Trade Assurance</p>
-                            <p>Business Identity</p>
-                            <p>Logistics Services</p>
+                            <p className='hover:text-primary duration-150' >Trade Assurance</p>
+                            <p className='hover:text-primary duration-150' >Business Identity</p>
+                            <p className='hover:text-primary duration-150' >Logistics Services</p>
                         </div>
                     </div>
                 </div>

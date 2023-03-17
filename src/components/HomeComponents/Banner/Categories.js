@@ -11,6 +11,15 @@ import AllCategoriesModal from '../../Modals/CategoriesModals/AllCategoriesModal
 const Categories = () => {
     const [allCategories, setAllCategories] = useState(null)
     const { categories } = useSelector((state) => state.bannerSlice)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        fetch(`http://localhost:5055/api/category`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch(setCategories(data))
+            })
+    }, [])
 
     return (
         <div className='lg:col-span-1 cursor-pointer relative'>
@@ -25,7 +34,7 @@ const Categories = () => {
                         <Link
                             href={`/categories/${category?.parent.toLowerCase()}`}
                             className=' hover:bg-gray-300 border-b border-x h-12 w-full flex justify-between items-center px-3 text-gray-900'>
-                            <h1 className='font-semibold'>{category?.parent.toLowerCase()}</h1>
+                            <h1 className='font-semibold'>{category?.parent}</h1>
                             <Image className="w-2" src={arrow} alt="" />
                         </Link>
 

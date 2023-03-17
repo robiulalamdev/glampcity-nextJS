@@ -15,14 +15,14 @@ const FooterInbox = () => {
 
                 <form onSubmit={handleSubmit(handleInbox)} className='flex items-center mt-8 md:max-w-[700px] mx-auto'>
                     <input {...register('email', { required: 'Email is required' })}
-                        className='rounded-l-[50px] w-full h-12 md:h-16 px-3 backdrop-blur-sm bg-transparent border-y border-l text-white focus:outline-none' type="email" name="email" placeholder='Email Address' />
+                        className='rounded-l-[50px] w-full h-12 md:h-16 px-3 backdrop-blur-sm bg-white bg-opacity-10 border-y border-l text-white text-opacity-100 placeholder-white focus:outline-none' type="email" name="email" placeholder='Email Address' />
                     <button type="submit"
-                        className='rounded-r-[50px] w-32 md:w-44 h-12 md:h-16 flex justify-center items-center bg-white text-primary font-bold'>
+                        className='rounded-r-[50px] w-32 md:w-44 h-12 md:h-16 flex justify-center items-center bg-white hover:bg-gray-200 duration-150 text-xl text-primary font-bold'>
                         <h1>Submit</h1>
                     </button>
                 </form>
             </div>
-            <small className='text-sm text-center text-white'>We’ll never share your email address with a third-party.</small>
+            <small className='text-sm text-center flex justify-center text-white'>We’ll never share your email address with a third-party.</small>
         </section>
     );
 };

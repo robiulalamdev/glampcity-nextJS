@@ -136,7 +136,7 @@ const ContactForm = () => {
                     }
                 </div>
 
-                <button type="submit" className='w-full md:w-96 h-14 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary text-white font-bold'>
+                <button type="submit" className='w-full md:w-96 h-14 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary hover:bg-darkPrimary duration-150 text-white font-bold'>
                     <h1>Submit</h1>
                 </button>
             </form>

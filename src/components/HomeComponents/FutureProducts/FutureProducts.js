@@ -11,6 +11,7 @@ import { setVerifiedStores } from '@/Slices/storeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import SingelStore from './SingelStore';
+import bestSeller from '../../../assets/images/product-details/product-images/bestSeller.png'
 
 const products = [
     { id: '1556', img: img1, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
@@ -44,25 +45,25 @@ const FutureProducts = () => {
                         verifiedStores && verifiedStores?.map(store => <SingelStore store={store} />)
                     }
                 </div>
-                <Link href='/stores' className='flex justify-center items-center bg-primary h-14 md:w-60 mt-20 mx-auto'>
+                <Link href='/stores' className='flex justify-center items-center bg-primary hover:bg-darkPrimary duration-150 h-14 md:w-60 mt-20 mx-auto'>
                     <button className='text-white font-semibold'>View More</button>
                 </Link>
             </div>
 
             <div className='mt-16'>
                 <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
-                    <div className='relative col-span-2 rounded-xl bg-[#FF9F46] mt-6'>
-                        <div className='px-6 mt-3'>
+                    <div className='relative col-span-2 flex items-center rounded-xl bg-[#FF9F46] mt-6 px-6 py-3'>
+                        <div className=''>
                             <h1 className='font-bold text-white text-2xl text-center md:text-left '>The Most <br /> Popular Products</h1>
-                            <div className='w-36 h-9 mx-auto md:mx-0 bg-white rounded-[50px] flex justify-center items-center mt-2'>
+                            <div className='w-36 h-9 mx-auto md:mx-0 bg-white hover:bg-gray-200 duration-150 rounded-[50px] flex justify-center items-center mt-2'>
                                 <button className='text-[#FFA048] font-semibold'>View More</button>
                             </div>
 
                             <h1 className='text-white text-xl text-center md:text-left mt-2'>Upto</h1>
                             <h1 className='text-white font-bold text-5xl text-center md:text-left'>10%</h1>
-                            <h1 className='text-white text-xl my-2 text-center'>Rebate</h1>
+                            <h1 className='text-white text-xl mt-2 text-center'>Rebate</h1>
                         </div>
-
+                        <Image className='h-52 mx-auto mr-0' src={bestSeller} alt="" />
                     </div>
                     {
                         products.map((product, i) => <ProductCard key={i} product={product} />)
