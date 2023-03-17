@@ -21,17 +21,21 @@ const TopRanking = () => {
     return (
         <div className='bg-secondary rounded-3xl p-4 md:p-7 cursor-pointer'>
             <div className='mb-5 flex justify-between items-center'>
-                <h1 className='text-gray-900 md:text-2xl text-left font-bold'>Top-ranking</h1>
-                <Link href='/categories/top-ranking' className='text-primary font-bold'>See All</Link>
+                <h1 className='text-gray-900 text-xl md:text-2xl text-left font-bold'>Top-ranking</h1>
+                <Link href='/categories/top-ranking' className='text-primary hover:text-darkPrimary duration-300 font-bold'>See All</Link>
             </div>
 
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
                     topRankingProducts.map(product => <Link href='/product-view'
                         className='flex flex-col justify-center items-center gap-2 rounded-xl pb-2 bg-white'>
-                        <Image className='w-full md:w-52 h-24 md:h-28 rounded-xl' src={product.img} alt="" />
-                        <span className='text-gray-900 text-sm font-bold text-center'>{product.title}</span>
-                        <span className='text-gray-900 text-sm font-bold text-center'>{product.price}$</span>
+                        <div className='w-full h-28 rounded-xl overflow-hidden'>
+                            <Image className='w-full h-28 object-cover rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
+                        </div>
+                        <div className='flex flex-col justify-start items-start md:justify-center md:items-center gap-2 w-full px-2'>
+                            <span className='text-gray-900 font-bold'>{product.title}</span>
+                            <span className='text-gray-900 text-sm font-bold'>{product.price}$</span>
+                        </div>
                     </Link>
                     )
                 }

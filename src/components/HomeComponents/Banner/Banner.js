@@ -19,8 +19,8 @@ const Banner = () => {
                     <div className='w-full flex flex-col-reverse lg:flex-row lg:items-center gap-6'>
                         <div className="flex-grow relative">
                             <div className='flex-grow flex items-center'>
-                                <input onClick={() => dispatch(setOpenRecommended(true))} className='flex-grow h-10 w-full focus:outline-none border px-2' type="search" name="search" placeholder='What do you need?' />
-                                <button className='w-36 h-10 text-white bg-primary flex justify-center items-center' type="submit"><span>Search</span></button>
+                                <input onClick={() => dispatch(setOpenRecommended(true))} className='flex-grow h-10 w-full focus:outline-none border focus:border-primary px-2' type="search" name="search" placeholder='What do you need?' />
+                                <button className='w-36 h-10 text-white bg-primary hover:bg-darkPrimary duration-150 flex justify-center items-center' type="submit"><span>Search</span></button>
                             </div>
                             {
                                 openRecommended && <RecommendedDropdown />

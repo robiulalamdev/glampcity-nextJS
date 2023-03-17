@@ -38,19 +38,19 @@ const Navber = () => {
                     <Link href='/'><Image className='w-10 md:w-16' src={logo} alt="navberImage" /></Link>
                 </div>
                 <div className='hidden lg:block'>
-                    <Link href='/home' className='text-black font-semibold'>Home</Link>
+                    <Link href='/home' className='text-black hover:text-primary duration-100 font-semibold'>Home</Link>
                 </div>
                 <div className='hidden lg:block'>
-                    <Link href='/how-it-works' className='text-black font-semibold'>How it works</Link>
+                    <Link href='/how-it-works' className='text-black hover:text-primary duration-100 font-semibold'>How it works</Link>
                 </div>
                 <div className='hidden lg:block'>
-                    <Link href='/about-us' className='text-black font-semibold'>About Us</Link>
+                    <Link href='/about-us' className='text-black hover:text-primary duration-100 font-semibold'>About Us</Link>
                 </div>
                 <div className='hidden lg:block'>
-                    <Link href='/contact' className='text-black font-semibold'>Contact</Link>
+                    <Link href='/contact' className='text-black hover:text-primary duration-100 font-semibold'>Contact</Link>
                 </div>
                 <div className='hidden lg:block'>
-                    <Link href='/faq' className='text-black font-semibold'>FAQ</Link>
+                    <Link href='/faq' className='text-black hover:text-primary duration-100 font-semibold'>FAQ</Link>
                 </div>
                 <div className='flex justify-between items-center gap-6'>
                     <div onClick={() => dispatch(setOpenWishlistSidebar(true))} >
