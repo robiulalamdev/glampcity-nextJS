@@ -23,11 +23,11 @@ const NewArrival = () => {
         <div className='bg-secondary rounded-3xl p-4 md:p-7 cursor-pointer'>
             <div className='mb-5 flex justify-between items-center'>
                 <h1 className='text-gray-900 text-xl md:text-2xl text-left font-bold'>New Arrival</h1>
-                <Link href='/categories/new-arrival' className='text-primary font-bold hover:text-darkPrimary duration-300'>See All</Link>
+                <Link href={`/product-list/Beauty-&-Health`} className='text-primary font-bold hover:text-darkPrimary duration-300'>See All</Link>
             </div>
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
-                    newArrivalProducts.map(product => <Link href='/product-view'
+                    newArrivalProducts.map(product => <Link href='/'
                         className='flex flex-col justify-center items-center gap-2 rounded-xl pb-2 bg-white
                         hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300'>
                         <div className='w-full h-28 rounded-xl overflow-hidden'>

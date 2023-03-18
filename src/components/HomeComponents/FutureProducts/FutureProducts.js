@@ -10,8 +10,8 @@ import ProductCard from '../../ProductCards/ProductCard';
 import { setVerifiedStores } from '@/Slices/storeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import SingelStore from './SingelStore';
 import bestSeller from '../../../assets/images/product-details/product-images/bestSeller.png'
+import StoreCard from '@/components/Commons/StoreCards/StoreCard';
 
 const products = [
     { id: '1556', img: img1, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
@@ -42,7 +42,7 @@ const FutureProducts = () => {
             <div className='mt-16 md:mt-28'>
                 <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8'>
                     {
-                        verifiedStores && verifiedStores?.map(store => <SingelStore store={store} />)
+                        verifiedStores && verifiedStores?.map(store => <StoreCard store={store} />)
                     }
                 </div>
                 <Link href='/stores' className='flex justify-center items-center bg-primary hover:bg-darkPrimary duration-150 h-14 md:w-60 mt-20 mx-auto'>

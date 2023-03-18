@@ -3,6 +3,7 @@ import authSlice from "@/Slices/authSlice";
 import bannerSlice from "@/Slices/bannerSlice";
 import controllerSlice from "@/Slices/controllerSlice";
 import conversationSlice from "@/Slices/conversationSlice";
+import createCompanySlice from "@/Slices/createCompanySlice";
 import customerSupportSlice from "@/Slices/customerSupportSlice";
 import loginRegisterSlice from "@/Slices/loginRegisterSlice";
 import orderRefoundsSlice from "@/Slices/orderRefoundsSlice";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   storeSlice: storeSlice,
   conversationSlice: conversationSlice,
   allOrderSlice: allOrderSlice,
+  createCompanySlice: createCompanySlice,
 });
 
 export default rootReducer;

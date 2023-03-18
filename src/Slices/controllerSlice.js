@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    isLoading: false,
     name: 'robiulalam',
     openWishlistSidebar: false,
     openAddCartItemsSidebar: false,
@@ -12,6 +13,9 @@ export const controllerSlice = createSlice({
     name: "controllerSlice",
     initialState,
     reducers: {
+        setIsloading: (state, action) => {
+            state.isLoading = action.payload;
+        },
         setName: (state, action) => {
             state.name = action.payload;
         },
@@ -32,6 +36,7 @@ export const controllerSlice = createSlice({
 
 export const {
     setName,
+    setIsloading,
     setOpenWishlistSidebar,
     setOpenAddCartItemsSidebar,
     setWishlistItems,
