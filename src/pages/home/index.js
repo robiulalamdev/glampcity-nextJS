@@ -14,7 +14,7 @@ import { setCategories } from '@/Slices/bannerSlice';
 import { useDispatch } from 'react-redux';
 
 
-const index = ({ data }) => {
+const index = () => {
     // const dispatch = useDispatch()
     // dispatch(setCategories(data))
     return (

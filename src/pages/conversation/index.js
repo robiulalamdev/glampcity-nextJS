@@ -15,7 +15,7 @@ const Conversation = () => {
     const dispatch = useDispatch()
     const socket = useRef()
 
-    console.log(onlineUsers);
+    // console.log(onlineUsers);
 
     const handleReceiverData = (data) => {
         setCurrentChat(data)
@@ -48,8 +48,8 @@ const Conversation = () => {
                     className={`absolute md:relative z-50 md:z-10 duration-300 min-h-full overflow-y-auto max-h-[450px] pt-2 px-2 hidden md:block flex flex-col items-start gap-3 w-72 ${open ? 'left-0' : '-left-[300px]'}`}>
                     <input className='px-3 w-full h-10 border rounded focus:outline-none' type="search" name="search" id="" placeholder='Search Your Chat' />
                     {
-                        chats?.map(chat => <div onClick={() => handleReceiverData(chat)}>
-                            <ConversationChat data={chat} currentUser={user} />
+                        chats?.map((chat, i) => <div onClick={() => handleReceiverData(chat)}>
+                            <ConversationChat key={i} data={chat} currentUser={user} />
                         </div>)
                     }
                 </div>

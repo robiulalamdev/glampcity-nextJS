@@ -25,8 +25,8 @@ const CustomerSupportMain = () => {
             <div className='max-w-[1440px] mx-auto mt-8 px-4'>
                 <div className='flex md:justify-between items-center flex-wrap md:flex-nowrap bg-gray-100 border h-20 w-full'>
                     {
-                        categories.map(ctg => <button onClick={() => dispatch(setSelectedCategory(ctg.id))}
-                            key={ctg.id}
+                        categories.map((ctg, i) => <button onClick={() => dispatch(setSelectedCategory(ctg.id))}
+                            key={i}
                             className={`w-fit px-4 md:w-full h-20 flex justify-center items-center
                             ${selectedCategory === ctg.id ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white text-black'}`}>
                             <h1 className='font-semibold text-xl'>{ctg.title}</h1>

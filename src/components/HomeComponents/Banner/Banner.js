@@ -5,14 +5,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import call from '../../../assets/icons/banner-icons/call.png'
 import banner from '../../../assets/images/banner-images/banner.png'
+import BannerCarousel from "./BannerCarousel";
 import Categories from "./Categories";
 
 const Banner = () => {
     const { openRecommended } = useSelector((state) => state.bannerSlice)
     const dispatch = useDispatch()
     return (
-        <section className='bg-white'>
-            <div className='grid lg:grid-cols-4 gap-6 mt-8'>
+        <section className=''>
+            <div className='grid lg:grid-cols-4 gap-6 pt-8'>
                 <Categories />
 
                 <div className='lg:col-span-3 order-first lg:order-none'>
@@ -37,8 +38,10 @@ const Banner = () => {
                         </div>
                     </div>
 
-                    <div className='h-[368px] mt-6'>
-                        <Image className='h-[368px] w-full' src={banner} alt="" />
+
+                    <div className='relative w-full h-[368px] mt-6'>
+                        {/* <Image className='h-[368px] w-full' src={banner} alt="" /> */}
+                        <BannerCarousel />
                     </div>
                 </div>
             </div>

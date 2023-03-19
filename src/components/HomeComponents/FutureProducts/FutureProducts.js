@@ -42,7 +42,7 @@ const FutureProducts = () => {
             <div className='mt-16 md:mt-28'>
                 <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8'>
                     {
-                        verifiedStores && verifiedStores?.map(store => <StoreCard store={store} />)
+                        verifiedStores && verifiedStores?.map((store, i) => <StoreCard key={i} store={store} />)
                     }
                 </div>
                 <Link href='/stores' className='flex justify-center items-center bg-primary hover:bg-darkPrimary duration-150 h-14 md:w-60 mt-20 mx-auto'>

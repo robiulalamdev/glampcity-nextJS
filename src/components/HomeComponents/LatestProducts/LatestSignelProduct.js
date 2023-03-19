@@ -1,5 +1,6 @@
 import { setCartItems, setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../../assets/icons/latest-products-icons/love.png'
@@ -18,7 +19,7 @@ const LatestSignelProduct = ({ product, wishlistItem }) => {
         dispatch(setWishlistItems(getWishlistItems))
     }
     return (
-        <div className='relative w-full mx-auto flex flex-col justify-center items-start gap-2 rounded-xl p-3 border hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300 cursor-pointer mt-6'>
+        <Link href={`/products/${product?._id}`} className='relative w-full mx-auto flex flex-col justify-center items-start gap-2 rounded-xl p-3 border hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300 cursor-pointer mt-6'>
             <div className='relative w-full h-28 overflow-hidden'>
 
                 {
@@ -43,7 +44,7 @@ const LatestSignelProduct = ({ product, wishlistItem }) => {
                 <h1 className='text-white font-semibold md:font-bold'>Buy Now</h1>
             </button>
 
-        </div>
+        </Link>
     );
 };
 

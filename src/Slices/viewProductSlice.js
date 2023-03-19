@@ -8,6 +8,10 @@ const initialState = {
         'https://i.postimg.cc/6QzF9hp7/img4.png'
     ],
     selectedImage: 'https://i.postimg.cc/x1DwgCZd/img1.png',
+    product: null,
+    latestProducts: [],
+    newArrivalProducts: [],
+    topRankingProducts: [],
 };
 
 export const viewProductSlice = createSlice({
@@ -17,10 +21,26 @@ export const viewProductSlice = createSlice({
         setSelectedImage: (state, action) => {
             state.selectedImage = action.payload;
         },
+        setProduct: (state, action) => {
+            state.product = action.payload;
+        },
+        setLatestProducts: (state, action) => {
+            state.latestProducts = action.payload;
+        },
+        setNewArrivalProducts: (state, action) => {
+            state.newArrivalProducts = action.payload;
+        },
+        setTopRankingProducts: (state, action) => {
+            state.topRankingProducts = action.payload;
+        },
     },
 });
 
 export const {
-    setSelectedImage
+    setSelectedImage,
+    setProduct,
+    setLatestProducts,
+    setNewArrivalProducts,
+    setTopRankingProducts,
 } = viewProductSlice.actions;
 export default viewProductSlice.reducer;

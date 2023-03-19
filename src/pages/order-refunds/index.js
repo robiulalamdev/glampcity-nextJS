@@ -19,9 +19,9 @@ const index = () => {
 
                 <div className='grid md:grid-cols-3 gap-4 mt-8'>
                     {
-                        menuItems.map(item => (
+                        menuItems.map((item, i) => (
                             <button onClick={() => dispatch(setSelectedMenu(item.id))}
-                                key={item.id} className={`w-full h-12 rounded-md flex justify-center items-center
+                                key={i} className={`w-full h-12 rounded-md flex justify-center items-center
                             ${selectedMenu === item.id ? 'bg-primary text-white' : 'bg-gray-200 text-black'}`}>
                                 <h1 className=''>{item.title}</h1>
                             </button>

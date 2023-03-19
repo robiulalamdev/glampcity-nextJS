@@ -13,18 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedImage } from '@/Slices/viewProductSlice';
 
 const ProductReview = () => {
-    const { images, selectedImage } = useSelector((state) => state.viewProductSlice)
+    const { images, product, selectedImage } = useSelector((state) => state.viewProductSlice)
     const dispatch = useDispatch()
     return (
         <section className='mt-8'>
             <div className='grid md:grid-cols-2 lg:grid-cols-10 gap-5 cursor-pointer'>
                 <div className='lg:col-span-3 border rounded-md w-full'>
                     <div>
-                        <img className='w-full h-96' src='https://i.postimg.cc/x1DwgCZd/img1.png' alt="" />
+                        <img className='w-full h-96' src={product?.image} alt="" />
                     </div>
                     <div className='grid grid-cols-4 gap-4 p-4'>
                         {
-                            images.map(img => <div
+                            images.map((img, i) => <div key={i}
                                 className='w-full h-full'>
                                 <img className='w-full h-full' src='https://i.postimg.cc/x1DwgCZd/img1.png' alt="" />
                             </div>)
@@ -34,14 +34,14 @@ const ProductReview = () => {
 
                 <div className='lg:col-span-4 border rounded-md w-full p-2 md:p-4'>
                     <div className='border-b border-gray-400 mb-4 pb-4'>
-                        <h1 className='text-black font-bold text-left text-2xl'>Wholesale men’s casual shoes</h1>
+                        <h1 className='text-black font-bold text-left text-2xl'>{product?.title}</h1>
                         <div className='flex items-center gap-4 mt-4'>
                             <Image className='w-24' src={stars} alt="" />
                             <span className='text-primary text-md'>5 Ratings</span>
                         </div>
                     </div>
                     <div className='border-b border-gray-400 mb-4 pb-4'>
-                        <h1 className='text-primary font-bold text-left text-3xl'>$10.00/ pieces</h1>
+                        <h1 className='text-primary font-bold text-left text-3xl'>${product?.price}/ pieces</h1>
                         <h1 className='text-gray-500 mt-2 font-semibold text-left text-xl'>Enter Promo Code</h1>
 
                         <div className='flex items-center mt-4 w-full'>
@@ -52,24 +52,32 @@ const ProductReview = () => {
                         </div>
                     </div>
                     <div className='border-b border-gray-400 mb-4 pb-4'>
-                        <div className='grid grid-cols-3 mb-2'>
-                            <h1 className='col-span-1 text-xl text-gray-500 text-left'>Color</h1>
-                            <div className='col-span-2 flex items-center gap-4'>
-                                <div className='w-6 h-6 bg-rose-600'></div>
-                                <div className='w-6 h-6 bg-green-600'></div>
-                                <div className='w-6 h-6 bg-sky-600'></div>
-                                <div className='w-6 h-6 bg-yellow-600'></div>
-                            </div>
-                        </div>
-                        <div className='grid grid-cols-3 mb-2 mt-4'>
-                            <h1 className='col-span-1 text-xl text-gray-500 text-left'>Size</h1>
-                            <div className='col-span-2 flex items-center gap-4'>
-                                <div className='w-10 h-8 border rounded'><span>2</span></div>
-                                <div className='w-10 h-8 border rounded'><span>4</span></div>
-                                <div className='w-10 h-8 border rounded'><span>8</span></div>
-                                <div className='w-10 h-8 border rounded'><span>8.5</span></div>
-                            </div>
-                        </div>
+                        {
+                            product?.color && (
+                                <div className='grid grid-cols-3 mb-2'>
+                                    <h1 className='col-span-1 text-xl text-gray-500 text-left'>Color</h1>
+                                    <div className='col-span-2 flex items-center gap-4'>
+                                        <div className='w-6 h-6 bg-rose-600'></div>
+                                        <div className='w-6 h-6 bg-green-600'></div>
+                                        <div className='w-6 h-6 bg-sky-600'></div>
+                                        <div className='w-6 h-6 bg-yellow-600'></div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            product?.size && (
+                                <div className='grid grid-cols-3 mb-2 mt-4'>
+                                    <h1 className='col-span-1 text-xl text-gray-500 text-left'>Size</h1>
+                                    <div className='col-span-2 flex items-center gap-4'>
+                                        <div className='w-10 h-8 border rounded'><span>2</span></div>
+                                        <div className='w-10 h-8 border rounded'><span>4</span></div>
+                                        <div className='w-10 h-8 border rounded'><span>8</span></div>
+                                        <div className='w-10 h-8 border rounded'><span>8.5</span></div>
+                                    </div>
+                                </div>
+                            )
+                        }
                         <div className='grid md:grid-cols-5 mb-2 mt-4'>
                             <h1 className='md:col-span-1 text-xl text-gray-500 text-left'>Shipping:</h1>
                             <h1 className='md:col-span-4 text-gray-500 text-left text-xl'>Express ( Ocean, Land, Air )</h1>

@@ -32,7 +32,7 @@ const Categories = () => {
                         key={category._id}
                         className="group w-full relative">
                         <Link
-                            href={`/categories/${category?.parent.toLowerCase()}`}
+                            href={`/product-list/${category?.parent?.replaceAll(' ', '-')}`}
                             className=' hover:bg-gray-300 border-b border-x h-12 w-full flex justify-between items-center px-3 text-gray-900'>
                             <h1 className='font-semibold'>{category?.parent}</h1>
                             <Image className="w-2" src={arrow} alt="" />
@@ -40,8 +40,8 @@ const Categories = () => {
 
                         <div className='hidden group-focus:block group-hover:block z-50 absolute -right-10 bg-white w-full border-t-8 border-t-primary border-b border-x max-h-72 overflow-y-auto'>
                             {
-                                category?.children?.map(subCTG => <Link
-                                    href={`/categories/${category?.parent?.toLowerCase()}/${subCTG?.toLowerCase()}`}
+                                category?.children?.map((subCTG, i) => <Link key={i}
+                                    href={`/product-list/${category?.parent?.replaceAll(' ', '-')}/${subCTG?.replaceAll(' ', '-')}`}
                                     className='hover:bg-gray-300 border-b border-x h-12 w-full flex items-center px-3 text-gray-900'>
                                     <h1 className='font-semibold'>{subCTG}</h1>
                                 </Link>)
