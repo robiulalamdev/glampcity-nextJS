@@ -3,6 +3,7 @@ import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenWishlistSidebar, setWishlistItems } from '@/Slices/controllerSlice';
 import { useAuth } from '@/Hooks/getAuth';
+import Link from 'next/link';
 
 const WishlistDrawer = () => {
     const userInfo = useAuth()
@@ -19,14 +20,14 @@ const WishlistDrawer = () => {
 
 
     const handleWishlistRemove = (id) => {
-        alert('wishlist delete redy')
         fetch(`http://localhost:5055/api/wishlist/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 handleGetWishlist()
+                alert('wishlist Product deleted')
             })
     }
 
@@ -52,20 +53,18 @@ const WishlistDrawer = () => {
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {wishlistItems && wishlistItems.map((product) => (
                                 <li key={product?.id} className="flex py-6">
-                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <Link href={`/products/${product?.productId}`} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                         <img
                                             src={product?.image}
                                             alt=''
                                             className="h-full w-full object-cover object-center"
                                         />
-                                    </div>
+                                    </Link>
 
                                     <div className="ml-4 flex flex-1 flex-col">
                                         <div>
                                             <div className="flex justify-between text-base font-medium text-gray-900">
-                                                <h3>
-                                                    <a href=''>{product?.title}</a>
-                                                </h3>
+                                                <Link href={`/products/${product?.productId}`}>{product?.title}</Link>
                                                 <p className="ml-4">{product?.price}</p>
                                             </div>
                                             <p className="mt-1 text-sm text-gray-500">blue</p>
@@ -101,12 +100,11 @@ const WishlistDrawer = () => {
                             </div>
                             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                             <div className="mt-6">
-                                <a
-                                    href="#"
-                                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                                <Link href='/'
+                                    className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-darkPrimary"
                                 >
                                     Checkout
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     }

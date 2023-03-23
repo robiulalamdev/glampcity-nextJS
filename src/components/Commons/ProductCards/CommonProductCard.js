@@ -20,6 +20,15 @@ const CommonProductCard = ({ product }) => {
             })
     }
 
+    // get cart products
+    const handleGetCartProducts = () => {
+        fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch(setCartItems(data));
+            })
+    }
+
 
     const handleWishlistRemove = (id) => {
         alert('wishlist delete redy')
@@ -28,13 +37,12 @@ const CommonProductCard = ({ product }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 handleGetWishlist()
             })
     }
 
     const handleAddWishlist = (product) => {
-        alert('wishlist added redy')
         fetch(`http://localhost:5055/api/wishlist`, {
             method: "POST",
             headers: {
@@ -58,6 +66,30 @@ const CommonProductCard = ({ product }) => {
             })
     }
 
+    // add to cart product
+    const handleAddToCart = (product) => {
+        fetch(`http://localhost:5055/api/cartProduct`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: product?._id,
+                userId: userInfo?._id,
+                sku: product?.sku,
+                title: product?.title,
+                unit: product?.unit,
+                description: product?.description,
+                price: product?.price,
+                image: product?.image,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                handleGetCartProducts()
+            })
+    }
+
     useEffect(() => {
         if (userInfo?._id) {
             handleGetWishlist()
@@ -65,8 +97,9 @@ const CommonProductCard = ({ product }) => {
     }, [])
 
     const wishlised = wishlistItems.find(p => p?.productId === product?._id)
+
     return (
-        <Link href={`/products/${product?._id}`} className='relative w-full mx-auto flex flex-col justify-center items-start gap-2 rounded-xl p-3 border hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300 cursor-pointer mt-6'>
+        <div className='relative w-full mx-auto flex flex-col justify-center items-start gap-2 rounded-xl p-3 border hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300 cursor-pointer mt-6'>
             <div className='relative w-full h-28 overflow-hidden'>
 
                 {
@@ -75,7 +108,7 @@ const CommonProductCard = ({ product }) => {
                         <Image className='w-full h-28 rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
                 }
                 {wishlised ?
-                    < Image onClick={() => handleWishlistRemove(wishlised?.productId)}
+                    < Image onClick={() => handleWishlistRemove(wishlised?._id)}
                         className='w-8 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full absolute top-3 right-3 hover:scale-125 duration-200' src={love2} alt="" />
                     :
                     < Image onClick={() => handleAddWishlist(product)}
@@ -87,11 +120,11 @@ const CommonProductCard = ({ product }) => {
                 <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product.price}</span>
                 <span className='text-gray-400 text-sm text-left'>{product.description?.slice(0, 40) + '...'}</span>
             </div>
-            <button onClick={() => dispatch(setCartItems([...cartItems, product]))} className='w-36 lg:w-48 h-7 md:h-9 mx-auto bg-primary hover:bg-darkPrimary duration-150 flex justify-center items-center rounded-[50px]'>
+            <button onClick={() => handleAddToCart(product)} className='w-36 lg:w-48 h-7 md:h-9 mx-auto bg-primary hover:bg-darkPrimary duration-150 flex justify-center items-center rounded-[50px]'>
                 <h1 className='text-white font-semibold md:font-bold'>Buy Now</h1>
             </button>
 
-        </Link>
+        </div>
     );
 };
 

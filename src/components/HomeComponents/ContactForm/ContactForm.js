@@ -44,7 +44,7 @@ const ContactForm = () => {
         }
     });
     return (
-        <section className='mt-36 pb-16'>
+        <section className='pb-16'>
             <h1 className='text-gray-900 text-3xl text-center font-semibold mb-5 pt-16'>Tell Us What You Need</h1>
             <form onSubmit={handleSubmit(handleContact)} className='px-2 md:px-12 md:w-[950px] mx-auto'>
                 <div className='flex flex-col items-start gap-2 mb-6'>

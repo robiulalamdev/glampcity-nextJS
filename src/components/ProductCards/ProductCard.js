@@ -1,7 +1,6 @@
 import { useAuth } from '@/Hooks/getAuth';
 import { setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../assets/icons/latest-products-icons/love.png'
@@ -28,13 +27,13 @@ const ProductCard = ({ product }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 handleGetWishlist()
+                alert('wishlist Product deleted')
             })
     }
 
     const handleAddWishlist = (product) => {
-        alert('wishlist added redy')
         fetch(`http://localhost:5055/api/wishlist`, {
             method: "POST",
             headers: {
@@ -55,6 +54,7 @@ const ProductCard = ({ product }) => {
             .then(data => {
                 console.log(data);
                 handleGetWishlist()
+                alert('wishlist Product Added')
             })
     }
 
@@ -73,10 +73,10 @@ const ProductCard = ({ product }) => {
                 <img className='w-full h-28 object-cover rounded-xl hover:scale-150 duration-500' src={product?.image} alt="" />
                 {wishlised ?
                     <Image onClick={() => handleWishlistRemove(wishlised?._id)}
-                        className='w-8 absolute top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love2} alt="" />
+                        className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love2} alt="" />
                     :
                     <Image onClick={() => handleAddWishlist(product)}
-                        className='w-8 absolute top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love} alt="" />
+                        className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love} alt="" />
                 }
             </div>
             <div className='flex flex-col items-start gap-2 px-3'>

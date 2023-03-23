@@ -20,21 +20,28 @@ const LatestSignelProduct = ({ product }) => {
             })
     }
 
+    // get cart products
+    const handleGetCartProducts = () => {
+        fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch(setCartItems(data));
+            })
+    }
+
 
     const handleWishlistRemove = (id) => {
-        alert('wishlist delete redy')
         fetch(`http://localhost:5055/api/wishlist/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 handleGetWishlist()
             })
     }
 
     const handleAddWishlist = (product) => {
-        alert('wishlist added redy')
         fetch(`http://localhost:5055/api/wishlist`, {
             method: "POST",
             headers: {
@@ -55,6 +62,31 @@ const LatestSignelProduct = ({ product }) => {
             .then(data => {
                 console.log(data);
                 handleGetWishlist()
+            })
+    }
+
+
+    // add to cart product
+    const handleAddToCart = (product) => {
+        fetch(`http://localhost:5055/api/cartProduct`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: product?._id,
+                userId: userInfo?._id,
+                sku: product?.sku,
+                title: product?.title,
+                unit: product?.unit,
+                description: product?.description,
+                price: product?.price,
+                image: product?.image,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                handleGetCartProducts()
             })
     }
 
@@ -88,7 +120,7 @@ const LatestSignelProduct = ({ product }) => {
                 <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product.price}</span>
                 <span className='text-gray-400 text-sm text-left'>{product.description?.slice(0, 40) + '...'}</span>
             </div>
-            <button onClick={() => dispatch(setCartItems([...cartItems, product]))} className='w-36 lg:w-48 h-7 md:h-9 mx-auto bg-primary hover:bg-darkPrimary duration-150 flex justify-center items-center rounded-[50px]'>
+            <button onClick={() => handleAddToCart(product)} className='w-36 lg:w-48 h-7 md:h-9 mx-auto bg-primary hover:bg-darkPrimary duration-150 flex justify-center items-center rounded-[50px]'>
                 <h1 className='text-white font-semibold md:font-bold'>Buy Now</h1>
             </button>
 

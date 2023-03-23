@@ -7,7 +7,7 @@ import icon4 from '../../../assets/icons/product-requirements-icons/icon4.png'
 
 const ProductRequirements = () => {
     return (
-        <section className='mt-32'>
+        <section className='pb-16 pt-32'>
             <h1 className='text-gray-900 text-2xl md:text-3xl text-center font-semibold mb-16'>Can’t find the <strong>PRODUCTS</strong> that meets <br /> your requirement exactly? </h1>
 
             <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-auto'>

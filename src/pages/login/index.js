@@ -25,7 +25,9 @@ const index = () => {
                 if (data?.login === false) {
                     alert(data?.message)
                 }
-                localStorage.setItem('glampcity-token', data.token)
+                if (data?.success === true) {
+                    localStorage.setItem('glampcity-token', data.token)
+                }
                 if (data?.token) {
                     const token = localStorage.getItem('glampcity-token')
                     if (token) {

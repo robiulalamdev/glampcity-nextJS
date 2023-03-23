@@ -13,12 +13,16 @@ const Product = () => {
     const router = useRouter()
     const id = router.query.id
 
+    // console.log(id);
+
     useEffect(() => {
-        fetch(`http://localhost:5055/api/products/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setProduct(data))
-            })
+        if (id) {
+            fetch(`http://localhost:5055/api/products/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    dispatch(setProduct(data))
+                })
+        }
 
     }, [id])
     return (

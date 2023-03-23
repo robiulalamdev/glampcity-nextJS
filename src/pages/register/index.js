@@ -43,10 +43,9 @@ const index = () => {
         })
             .then(res => res.json())
             .then(data => {
-                localStorage.setItem('glampcity-token', data.token)
-                alert('New User Register Successfull')
-                if (data?.token) {
-                    router.push('/user-wellcome')
+                if (data?.success === true) {
+                    router.push('/login')
+                    alert('User Register Successfull')
                 }
             })
     }

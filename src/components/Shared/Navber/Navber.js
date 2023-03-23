@@ -76,7 +76,7 @@ const Navber = () => {
                     </div>
                 </div>
                 {
-                    userInfo ? <div className='flex items-center gap-2'>
+                    userInfo?._id ? <div className='flex items-center gap-2'>
                         <h1 className='font-bold text-blue-900 hidden sm:block'>{userInfo?.name?.slice(0, 12)}</h1>
                         <div onClick={() => dispatch(setOpenUserProfileSidebar(true))}
                             className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
@@ -85,11 +85,11 @@ const Navber = () => {
                     </div>
                         :
                         <div className='hidden lg:block lg:flex justify-between items-center gap-6'>
-                            <Link href='/login' className='w-36 h-10 bg-[#0029FF] flex justify-center items-center rounded'>
+                            <Link href='/login' className='w-36 h-10 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
                                 <h1 className='text-white font-semibold'>LOG IN</h1>
                             </Link>
-                            <Link href='/register' className='w-36 h-10 border border-[#0029FF] flex justify-center items-center rounded'>
-                                <h1 className='text-[#0029FF] font-semibold'>REGISTER</h1>
+                            <Link href='/register' className='w-36 h-10 border border-primary hover:bg-gray-300 duration-300 flex justify-center items-center rounded'>
+                                <h1 className='text-primary font-semibold'>REGISTER</h1>
                             </Link>
                         </div>
                 }
@@ -127,11 +127,11 @@ const Navber = () => {
                 </div>
                 {
                     !userInfo && <div className='lg:hidden flex items-center gap-6 mt-4'>
-                        <Link href='/login' className='w-24 h-8 bg-[#0029FF] flex justify-center items-center rounded'>
+                        <Link href='/login' className='w-24 h-8 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
                             <h1 className='text-white font-semibold'>LOG IN</h1>
                         </Link>
-                        <Link href='/register' className='w-24 h-8 border border-[#0029FF] flex justify-center items-center rounded'>
-                            <h1 className='text-[#0029FF] font-semibold'>REGISTER</h1>
+                        <Link href='/register' className='w-24 h-8 border border-[#0029FF] hover:bg-gray-300 duration-300 flex justify-center items-center rounded'>
+                            <h1 className='text-primary font-semibold'>REGISTER</h1>
                         </Link>
                     </div>
                 }

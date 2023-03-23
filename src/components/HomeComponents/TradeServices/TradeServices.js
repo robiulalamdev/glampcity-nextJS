@@ -22,7 +22,7 @@ const TradeServices = () => {
             })
     }, [])
     return (
-        <section className='mt-32 cursor-pointer'>
+        <section className='pt-32 cursor-pointer'>
             <h1 className='text-gray-900 text-3xl text-center font-semibold mb-5'>Trade services</h1>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mx-auto'>
