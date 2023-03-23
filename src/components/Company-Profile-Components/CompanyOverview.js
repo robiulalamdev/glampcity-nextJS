@@ -1,23 +1,11 @@
-import Link from 'next/link';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import SmallTabs from '../TabsComponents/SmallTabs';
 
 
 const CompanyOverview = () => {
-    const { product } = useSelector((state) => state.viewProductSlice)
     return (
         <section className='mt-6 md:mt-32'>
-            <div className='flex flex-col md:flex-row md:items-center gap-4 mt-16'>
-                <Link href={`/products/${product?._id}`} className='flex justify-center items-center w-full md:w-56 h-14 border border-primary'>
-                    <span className='text-xl text-primary'>Product details</span>
-                </Link>
-                <Link href='/company-profile' className='flex justify-center items-center w-full md:w-56 h-14 bg-primary'>
-                    <span className='text-xl text-white'>Company profile</span>
-                </Link>
-                <Link href='/buyer-reviews' className='flex justify-center items-center w-full md:w-56 h-14 border border-primary'>
-                    <span className='text-xl text-primary'>Buyer Reviews</span>
-                </Link>
-            </div>
+            <SmallTabs />
             <hr className='my-6' />
 
             <div className='mb-6'>

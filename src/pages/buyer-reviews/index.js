@@ -5,22 +5,13 @@ import stars from '../../assets/icons/buyer-reviews/stars.png'
 import img1 from '../../assets/icons/buyer-reviews/flag.png'
 import star from '../../assets/icons/buyer-reviews/star.png'
 import starG from '../../assets/icons/buyer-reviews/star-gray.png'
+import SmallTabs from '@/components/TabsComponents/SmallTabs';
 
 const BuyerReviewMain = () => {
     return (
         <section className='bg-white min-h-screen'>
             <div className='max-w-[1440px] mx-auto px-4 md:px-8 py-6'>
-                <div className='flex flex-col md:flex-row md:items-center gap-4 mt-16'>
-                    <Link href='/product-details' className='flex justify-center items-center w-full md:w-56 h-14 border border-primary'>
-                        <span className='text-xl text-primary'>Product details</span>
-                    </Link>
-                    <Link href='/company-profile' className='flex justify-center items-center w-full md:w-56 h-14 border border-primary'>
-                        <span className='text-xl text-primary'>Company profile</span>
-                    </Link>
-                    <Link href='/buyer-reviews' className='flex justify-center items-center w-full md:w-56 h-14  bg-primary'>
-                        <span className='text-xl text-white'>Buyer Reviews</span>
-                    </Link>
-                </div>
+                <SmallTabs />
                 <hr className='my-6' />
 
                 {/* ----------------suplier services---------------- */}

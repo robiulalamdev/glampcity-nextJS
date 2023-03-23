@@ -24,7 +24,7 @@ const TopRanking = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/products/cat/Top Ranking`)
+        fetch(`http://localhost:5055/api/products/cat/top-ranking`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setTopRankingProducts(data));
@@ -33,8 +33,8 @@ const TopRanking = () => {
     return (
         <div className='bg-secondary rounded-3xl p-4 md:p-7 cursor-pointer'>
             <div className='mb-5 flex justify-between items-center'>
-                <h1 className='text-gray-900 text-xl md:text-2xl text-left font-bold'>Top-ranking</h1>
-                <Link href='/product-list/Top-Ranking' className='text-primary hover:text-darkPrimary duration-300 font-bold'>See All</Link>
+                <h1 className='text-gray-900 text-xl md:text-2xl text-left font-bold'>Top Ranking</h1>
+                <Link href='/product-list/top-ranking' className='text-primary hover:text-darkPrimary duration-300 font-bold'>See All</Link>
             </div>
 
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>

@@ -24,7 +24,7 @@ const NewArrival = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/products/cat/New Arrival`)
+        fetch(`http://localhost:5055/api/products/cat/new-arrival`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setNewArrivalProducts(data));
@@ -35,7 +35,7 @@ const NewArrival = () => {
         <div className='bg-secondary rounded-3xl p-4 md:p-7 cursor-pointer'>
             <div className='mb-5 flex justify-between items-center'>
                 <h1 className='text-gray-900 text-xl md:text-2xl text-left font-bold'>New Arrival</h1>
-                <Link href={`/product-list/New-Arrival`}
+                <Link href={`/product-list/new-arrival`}
                     className='text-primary font-bold hover:text-darkPrimary duration-300'>See All</Link>
             </div>
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import stars from '../../assets/images/product-details/product-images/stars.png'
 import blueRight from '../../assets/images/product-details/product-images/blue-right.png'
 import message from '../../assets/images/product-details/product-images/message.png'
@@ -10,11 +10,10 @@ import img3 from '../../assets/images/product-details/product-images/img3.png'
 import img4 from '../../assets/images/product-details/product-images/img4.png'
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedImage } from '@/Slices/viewProductSlice';
+import Link from 'next/link';
 
 const ProductReview = () => {
-    const { images, product, selectedImage } = useSelector((state) => state.viewProductSlice)
-    const dispatch = useDispatch()
+    const { images, product } = useSelector((state) => state.viewProductSlice)
     return (
         <section className='mt-8'>
             <div className='grid md:grid-cols-2 lg:grid-cols-10 gap-5 cursor-pointer'>
@@ -45,8 +44,8 @@ const ProductReview = () => {
                         <h1 className='text-gray-500 mt-2 font-semibold text-left text-xl'>Enter Promo Code</h1>
 
                         <div className='flex items-center mt-4 w-full'>
-                            <input className='w-full h-12 focus:outline-none border border-l border-y border-gray-500 px-2' type="text" placeholder='Promo Code' />
-                            <button className='w-44 h-12 flex justify-center items-center text-white bg-primary'>
+                            <input className='w-full h-12 focus:outline-none border border-l border-y hover:border-primary focus:border-primary border-gray-500 px-2' type="text" placeholder='Promo Code' />
+                            <button className='w-44 h-12 flex justify-center items-center text-white bg-primary hover:bg-darkPrimary duration-300'>
                                 <span className='text-xl uppercase'>Submit</span>
                             </button>
                         </div>
@@ -104,14 +103,14 @@ const ProductReview = () => {
                 <div className='lg:col-span-3 border rounded-md w-full p-2 md:p-4'>
                     <p className='text-center text-xl text-gray-500 mb-4'>For more detailed information including pricing, customization, and shipping</p>
 
-                    <button className='flex justify-center items-center gap-4 mb-4 w-full h-12 bg-primary rounded-[50px]'>
+                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-12 bg-primary hover:bg-darkPrimary duration-300 rounded-[50px]'>
                         <Image className='w-6' src={message} alt="" />
                         <span className='text-white'>Contact Supplier</span>
-                    </button>
-                    <button className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary rounded-[50px]'>
+                    </Link>
+                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary hover:bg-gray-300 text-primary duration-300 rounded-[50px]'>
                         <Image className='w-6' src={comment} alt="" />
-                        <span className='text-primary'>Contact Supplier</span>
-                    </button>
+                        <span className=''>Contact Supplier</span>
+                    </Link>
 
                     <div className='mt-6 border p-3 rounded-md'>
                         <h1 className='text-xl text-left text-black font-semibold'>Baoding Shunxuan Trading Co, Ltd</h1>

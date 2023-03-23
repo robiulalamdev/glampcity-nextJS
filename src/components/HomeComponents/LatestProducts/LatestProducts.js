@@ -24,7 +24,7 @@ const LatestProducts = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/products/getLatestProducts/0/10`)
+        fetch(`http://localhost:5055/api/products/getProducts/latest`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setLatestProducts(data));
