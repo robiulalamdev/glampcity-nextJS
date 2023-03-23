@@ -1,38 +1,89 @@
+import { useAuth } from '@/Hooks/getAuth';
 import { setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../assets/icons/latest-products-icons/love.png'
 import love2 from '../../assets/icons/love.png'
 
 const ProductCard = ({ product }) => {
+    const userInfo = useAuth()
     const { wishlistItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
 
-    const wishlised = wishlistItems.find(w => w.id === product.id)
+    const handleGetWishlist = () => {
+        fetch(`http://localhost:5055/api/wishlist/${userInfo?._id}`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch(setWishlistItems(data));
+            })
+    }
+
 
     const handleWishlistRemove = (id) => {
-        const getWishlistItems = wishlistItems.filter(w => w.id !== id)
-        dispatch(setWishlistItems(getWishlistItems))
+        alert('wishlist delete redy')
+        fetch(`http://localhost:5055/api/wishlist/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                handleGetWishlist()
+            })
     }
+
+    const handleAddWishlist = (product) => {
+        alert('wishlist added redy')
+        fetch(`http://localhost:5055/api/wishlist`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: product?.productId,
+                userId: userInfo?._id,
+                sku: product?.sku,
+                title: product?.title,
+                unit: product?.unit,
+                description: product?.description,
+                price: product?.price,
+                image: product?.image,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                handleGetWishlist()
+            })
+    }
+
+    useEffect(() => {
+        if (userInfo?._id) {
+            handleGetWishlist()
+        }
+    }, [])
+
+    const wishlised = wishlistItems.find(p => p?.productId === product?.productId)
+    // console.log(wishlised);
+
     return (
-        <div className='relative w-full mx-auto flex flex-col justify-center items-center gap-2 rounded-xl p-2 hover:bg-blue-100 cursor-pointer hover:shadow-xl hover:shadow-purple-100 duration-300 bg-white mt-6'>
+        <div className='relative w-full mx-auto flex flex-col justify-center items-center gap-2 rounded-xl p-2 hover:bg-blue-100 cursor-pointer border hover:shadow-xl hover:shadow-purple-100 duration-300 bg-white mt-6'>
             <div className='relative w-full h-28 overflow-hidden'>
-                <Image className='w-full h-28 object-cover rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
+                <img className='w-full h-28 object-cover rounded-xl hover:scale-150 duration-500' src={product?.image} alt="" />
                 {wishlised ?
-                    <Image onClick={() => handleWishlistRemove(product.id)}
-                        className='w-8 absolute top-3 right-3 hover:scale-125 duration-200' src={love2} alt="" />
+                    <Image onClick={() => handleWishlistRemove(wishlised?._id)}
+                        className='w-8 absolute top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love2} alt="" />
                     :
-                    <Image onClick={() => dispatch(setWishlistItems([...wishlistItems, product]))}
-                        className='w-8 absolute top-3 right-3 hover:scale-125 duration-200' src={love} alt="" />
+                    <Image onClick={() => handleAddWishlist(product)}
+                        className='w-8 absolute top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love} alt="" />
                 }
             </div>
             <div className='flex flex-col items-start gap-2 px-3'>
-                <span className='text-gray-900 text-sm md:text-md font-bold text-left '>{product.title}</span>
-                <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product.price}</span>
-                <span className='text-gray-400 text-sm text-left'>{product.description?.slice(0, 40) + '...'}</span>
+                <span className='text-gray-900 text-sm md:text-md font-bold text-left '>{product?.title}</span>
+                <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product?.price}</span>
+                <span className='text-gray-400 text-sm text-left'>{product?.description?.slice(0, 40) + '...'}</span>
             </div>
-
         </div>
     );
 };

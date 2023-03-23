@@ -16,8 +16,8 @@ const ParentByProducts = () => {
 
     // console.log(router);
 
-    const handleLatestProducts = () => {
-        fetch(`http://localhost:5055/api/products/getProducts/latest`)
+    const handleFetchData = (endPoint) => {
+        fetch(`http://localhost:5055/api/${endPoint}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);
@@ -37,7 +37,10 @@ const ParentByProducts = () => {
     useEffect(() => {
         dispatch(setIsloading(true))
         if (name === 'latest-products') {
-            handleLatestProducts()
+            handleFetchData('products/getProducts/latest')
+        }
+        else if (name === 'popular-products') {
+            handleFetchData('popular-product')
         }
         else {
             handleAllProductsOfCTG()

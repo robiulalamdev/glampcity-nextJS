@@ -41,7 +41,7 @@ const NewArrival = () => {
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
                     newArrivalProducts?.slice(0, 6)?.map((product, i) => <Link key={i} href={`/products/${product?._id}`}
-                        className='flex flex-col justify-center items-center gap-2 rounded-xl pb-2 bg-white
+                        className='flex flex-col justify-center items-center gap-2 rounded-xl pb-2 border bg-white
                         hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300'>
                         <div className='w-full h-28 rounded-xl overflow-hidden'>
                             <img className='w-full h-28 object-cover rounded-xl hover:scale-150 duration-500' src={product?.image} alt="" />

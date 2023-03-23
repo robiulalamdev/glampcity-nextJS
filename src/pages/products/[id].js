@@ -3,13 +3,11 @@ import ProductReview from '@/components/Product-View-Components/ProductReview';
 import ProductSubmit from '@/components/Product-View-Components/ProductSubmit';
 import SmallTabs from '@/components/TabsComponents/SmallTabs';
 import { setProduct } from '@/Slices/viewProductSlice';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Product = () => {
-    const { isLoading } = useSelector((state) => state.controllerSlice)
     const { product } = useSelector((state) => state.viewProductSlice)
     const dispatch = useDispatch()
     const router = useRouter()
@@ -38,15 +36,5 @@ const Product = () => {
         </section >
     );
 };
-
-// export async function getStaticProps({ params }) {
-//     // params contains the post `id`.
-//     // If the route is like /posts/1, then params.id is 1
-//     const res = await fetch(`http://localhost:5055/api/products/${params.id}`)
-//     const product = await res.json()
-
-//     // Pass product data to the page via props
-//     return { props: { product } }
-// }
 
 export default Product;

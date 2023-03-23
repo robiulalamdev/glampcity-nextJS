@@ -10,13 +10,9 @@ import Banner from '../../components/HomeComponents/Banner/Banner'
 import ContactForm from '@/components/HomeComponents/ContactForm/ContactForm';
 import FrequentlyAsk from '@/components/HomeComponents/FrequentlyAsk/FrequentlyAsk';
 import FooterInbox from '@/components/HomeComponents/FooterInbox/FooterInbox';
-import { setCategories } from '@/Slices/bannerSlice';
-import { useDispatch } from 'react-redux';
 
 
 const index = () => {
-    // const dispatch = useDispatch()
-    // dispatch(setCategories(data))
     return (
         <section className=''>
             <div className='bg-[#faf8f8]'>
@@ -56,11 +52,11 @@ const index = () => {
 
 export async function getServerSideProps() {
     // Fetch data from external API
-    const res = await fetch(`http://localhost:5055/api/category`)
+    const res = await fetch(`http://localhost:5055/api/category/show`)
     const data = await res.json()
 
     // Pass data to the page via props
     return { props: { data } }
-}
+};
 
 export default index; 

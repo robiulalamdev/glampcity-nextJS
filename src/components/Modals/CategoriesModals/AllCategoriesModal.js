@@ -28,7 +28,7 @@ const AllCategoriesModal = ({ allCategories, closeModal }) => {
                         <h1 className='font-bold'>Browse Categories</h1>
                     </div>
                     {
-                        allCategories && allCategories?.map(category => <Link href={`/categories/${category?.parent?.toLowerCase()}`}
+                        allCategories && allCategories?.map(category => <Link href={`/categories/${category?.slug}`}
                             className="group relative w-full">
                             <div className=' hover:bg-gray-300 border-b border-x h-12 w-full flex justify-between items-center px-3 text-gray-900'>
                                 <h1 className='font-semibold'>{category?.parent}</h1>
@@ -39,7 +39,7 @@ const AllCategoriesModal = ({ allCategories, closeModal }) => {
                                 className='hidden group-focus:block group-hover:block z-50 absolute right-10 bg-white w-72 border-t-8 border-t-primary border-b border-x shadow max-h-72 overflow-y-auto'>
                                 {
                                     category?.children?.map(subCTG => <Link
-                                        href={`/categories/${category?.parent?.toLowerCase()}/${subCTG?.toLowerCase()}`}
+                                        href={`/categories/${category?.slug}/${subCTG?.toLowerCase()}`}
                                         className='hover:bg-gray-300 border-b border-x h-12 w-full flex items-center px-3 text-gray-900'>
                                         <h1 className='font-semibold'>{subCTG}</h1>
                                     </Link>)
@@ -48,7 +48,7 @@ const AllCategoriesModal = ({ allCategories, closeModal }) => {
                         </Link>)
                     }
                 </div>
-                <button onClick={() => closeModal(null)} className='bg-primary h-12 w-full flex justify-center items-center text-white'>
+                <button onClick={() => closeModal(null)} className='bg-primary hover:bg-darkPrimary duration-300 h-12 w-full flex justify-center items-center text-white'>
                     <h1 className='font-bold'>Close</h1>
                 </button>
             </div>

@@ -12,6 +12,7 @@ const initialState = {
     latestProducts: [],
     newArrivalProducts: [],
     topRankingProducts: [],
+    popularProducts: [],
 };
 
 export const viewProductSlice = createSlice({
@@ -33,6 +34,9 @@ export const viewProductSlice = createSlice({
         setTopRankingProducts: (state, action) => {
             state.topRankingProducts = action.payload;
         },
+        setPopularProducts: (state, action) => {
+            state.popularProducts = action.payload;
+        },
     },
 });
 
@@ -42,5 +46,6 @@ export const {
     setLatestProducts,
     setNewArrivalProducts,
     setTopRankingProducts,
+    setPopularProducts,
 } = viewProductSlice.actions;
 export default viewProductSlice.reducer;
