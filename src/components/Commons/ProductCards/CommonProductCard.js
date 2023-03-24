@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import love from '../../../assets/icons/latest-products-icons/love.png'
 import love2 from '../../../assets/icons/love.png'
 
-const CommonProductCard = ({ product }) => {
+const CommonProductCard = ({ product, action }) => {
     const userInfo = useAuth()
     const { wishlistItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
@@ -20,6 +20,13 @@ const CommonProductCard = ({ product }) => {
             })
     }
 
+    useEffect(() => {
+        if (userInfo?._id) {
+            // console.log('user data asce', userInfo?._id);
+            handleGetWishlist()
+        }
+    }, [userInfo?._id])
+
     // get cart products
     const handleGetCartProducts = () => {
         fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
@@ -31,7 +38,6 @@ const CommonProductCard = ({ product }) => {
 
 
     const handleWishlistRemove = (id) => {
-        alert('wishlist delete redy')
         fetch(`http://localhost:5055/api/wishlist/${id}`, {
             method: "DELETE"
         })
@@ -61,7 +67,7 @@ const CommonProductCard = ({ product }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 handleGetWishlist()
             })
     }
@@ -90,11 +96,6 @@ const CommonProductCard = ({ product }) => {
             })
     }
 
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetWishlist()
-        }
-    }, [])
 
     const wishlised = wishlistItems.find(p => p?.productId === product?._id)
 
@@ -115,11 +116,11 @@ const CommonProductCard = ({ product }) => {
                         className='w-8 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full absolute top-3 right-3 hover:scale-125 duration-200' src={love} alt="" />
                 }
             </div>
-            <div className='flex flex-col items-start gap-2'>
-                <span className='text-gray-900 text-sm md:text-md font-bold text-left '>{product.title}</span>
-                <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product.price}</span>
+            <Link href={`/products/${action === 'popular-product' ? product?.productId : product?._id}`} className='flex flex-col items-start gap-2'>
+                <span className='text-black font-bold text-left hover:text-primary duration-150'>{product.title}</span>
+                <span className='text-gray-900 text-xl font-bold text-left'>₹ {product.price}</span>
                 <span className='text-gray-400 text-sm text-left'>{product.description?.slice(0, 40) + '...'}</span>
-            </div>
+            </Link>
             <button onClick={() => handleAddToCart(product)} className='w-36 lg:w-48 h-7 md:h-9 mx-auto bg-primary hover:bg-darkPrimary duration-150 flex justify-center items-center rounded-[50px]'>
                 <h1 className='text-white font-semibold md:font-bold'>Buy Now</h1>
             </button>

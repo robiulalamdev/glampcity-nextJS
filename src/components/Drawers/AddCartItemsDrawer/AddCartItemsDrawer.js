@@ -19,6 +19,13 @@ const AddCartItemsDrawer = () => {
     }
 
 
+    useEffect(() => {
+        if (userInfo?._id) {
+            handleGetCartProducts()
+        }
+    }, [userInfo?._id])
+
+
     const handleCartProductRemove = (id) => {
         fetch(`http://localhost:5055/api/cartProduct/${id}`, {
             method: "DELETE"
@@ -27,15 +34,8 @@ const AddCartItemsDrawer = () => {
             .then(data => {
                 // console.log(data);
                 handleGetCartProducts()
-                alert('Cart Product deleted')
             })
     }
-
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetCartProducts()
-        }
-    }, [])
 
 
     return (

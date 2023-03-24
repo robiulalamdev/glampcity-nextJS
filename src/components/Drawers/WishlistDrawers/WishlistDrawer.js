@@ -18,6 +18,12 @@ const WishlistDrawer = () => {
             })
     }
 
+    useEffect(() => {
+        if (userInfo?._id) {
+            handleGetWishlist()
+        }
+    }, [userInfo?._id])
+
 
     const handleWishlistRemove = (id) => {
         fetch(`http://localhost:5055/api/wishlist/${id}`, {
@@ -27,15 +33,9 @@ const WishlistDrawer = () => {
             .then(data => {
                 // console.log(data);
                 handleGetWishlist()
-                alert('wishlist Product deleted')
             })
     }
 
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetWishlist()
-        }
-    }, [])
 
     return (
         <Drawer

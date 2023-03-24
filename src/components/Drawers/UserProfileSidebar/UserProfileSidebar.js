@@ -20,11 +20,11 @@ const UserProfileSidebar = () => {
             <ul class="relative flex flex-col overflow-y-auto overflow-x-hidden">
                 <div
                     className='w-full flex items-center gap-2 border-b px-3 pb-2 sticky z-50 bg-white top-0 cursor-pointer'>
-                    <div className='flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
-                        <span className='text-xl'>{userInfo?.name?.slice(0, 1)}</span>
+                    <div className='flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white'>
+                        <span className='text-2xl'>{userInfo?.name?.slice(0, 1)}</span>
                     </div>
                     <div className='flex flex-col items-start'>
-                        <span className='text-black text-xl'>{userInfo?.name}</span>
+                        <span className='text-black uppercase font-bold'>{userInfo?.name}</span>
                         <span className='text-blue-600 text-sm'>View Profile</span>
                     </div>
                 </div>

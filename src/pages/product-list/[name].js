@@ -42,6 +42,9 @@ const ParentByProducts = () => {
         else if (name === 'popular-products') {
             handleFetchData('popular-product')
         }
+        else if (name === 'top-ranking-products') {
+            handleFetchData('top-ranking-product')
+        }
         else {
             handleAllProductsOfCTG()
         }
@@ -63,7 +66,8 @@ const ParentByProducts = () => {
                 <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
 
                     {
-                        data?.map((product, i) => <CommonProductCard key={i} product={product} />)
+                        data?.map((product, i) => <CommonProductCard key={i} product={product}
+                            action={'popular-product'} />)
                     }
                 </div>
                 {

@@ -1,6 +1,7 @@
 import { useAuth } from '@/Hooks/getAuth';
 import { setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../assets/icons/latest-products-icons/love.png'
@@ -19,9 +20,14 @@ const ProductCard = ({ product }) => {
             })
     }
 
+    useEffect(() => {
+        if (userInfo?._id) {
+            handleGetWishlist()
+        }
+    }, [userInfo?._id])
+
 
     const handleWishlistRemove = (id) => {
-        alert('wishlist delete redy')
         fetch(`http://localhost:5055/api/wishlist/${id}`, {
             method: "DELETE"
         })
@@ -29,7 +35,7 @@ const ProductCard = ({ product }) => {
             .then(data => {
                 // console.log(data);
                 handleGetWishlist()
-                alert('wishlist Product deleted')
+                // alert('wishlist Product deleted')
             })
     }
 
@@ -52,17 +58,12 @@ const ProductCard = ({ product }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 handleGetWishlist()
-                alert('wishlist Product Added')
+                // alert('wishlist Product Added')
             })
     }
 
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetWishlist()
-        }
-    }, [])
 
     const wishlised = wishlistItems.find(p => p?.productId === product?.productId)
     // console.log(wishlised);
@@ -79,11 +80,11 @@ const ProductCard = ({ product }) => {
                         className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love} alt="" />
                 }
             </div>
-            <div className='flex flex-col items-start gap-2 px-3'>
-                <span className='text-gray-900 text-sm md:text-md font-bold text-left '>{product?.title}</span>
-                <span className='text-gray-900 text-sm md:text-md font-bold text-left'>₹ {product?.price}</span>
+            <Link href={`/products/${product?.productId ? product?.productId : product?._id}`} className='flex flex-col items-start gap-2 px-3'>
+                <span className='text-black font-bold text-left hover:text-primary duration-150'>{product?.title}</span>
+                <span className='text-gray-900 text-xl font-bold text-left'>₹ {product?.price}</span>
                 <span className='text-gray-400 text-sm text-left'>{product?.description?.slice(0, 40) + '...'}</span>
-            </div>
+            </Link>
         </div>
     );
 };
