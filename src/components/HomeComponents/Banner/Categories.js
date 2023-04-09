@@ -14,7 +14,7 @@ const Categories = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/category`)
+        fetch(`https://heylink.ahmadalanazi.com/api/category`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCategories(data))
@@ -67,7 +67,7 @@ const Categories = () => {
 
 export async function getServerSideProps() {
     // Fetch data from external API
-    const res = await fetch(`http://localhost:5055/api/category`)
+    const res = await fetch(`https://heylink.ahmadalanazi.com/api/category`)
     const data = await res.json()
     // Pass data to the page via props
     return { props: { data } }

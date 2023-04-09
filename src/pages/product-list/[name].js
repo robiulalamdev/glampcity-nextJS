@@ -14,10 +14,10 @@ const ParentByProducts = () => {
     const name = router.query.name
     const [data, setData] = useState([])
 
-    // console.log(router);
+    // console.log(data, name);
 
     const handleFetchData = (endPoint) => {
-        fetch(`http://localhost:5055/api/${endPoint}`)
+        fetch(`https://heylink.ahmadalanazi.com/api/${endPoint}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);
@@ -26,7 +26,7 @@ const ParentByProducts = () => {
     }
 
     const handleAllProductsOfCTG = () => {
-        fetch(`http://localhost:5055/api/products/cat/${name}`)
+        fetch(`https://heylink.ahmadalanazi.com/api/products/cat/${name}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);
@@ -67,7 +67,7 @@ const ParentByProducts = () => {
 
                     {
                         data?.map((product, i) => <CommonProductCard key={i} product={product}
-                            action={'popular-product'} />)
+                            action={name === 'popular-product' ? 'popular-product' : ''} />)
                     }
                 </div>
                 {

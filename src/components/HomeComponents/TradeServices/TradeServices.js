@@ -15,7 +15,7 @@ const TradeServices = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/popular-product`)
+        fetch(`https://heylink.ahmadalanazi.com/api/popular-product`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setPopularProducts(data));

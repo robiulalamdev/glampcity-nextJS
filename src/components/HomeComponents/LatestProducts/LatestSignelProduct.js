@@ -6,14 +6,16 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../../assets/icons/latest-products-icons/love.png'
 import love2 from '../../../assets/icons/love.png'
+import { useRouter } from 'next/router';
 
 const LatestSignelProduct = ({ product }) => {
     const userInfo = useAuth()
     const { wishlistItems } = useSelector((state) => state.controllerSlice)
+    const router = useRouter()
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`http://localhost:5055/api/wishlist/${userInfo?._id}`)
+        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${userInfo?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -28,7 +30,7 @@ const LatestSignelProduct = ({ product }) => {
 
     // get cart products
     const handleGetCartProducts = () => {
-        fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
+        fetch(`https://heylink.ahmadalanazi.com/api/cartProduct/${userInfo?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -37,63 +39,78 @@ const LatestSignelProduct = ({ product }) => {
 
 
     const handleWishlistRemove = (id) => {
-        fetch(`http://localhost:5055/api/wishlist/${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                handleGetWishlist()
+        if (userInfo?._id) {
+            fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${id}`, {
+                method: "DELETE"
             })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data);
+                    handleGetWishlist()
+                })
+        }
+        else {
+            router.push("/login")
+        }
     }
 
     const handleAddWishlist = (product) => {
-        fetch(`http://localhost:5055/api/wishlist`, {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                productId: product?._id,
-                userId: userInfo?._id,
-                sku: product?.sku,
-                title: product?.title,
-                unit: product?.unit,
-                description: product?.description,
-                price: product?.price,
-                image: product?.image,
+        if (userInfo?._id) {
+            fetch(`https://heylink.ahmadalanazi.com/api/wishlist`, {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productId: product?._id,
+                    userId: userInfo?._id,
+                    sku: product?.sku,
+                    title: product?.title,
+                    unit: product?.unit,
+                    description: product?.description,
+                    price: product?.price,
+                    image: product?.image,
+                })
             })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                handleGetWishlist()
-            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    handleGetWishlist()
+                })
+        }
+        else {
+            router.push("/login")
+        }
     }
 
 
     // add to cart product
     const handleAddToCart = (product) => {
-        fetch(`http://localhost:5055/api/cartProduct`, {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                productId: product?._id,
-                userId: userInfo?._id,
-                sku: product?.sku,
-                title: product?.title,
-                unit: product?.unit,
-                description: product?.description,
-                price: product?.price,
-                image: product?.image,
+        if (userInfo?._id) {
+            fetch(`https://heylink.ahmadalanazi.com/api/cartProduct`, {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productId: product?._id,
+                    userId: userInfo?._id,
+                    sku: product?.sku,
+                    title: product?.title,
+                    unit: product?.unit,
+                    description: product?.description,
+                    price: product?.price,
+                    image: product?.image,
+                })
             })
-        })
-            .then(res => res.json())
-            .then(data => {
-                handleGetCartProducts()
-            })
+                .then(res => res.json())
+                .then(data => {
+                    handleGetCartProducts()
+                })
+        }
+        else {
+            router.push("/login")
+        }
     }
 
     const wishlised = wishlistItems.find(p => p?.productId === product?._id)

@@ -17,7 +17,7 @@ const Product = () => {
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:5055/api/products/${id}`)
+            fetch(`https://heylink.ahmadalanazi.com/api/products/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     dispatch(setProduct(data))

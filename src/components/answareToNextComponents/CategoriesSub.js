@@ -16,7 +16,7 @@ const CategoriesSub = () => {
             tents: data2,
             autoAndTransportation: data3,
         }
-        fetch(`http://localhost:5055/api/user/${userInfo?._id}`, {
+        fetch(`https://heylink.ahmadalanazi.com/api/user/${userInfo?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

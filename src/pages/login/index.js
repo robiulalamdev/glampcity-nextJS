@@ -13,7 +13,7 @@ const index = () => {
     const router = useRouter()
 
     const handleLogin = (data) => {
-        fetch(`http://localhost:5055/api/user/login`, {
+        fetch(`https://heylink.ahmadalanazi.com/api/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

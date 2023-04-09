@@ -8,7 +8,7 @@ const ConversationChat = ({ data, currentUser }) => {
     useEffect(() => {
         const userId = data.members.find(id => id !== currentUser?._id)
         if (receiverUser === null) {
-            fetch(`http://localhost:5055/api/user/${userId}`,)
+            fetch(`https://heylink.ahmadalanazi.com/api/user/${userId}`,)
                 .then(res => res.json())
                 .then(data => {
                     setReceiverUser(data);

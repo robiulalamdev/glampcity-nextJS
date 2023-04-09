@@ -11,7 +11,7 @@ const WishlistDrawer = () => {
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`http://localhost:5055/api/wishlist/${userInfo?._id}`)
+        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${userInfo?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -26,7 +26,7 @@ const WishlistDrawer = () => {
 
 
     const handleWishlistRemove = (id) => {
-        fetch(`http://localhost:5055/api/wishlist/${id}`, {
+        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

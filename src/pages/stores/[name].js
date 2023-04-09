@@ -13,7 +13,7 @@ const SingelStore = () => {
 
     useEffect(() => {
         dispatch(setIsloading(true))
-        fetch(`http://localhost:5055/api/store/getInfo/${name}`)
+        fetch(`https://heylink.ahmadalanazi.com/api/store/getInfo/${name}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);
