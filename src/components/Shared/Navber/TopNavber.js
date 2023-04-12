@@ -1,34 +1,63 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import usa from '../../../assets/icons/navber-icons/usa.png'
 import downArrow from '../../../assets/icons/navber-icons/down-arrow.png'
 import Link from 'next/link';
 import CountryDropdown from '@/components/Dropdowns/NavberDropdowns/CountryDropdown';
 import Image from 'next/image';
 
+const routes = [
+    { _id: "1", title: "All Orders", url: "all-orders" },
+    { _id: "1", title: "Buyer Reviews", url: "buyer-reviews" },
+    { _id: "1", title: "Company Profile", url: "company-profile" },
+    { _id: "1", title: "Conversation", url: "conversation" },
+    { _id: "1", title: "Customer Support", url: "customer-support" },
+    { _id: "1", title: "Messages", url: "messages" },
+    { _id: "1", title: "Order Refunds", url: "order-refunds" },
+    { _id: "1", title: "Personalize", url: "personalize" },
+    { _id: "1", title: "Shopping Carts", url: "shopping-carts" },
+    { _id: "1", title: "user-wellcome", url: "user-wellcome" },
+    { _id: "1", title: "Conversation", url: "conversation" },
+]
+
 const TopNavber = () => {
     const [countryDropdown, setCountryDropdown] = useState(false)
     const [showRoutes, setShowRoutes] = useState(false)
+
+    let navberRef = useRef();
+    useEffect(() => {
+        let handler = (e) => {
+            if (!navberRef.current.contains(e.target)) {
+                setShowRoutes(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        }
+    });
 
     return (
         <nav className='bg-[#E5EAFF57] cursor-pointer'>
             <div className='flex justify-end items-center gap-8 max-w-[1440px] mx-auto px-4 h-14'>
 
-                {/* <div className=''>
-                    <button onClick={() => setShowRoutes(!showRoutes)} className='bg-primary text-white py-2 px-2'>Routes</button>
+                <div ref={navberRef} className='relative'>
+                    <button onClick={() => setShowRoutes(!showRoutes)} className='hover:bg-primary text-white py-2 px-2'>
+                        <img className='w-6' src="https://cdn-icons-png.flaticon.com/128/2976/2976215.png" alt="" />
+                    </button>
                     {
-                        showRoutes && <div class="absolute md:right-60 z-50 w-fit rounded bg-gray-50 shadow shadow-gray-400 border grid grid-cols-1">
-                            <Link href='/company-profile' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>Company Profile</Link>
-                            <Link href='/messages' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>messages</Link>
-                            <Link href='/shopping-carts' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>shopping carts</Link>
-                            <Link href='/product-details' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>product details</Link>
-                            <Link href='/answare-to-next' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>answare-to-next</Link>
-                            <Link href='/buyer' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>buyer</Link>
-                            <Link href='/customer-support' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>customer-support</Link>
-                            <Link href='/buyer-reviews' className='bg-gray-200 py-2 px-3 hover:bg-primary hover:text-white text-left'>Buyer Reviews</Link>
+                        showRoutes && <div className='w-44 grid grid-cols-1 absolute top-8 right-0 z-40 bg-white shadow border' >
+                            {
+                                routes.map((route, i) => (
+                                    <Link href={route?.url}
+                                        className='w-full h-10 flex justify-start items-center px-2 hover:bg-primary hover:text-white bg-white text-black'>
+                                        <span>{route?.title}</span>
+                                    </Link>
+                                ))
+                            }
                         </div>
                     }
-                </div> */}
+                </div>
 
                 <Link href='/help-center' className='text-sm text-gray-500'>Help Center</Link>
                 <Link href='/contact' className='text-sm text-gray-500'>Contact Us</Link>
