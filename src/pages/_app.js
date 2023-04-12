@@ -1,3 +1,5 @@
+import CartBtn from '@/components/Buttons/StickyButtons/CartBtn'
+import PremiumServiceBtn from '@/components/Buttons/StickyButtons/PremiumServiceBtn'
 import SmallLoader from '@/components/Loaders/SmallLoader'
 import Footer from '@/components/Shared/Footer/Footer'
 import Navber from '@/components/Shared/Navber/Navber'
@@ -28,6 +30,9 @@ export default function App({ Component, pageProps }) {
           loading ? <SmallLoader /> : <Component {...pageProps} />
         }
         <Footer />
+
+        <PremiumServiceBtn />
+        <CartBtn />
       </Provider>
     </>
   )
