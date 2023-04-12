@@ -17,7 +17,7 @@ const routes = [
     { _id: "1", title: "Personalize", url: "personalize" },
     { _id: "1", title: "Shopping Carts", url: "shopping-carts" },
     { _id: "1", title: "user-wellcome", url: "user-wellcome" },
-    { _id: "1", title: "Conversation", url: "conversation" },
+    { _id: "1", title: "Create Company", url: "create-company" },
 ]
 
 const TopNavber = () => {
@@ -49,7 +49,7 @@ const TopNavber = () => {
                         showRoutes && <div className='w-44 grid grid-cols-1 absolute top-8 right-0 z-40 bg-white shadow border' >
                             {
                                 routes.map((route, i) => (
-                                    <Link href={route?.url}
+                                    <Link href={route?.url} key={i}
                                         className='w-full h-10 flex justify-start items-center px-2 hover:bg-primary hover:text-white bg-white text-black'>
                                         <span>{route?.title}</span>
                                     </Link>
