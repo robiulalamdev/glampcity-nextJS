@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 
-export const useFetchData = ({ endPoint }) => {
-    const [data, setData] = useState(null)
+// export const useFetchData = ({ endPoint }) => {
+//     const [data, setData] = useState(null)
 
-    console.log(endPoint);
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/${endPoint}`)
-            .then(res => res.json())
-            .then(data => {
-                setData(data)
-            })
+//     console.log(endPoint);
+//     useEffect(() => {
+//         fetch(`http://localhost:5055/api/${endPoint}`)
+//             .then(res => res.json())
+//             .then(data => {
+//                 setData(data)
+//             })
 
-    }, [endPoint])
-    return data;
-}
+//     }, [endPoint])
+//     return data;
+// }

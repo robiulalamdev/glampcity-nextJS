@@ -15,7 +15,12 @@ import UserProfileSidebar from '@/components/Drawers/UserProfileSidebar/UserProf
 const Navber = () => {
     const { wishlistItems, cartItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
-    const userInfo = useAuth()
+    const [userInfo, setUserInfo] = useState(null)
+
+
+    useEffect(() => {
+        setUserInfo(localStorage?.getItem("userinfo"))
+    }, [])
 
     const [open, setOpen] = useState(false)
 
@@ -76,11 +81,11 @@ const Navber = () => {
                     </div>
                 </div>
                 {
-                    userInfo?._id ? <div className='flex items-center gap-2'>
+                    userInfo ? <div className='flex items-center gap-2'>
                         <h1 className='font-bold text-blue-900 hidden sm:block'>{userInfo?.name?.slice(0, 12)}</h1>
                         <div onClick={() => dispatch(setOpenUserProfileSidebar(true))}
                             className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
-                            <span>{userInfo?.name?.slice(0, 1)} </span>
+                            <img className='w-8 h-8 object-cover' src="https://cdn-icons-png.flaticon.com/512/3033/3033143.png" alt="" />
                         </div>
                     </div>
                         :
@@ -139,7 +144,7 @@ const Navber = () => {
 
             <AddCartItemsDrawer />
             <WishlistDrawer />
-            <UserProfileSidebar />
+            <UserProfileSidebar reFetch={setUserInfo} />
         </nav>
     );
 };

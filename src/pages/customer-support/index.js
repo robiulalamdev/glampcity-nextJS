@@ -38,6 +38,16 @@ const CustomerSupportMain = () => {
                 {
                     selectedCategory === '1' && <MyAccount />
                 }
+                {
+                    selectedCategory === '2' && <MyAccount />
+                }
+                {
+                    selectedCategory === '6' && <MyAccount />
+                }
+
+                {
+                    selectedCategory === '5' && <MyAccount />
+                }
             </div>
         </section>
     );

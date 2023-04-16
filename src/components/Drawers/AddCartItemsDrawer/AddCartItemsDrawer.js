@@ -2,41 +2,16 @@ import React, { useEffect } from 'react';
 import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems, setOpenAddCartItemsSidebar } from '@/Slices/controllerSlice';
-import { useAuth } from '@/Hooks/getAuth';
 import Link from 'next/link';
 
 const AddCartItemsDrawer = () => {
     const { openAddCartItemsSidebar, cartItems } = useSelector((state) => state.controllerSlice)
-    const userInfo = useAuth()
     const dispatch = useDispatch()
 
-    const handleGetCartProducts = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/cartProduct/${userInfo?._id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setCartItems(data));
-            })
-    }
-
-
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetCartProducts()
-        }
-    }, [userInfo?._id])
-
-
     const handleCartProductRemove = (id) => {
-        fetch(`https://heylink.ahmadalanazi.com/api/cartProduct/${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                handleGetCartProducts()
-            })
+        const products = cartItems.filter((product) => product?._id !== id)
+        dispatch(setCartItems(products))
     }
-
 
     return (
         <Drawer

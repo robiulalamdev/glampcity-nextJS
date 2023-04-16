@@ -1,35 +1,33 @@
-import SmallLoader from '@/components/Loaders/SmallLoader';
-import { setIsloading } from '@/Slices/controllerSlice';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { prodcuts } from '@/utils/products';
+import CommonProductCard from '@/components/Commons/ProductCards/CommonProductCard';
 
 const SingelStore = () => {
-    const { isLoading } = useSelector((state) => state.controllerSlice)
-    const dispatch = useDispatch()
     const router = useRouter()
     const name = router.query.name
-    const [data, setData] = useState()
 
-    useEffect(() => {
-        dispatch(setIsloading(true))
-        fetch(`https://heylink.ahmadalanazi.com/api/store/getInfo/${name}`)
-            .then(res => res.json())
-            .then(data => {
-                setData(data);
-                dispatch(setIsloading(false))
-            })
-    }, [router])
-
-    if (isLoading) {
-        return <SmallLoader />
-    }
 
     // console.log(data);
     return (
-        <div className='min-h-screen'>
-            <h1>{data?.name}</h1>
-        </div>
+        <section className='max-w-[1440px] mx-auto px-4'>
+            <div className='rounded-3xl md:p-4 mt-8'>
+                <div className='flex justify-between items-center'>
+                    <h1 className='text-gray-900 text-2xl text-left font-bold'>Products of {name}</h1>
+                </div>
+                <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
+
+                    {
+                        prodcuts?.map((product, i) => <CommonProductCard key={i} product={product} />)
+                    }
+                </div>
+                {
+                    prodcuts.length === 0 && <div className='flex justify-center items-center'>
+                        <h1 className='text-center font-bold text-black text-2xl'>No products of {name} Category</h1>
+                    </div>
+                }
+            </div>
+        </section>
     );
 };
 

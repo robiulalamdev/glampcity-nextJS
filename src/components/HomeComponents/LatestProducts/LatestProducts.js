@@ -19,17 +19,9 @@ import LatestSignelProduct from './LatestSignelProduct';
 //     { id: '6', img: img6, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
 // ]
 
-const LatestProducts = () => {
-    const { latestProducts } = useSelector((state) => state.viewProductSlice)
-    const dispatch = useDispatch()
+import { prodcuts } from '@/utils/products';
 
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/products/getProducts/latest`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setLatestProducts(data));
-            })
-    }, [])
+const LatestProducts = () => {
 
     return (
         <div className='rounded-3xl md:p-4 mt-8'>
@@ -40,7 +32,7 @@ const LatestProducts = () => {
             <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
 
                 {
-                    latestProducts?.map((product, i) => <LatestSignelProduct key={i} product={product} />)
+                    prodcuts?.map((product, i) => <LatestSignelProduct key={i} product={product} />)
                 }
             </div>
         </div>

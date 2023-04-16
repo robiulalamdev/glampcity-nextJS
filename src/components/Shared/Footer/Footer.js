@@ -41,7 +41,7 @@ const Footer = () => {
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>Customer Services</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p className='hover:text-primary duration-150' >Help Center</p>
+                            <Link href="/customer-support" className='hover:text-primary duration-150' >Help Center</Link>
                             <p className='hover:text-primary duration-150' >Report Abuse</p>
                             <p className='hover:text-primary duration-150' >Open Case</p>
                             <p className='hover:text-primary duration-150' >Policies And Rules</p>
@@ -53,8 +53,8 @@ const Footer = () => {
                         <h1 className='text-black text-xl font-bold text-center md:text-left mb-4 md:mb-10'>About US</h1>
 
                         <div className='text-gray-500 text-left font-normal flex flex-col justify-start items-center md:items-start gap-3'>
-                            <p className='hover:text-primary duration-150' >About</p>
-                            <p className='hover:text-primary duration-150' >Contact us</p>
+                            <Link href="/about-us" className='hover:text-primary duration-150' >About</Link>
+                            <Link href="/contact" className='hover:text-primary duration-150' >Contact us</Link>
                             <p className='hover:text-primary duration-150' >Sitemap</p>
                             <p className='hover:text-primary duration-150' >Blog</p>
                             <p className='hover:text-primary duration-150' >Notice</p>

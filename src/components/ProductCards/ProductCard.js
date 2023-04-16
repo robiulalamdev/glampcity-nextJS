@@ -1,5 +1,4 @@
-import { useAuth } from '@/Hooks/getAuth';
-import { setWishlistItems } from '@/Slices/controllerSlice';
+import { setCartItems, setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
@@ -9,74 +8,16 @@ import love2 from '../../assets/icons/love.png'
 import { useRouter } from 'next/router';
 
 const ProductCard = ({ product }) => {
-    const userInfo = useAuth()
-    const { wishlistItems } = useSelector((state) => state.controllerSlice)
-    const router = useRouter()
+    const { wishlistItems, cartItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
 
-    const handleGetWishlist = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${userInfo?._id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setWishlistItems(data));
-            })
-    }
-
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetWishlist()
-        }
-    }, [userInfo?._id])
-
-
     const handleWishlistRemove = (id) => {
-        if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${id}`, {
-                method: "DELETE"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data);
-                    handleGetWishlist()
-                    // alert('wishlist Product deleted')
-                })
-        }
-        else {
-            router.push("/login")
-        }
+        const products = wishlistItems.filter((product) => product?._id !== id)
+        dispatch(setWishlistItems(products))
     }
-
     const handleAddWishlist = (product) => {
-        if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/wishlist`, {
-                method: "POST",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    productId: product?.productId,
-                    userId: userInfo?._id,
-                    sku: product?.sku,
-                    title: product?.title,
-                    unit: product?.unit,
-                    description: product?.description,
-                    price: product?.price,
-                    image: product?.image,
-                })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data);
-                    handleGetWishlist()
-                    // alert('wishlist Product Added')
-                })
-        }
-        else {
-            router.push("/login")
-        }
+        dispatch(setWishlistItems([...wishlistItems, product]))
     }
-
-
     const wishlised = wishlistItems.find(p => p?.productId === product?.productId)
     // console.log(wishlised);
 

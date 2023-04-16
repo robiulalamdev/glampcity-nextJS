@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { format } from 'timeago.js'
 import InputEmoji from 'react-input-emoji'
-import { io } from 'socket.io-client'
 import { useSelector } from 'react-redux';
 
 const ChatBox = ({ chat, currentUser }) => {
@@ -9,81 +8,7 @@ const ChatBox = ({ chat, currentUser }) => {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
     const [onlineUsers, setOnlineUsers] = useState([])
-    const socket = useRef()
     const scroll = useRef()
-
-    useEffect(() => {
-        const fetchMessage = () => {
-            fetch(`https://heylink.ahmadalanazi.com/api/message/${chat?._id}`,)
-                .then(res => res.json())
-                .then(data => {
-                    setMessages(data);
-                    // console.log(messages);
-                })
-        }
-        if (chat !== null) {
-            fetchMessage()
-        }
-    }, [chat])
-
-    const handleChange = (newMessage) => {
-        setNewMessage(newMessage)
-    }
-
-
-    const refetchMessage = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/message/${chat?._id}`,)
-            .then(res => res.json())
-            .then(data => {
-                setMessages(data);
-                // console.log(messages);
-            })
-    }
-
-    useEffect(() => {
-        // console.log(currentUser?._id);
-        socket.current = io("http://localhost:8000")
-        socket.current.emit('new-user-add', currentUser?._id)
-        socket.current.on('get-users', (users) => {
-            setOnlineUsers(users)
-        })
-    }, [chat])
-
-    const handleSendMessage = () => {
-        const message = {
-            chatId: chat._id,
-            senderId: currentUser._id,
-            text: newMessage
-        }
-
-        fetch(`https://heylink.ahmadalanazi.com/api/message`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(message)
-        })
-            .then(res => res.json())
-            .then(data => {
-                setMessages([...messages, data])
-                setNewMessage('')
-
-                // send message to socket server
-                const receiverId = chat?.members?.find(id => id !== currentUser._id)
-                const sendMessage = { ...message, receiverId }
-                socket.current.emit("send-message", sendMessage)
-
-                // receive message
-                socket.current.on('receive-message', (receiveMessage) => {
-                    refetchMessage()
-                    // setMessages([...messages, receiveMessage])
-                })
-
-            })
-
-    }
-
-
 
     // scrooll to last message
     useEffect(() => {
@@ -134,7 +59,7 @@ const ChatBox = ({ chat, currentUser }) => {
                         setValue={newMessage}
                         onChange={handleChange}
                     ></InputEmoji>
-                    <button onClick={() => handleSendMessage()} type='submit' className='w-16 rounded h-8 bg-blue-600 text-white'>SEND</button>
+                    <button type='submit' className='w-16 rounded h-8 bg-blue-600 text-white'>SEND</button>
                 </div>
             </div>
         </div >

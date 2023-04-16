@@ -1,9 +1,7 @@
-import { useAuth } from '@/Hooks/getAuth';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 const Supplier = () => {
-    const userInfo = useAuth()
     const router = useRouter()
 
     const [data1, setData1] = useState('')
@@ -18,18 +16,7 @@ const Supplier = () => {
 
     const sendData = () => {
         const supplier = [data1, data2, data3, data4, data5, data6, data7, data8];
-        fetch(`https://heylink.ahmadalanazi.com/api/user/${userInfo?._id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ supplier })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                router.push('/home')
-            })
+        router.push('/home')
     }
     return (
         <div className='py-16'>

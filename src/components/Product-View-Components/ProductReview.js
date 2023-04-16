@@ -9,11 +9,32 @@ import img2 from '../../assets/images/product-details/product-images/img2.png'
 import img3 from '../../assets/images/product-details/product-images/img3.png'
 import img4 from '../../assets/images/product-details/product-images/img4.png'
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Link from 'next/link';
 
+const product = {
+    "price": 0,
+    "flashSale": false,
+    "status": "Show",
+    "_id": "641b36c144fa7ab0e89f7ea7",
+    "title": "Savlon Soap",
+    "slug": "new-arrival",
+    "parent": "New Arrival",
+    "children": "Bath",
+    "image": "https://i.ibb.co/XL8Dmw5/Savlon-Fresh-Antiseptic-Soap-100-Gm.jpg",
+    "discount": 0,
+    "unit": "100gm",
+    "quantity": 100,
+    "type": "Health Care",
+    "tag": [
+        "bath",
+        "soap"
+    ],
+    "description": "bathroom accessories are items specifically designed for use in a bathroom, such as soap dishes, towel racks, etc. bathroom accessories accessories typically have durable, decorative finishes."
+}
+
 const ProductReview = () => {
-    const { images, product } = useSelector((state) => state.viewProductSlice)
+    const { images } = useSelector((state) => state.viewProductSlice)
     return (
         <section className='mt-8'>
             <div className='grid md:grid-cols-2 lg:grid-cols-10 gap-5 cursor-pointer'>
@@ -107,7 +128,7 @@ const ProductReview = () => {
                         <Image className='w-6' src={message} alt="" />
                         <span className='text-white'>Contact Supplier</span>
                     </Link>
-                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary hover:bg-gray-300 text-primary duration-300 rounded-[50px]'>
+                    <Link href='/conversation' className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary hover:bg-gray-300 text-primary duration-300 rounded-[50px]'>
                         <Image className='w-6' src={comment} alt="" />
                         <span className=''>Contact Supplier</span>
                     </Link>

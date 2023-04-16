@@ -9,18 +9,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPopularProducts } from '@/Slices/viewProductSlice';
+import { prodcuts } from '@/utils/products';
 
 const TradeServices = () => {
-    const { popularProducts } = useSelector((state) => state.viewProductSlice)
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/popular-product`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setPopularProducts(data));
-            })
-    }, [])
     return (
         <section className='pt-32 cursor-pointer'>
             <h1 className='text-gray-900 text-3xl text-center font-semibold mb-5'>Trade services</h1>
@@ -72,7 +64,7 @@ const TradeServices = () => {
                         <Image className='h-52 mx-auto mr-0' src={justForYou} alt="" />
                     </Link>
                     {
-                        popularProducts?.map((product, i) => <ProductCard key={i} product={product} />)
+                        prodcuts?.map((product, i) => <ProductCard key={i} product={product} />)
                     }
                 </div>
             </div>

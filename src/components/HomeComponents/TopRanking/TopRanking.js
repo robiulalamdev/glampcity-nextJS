@@ -1,19 +1,10 @@
 import { setTopRankingProducts } from '@/Slices/viewProductSlice';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { prodcuts } from '@/utils/products';
 
 const TopRanking = () => {
-    const { topRankingProducts } = useSelector((state) => state.viewProductSlice)
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/top-ranking-product`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setTopRankingProducts(data));
-            })
-    }, [])
     return (
         <div className='bg-secondary rounded-3xl p-4 md:p-7 cursor-pointer'>
             <div className='mb-5 flex justify-between items-center'>
@@ -23,7 +14,7 @@ const TopRanking = () => {
 
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3'>
                 {
-                    topRankingProducts?.slice(0, 6)?.map((product, i) => <Link key={i}
+                    prodcuts?.slice(0, 6)?.map((product, i) => <Link key={i}
                         href={`/products/${product?.productId}`}
                         className='flex flex-col items-center gap-2 border rounded-xl pb-2 bg-white
                         hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300'>

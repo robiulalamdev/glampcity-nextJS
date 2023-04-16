@@ -2,24 +2,14 @@
 import { setCategories } from '@/Slices/bannerSlice';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import arrow from '../../../assets/icons/banner-icons/right-arrow.png'
 import AllCategoriesModal from '../../Modals/CategoriesModals/AllCategoriesModal';
+import { categories } from '@/utils/categories';
 
 
 const Categories = () => {
     const [allCategories, setAllCategories] = useState(null)
-    const { categories } = useSelector((state) => state.bannerSlice)
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/category`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setCategories(data))
-            })
-    }, [])
 
     return (
         <div className='lg:col-span-1 cursor-pointer relative'>
@@ -64,14 +54,6 @@ const Categories = () => {
         </div >
     );
 };
-
-export async function getServerSideProps() {
-    // Fetch data from external API
-    const res = await fetch(`https://heylink.ahmadalanazi.com/api/category`)
-    const data = await res.json()
-    // Pass data to the page via props
-    return { props: { data } }
-}
 
 export default Categories;
 

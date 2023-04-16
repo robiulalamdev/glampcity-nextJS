@@ -1,4 +1,3 @@
-import { useAuth } from '@/Hooks/getAuth';
 import { setCartItems, setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,114 +5,24 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../../assets/icons/latest-products-icons/love.png'
 import love2 from '../../../assets/icons/love.png'
-import { useRouter } from 'next/router';
 
 const LatestSignelProduct = ({ product }) => {
-    const userInfo = useAuth()
-    const { wishlistItems } = useSelector((state) => state.controllerSlice)
-    const router = useRouter()
+    const { wishlistItems, cartItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
 
-    const handleGetWishlist = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${userInfo?._id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setWishlistItems(data));
-            })
-    }
-
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetWishlist()
-        }
-    }, [userInfo?._id])
-
-    // get cart products
-    const handleGetCartProducts = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/cartProduct/${userInfo?._id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setCartItems(data));
-            })
-    }
-
-
     const handleWishlistRemove = (id) => {
-        if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${id}`, {
-                method: "DELETE"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    // console.log(data);
-                    handleGetWishlist()
-                })
-        }
-        else {
-            router.push("/login")
-        }
+        const products = wishlistItems.filter((product) => product?._id !== id)
+        dispatch(setWishlistItems(products))
     }
-
     const handleAddWishlist = (product) => {
-        if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/wishlist`, {
-                method: "POST",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    productId: product?._id,
-                    userId: userInfo?._id,
-                    sku: product?.sku,
-                    title: product?.title,
-                    unit: product?.unit,
-                    description: product?.description,
-                    price: product?.price,
-                    image: product?.image,
-                })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    handleGetWishlist()
-                })
-        }
-        else {
-            router.push("/login")
-        }
+        dispatch(setWishlistItems([...wishlistItems, product]))
     }
-
-
-    // add to cart product
     const handleAddToCart = (product) => {
-        if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/cartProduct`, {
-                method: "POST",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    productId: product?._id,
-                    userId: userInfo?._id,
-                    sku: product?.sku,
-                    title: product?.title,
-                    unit: product?.unit,
-                    description: product?.description,
-                    price: product?.price,
-                    image: product?.image,
-                })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    handleGetCartProducts()
-                })
-        }
-        else {
-            router.push("/login")
-        }
+        dispatch(setCartItems([...cartItems, product]))
     }
 
     const wishlised = wishlistItems.find(p => p?.productId === product?._id)
+    console.log(product);
 
     return (
         <div className='relative w-full mx-auto flex flex-col justify-center items-start gap-2 rounded-xl p-3 border hover:bg-blue-100 hover:shadow-xl hover:shadow-purple-100 duration-300 cursor-pointer mt-6'>
@@ -125,7 +34,7 @@ const LatestSignelProduct = ({ product }) => {
                         <Image className='w-full h-28 rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
                 }
                 {wishlised ?
-                    < Image onClick={() => handleWishlistRemove(wishlised?.productId)}
+                    < Image onClick={() => handleWishlistRemove(wishlised?._id)}
                         className='w-8 border shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full absolute top-3 right-3 hover:scale-125 duration-200' src={love2} alt="" />
                     :
                     < Image onClick={() => handleAddWishlist(product)}

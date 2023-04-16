@@ -1,41 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
 import facebook from '../../assets/icons/login-register-icons/facebook.png'
 import google from '../../assets/icons/login-register-icons/google.png'
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { setName } from '@/Slices/controllerSlice';
 import { useRouter } from 'next/router';
+import SuccessLogin from '../../components/Modals/SuccessLogin';
 const index = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const router = useRouter()
+    const [openModal, setOpenModal] = useState(false)
 
     const handleLogin = (data) => {
-        fetch(`https://heylink.ahmadalanazi.com/api/user/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data?.login === false) {
-                    alert(data?.message)
-                }
-                if (data?.success === true) {
-                    localStorage.setItem('glampcity-token', data.token)
-                }
-                if (data?.token) {
-                    const token = localStorage.getItem('glampcity-token')
-                    if (token) {
-                        router.push('/home')
-                        alert('User Login Successfull')
-                    }
-                }
-            })
+        // console.log(data);
+        localStorage?.setItem("userinfo", JSON.stringify(data));
+        const userinfo = localStorage?.getItem("userinfo");
+
+        if (userinfo) {
+            router.push('/home')
+            setOpenModal(true)
+        }
     }
 
     return (
@@ -88,6 +73,10 @@ const index = () => {
                     <h1 className='mt-6 text-sm text-gray-600 text-center'>Don’t have any account? Click here to <Link href='/register' className='text-primary font-bold'>Register</Link></h1>
                 </div>
             </div>
+
+            {
+                openModal && <SuccessLogin closeModal={setOpenModal} />
+            }
         </div>
     );
 };

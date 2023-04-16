@@ -1,4 +1,3 @@
-import { useAuth } from '@/Hooks/getAuth';
 import { setNextIncrease } from '@/Slices/loginRegisterSlice';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -6,7 +5,6 @@ import { useDispatch } from 'react-redux';
 
 const DescribeYourBusiness = () => {
     const dispatch = useDispatch()
-    const userInfo = useAuth()
 
 
     const [data1, setData1] = useState('')
@@ -23,18 +21,7 @@ const DescribeYourBusiness = () => {
 
     const sendData = () => {
         const describeYourBusiness = [data1, data2, data3, data4, data5, data6, data7, data8]
-        fetch(`https://heylink.ahmadalanazi.com/api/user/${userInfo?._id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ describeYourBusiness })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                dispatch(setNextIncrease('2'))
-            })
+        dispatch(setNextIncrease('2'))
     }
 
     return (

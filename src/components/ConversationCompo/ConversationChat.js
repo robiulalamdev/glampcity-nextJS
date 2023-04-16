@@ -4,17 +4,6 @@ const ConversationChat = ({ data, currentUser }) => {
     const [receiverUser, setReceiverUser] = useState(null)
     // console.log(currentUser);
     // console.log(receiverUser);
-
-    useEffect(() => {
-        const userId = data.members.find(id => id !== currentUser?._id)
-        if (receiverUser === null) {
-            fetch(`https://heylink.ahmadalanazi.com/api/user/${userId}`,)
-                .then(res => res.json())
-                .then(data => {
-                    setReceiverUser(data);
-                })
-        }
-    }, [])
     return (
         <div
             className='flex items-center gap-2 border-b hover:bg-gray-300 p-3 sticky z-50 bg-white top-0 cursor-pointer'>

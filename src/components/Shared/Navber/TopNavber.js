@@ -7,17 +7,17 @@ import CountryDropdown from '@/components/Dropdowns/NavberDropdowns/CountryDropd
 import Image from 'next/image';
 
 const routes = [
-    { _id: "1", title: "All Orders", url: "all-orders" },
-    { _id: "1", title: "Buyer Reviews", url: "buyer-reviews" },
-    { _id: "1", title: "Company Profile", url: "company-profile" },
-    { _id: "1", title: "Conversation", url: "conversation" },
-    { _id: "1", title: "Customer Support", url: "customer-support" },
-    { _id: "1", title: "Messages", url: "messages" },
-    { _id: "1", title: "Order Refunds", url: "order-refunds" },
-    { _id: "1", title: "Personalize", url: "personalize" },
-    { _id: "1", title: "Shopping Carts", url: "shopping-carts" },
-    { _id: "1", title: "user-wellcome", url: "user-wellcome" },
-    { _id: "1", title: "Create Company", url: "create-company" },
+    // { _id: "1", title: "All Orders", url: "all-orders" },
+    // { _id: "1", title: "Buyer Reviews", url: "buyer-reviews" },
+    // { _id: "1", title: "Company Profile", url: "company-profile" },
+    // { _id: "1", title: "Conversation", url: "conversation" },
+    // { _id: "1", title: "Customer Support", url: "customer-support" },
+    // { _id: "1", title: "Messages", url: "messages" },
+    // { _id: "1", title: "Order Refunds", url: "order-refunds" },
+    // { _id: "1", title: "Personalize", url: "personalize" },
+    // { _id: "1", title: "Shopping Carts", url: "shopping-carts" },
+    // { _id: "1", title: "user-wellcome", url: "user-wellcome" },
+    // { _id: "1", title: "Create Company", url: "create-company" },
 ]
 
 const TopNavber = () => {
@@ -40,7 +40,7 @@ const TopNavber = () => {
     return (
         <nav className='bg-[#E5EAFF57] cursor-pointer'>
             <div className='flex justify-end items-center gap-8 max-w-[1440px] mx-auto px-4 h-14'>
-
+                {/* 
                 <div ref={navberRef} className='relative'>
                     <button onClick={() => setShowRoutes(!showRoutes)} className='hover:bg-primary text-white py-2 px-2'>
                         <img className='w-6' src="https://cdn-icons-png.flaticon.com/128/2976/2976215.png" alt="" />
@@ -57,9 +57,9 @@ const TopNavber = () => {
                             }
                         </div>
                     }
-                </div>
+                </div> */}
 
-                <Link href='/help-center' className='text-sm text-gray-500'>Help Center</Link>
+                <Link href='/customer-support' className='text-sm text-gray-500'>Help Center</Link>
                 <Link href='/contact' className='text-sm text-gray-500'>Contact Us</Link>
                 <div className='relative'>
                     <div onClick={() => setCountryDropdown(!countryDropdown)}

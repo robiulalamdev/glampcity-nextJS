@@ -2,38 +2,16 @@ import React, { useEffect } from 'react';
 import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenWishlistSidebar, setWishlistItems } from '@/Slices/controllerSlice';
-import { useAuth } from '@/Hooks/getAuth';
 import Link from 'next/link';
 
 const WishlistDrawer = () => {
-    const userInfo = useAuth()
     const { openWishlistSidebar, wishlistItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
 
-    const handleGetWishlist = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${userInfo?._id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setWishlistItems(data));
-            })
-    }
-
-    useEffect(() => {
-        if (userInfo?._id) {
-            handleGetWishlist()
-        }
-    }, [userInfo?._id])
-
 
     const handleWishlistRemove = (id) => {
-        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                handleGetWishlist()
-            })
+        const products = wishlistItems.filter((product) => product?._id !== id)
+        dispatch(setWishlistItems(products))
     }
 
 

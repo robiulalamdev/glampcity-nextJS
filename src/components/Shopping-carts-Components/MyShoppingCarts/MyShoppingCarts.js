@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import blueRight from '../../.././assets/icons/shopping-cart-icons/blue-right.png'
 import img4 from '../../../assets/images/product-details/product-images/img4.png'
 import img1 from '../../../assets/images/product-details/product-images/img1.png'
 import img2 from '../../../assets/images/product-details/product-images/img2.png'
 import img3 from '../../../assets/images/product-details/product-images/img3.png'
 import Image from 'next/image';
+import { Modal } from 'flowbite-react';
 
 const MyShoppingCarts = ({ nextHandle }) => {
+    const [openModal, setOpenModal] = useState(false)
     const nexPermit = (data) => {
         nextHandle(data)
     }
@@ -59,7 +61,7 @@ const MyShoppingCarts = ({ nextHandle }) => {
                         <p className='text-xl font-bold text-black'>$20.00</p>
                     </div>
                     <div className='flex justify-center items-center gap-8 mt-4'>
-                        <button className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] border border-primary'>
+                        <button onClick={() => setOpenModal(true)} className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] border border-primary'>
                             <span className='text-primary uppercase text-xl'>GO TO CART</span>
                         </button>
                         <button onClick={() => nexPermit(2)} className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] bg-primary'>

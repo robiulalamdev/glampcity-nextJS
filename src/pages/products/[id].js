@@ -7,24 +7,33 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { prodcuts } from '@/utils/products';
+
+const product = {
+    "price": 0,
+    "flashSale": false,
+    "status": "Show",
+    "_id": "641b36c144fa7ab0e89f7ea7",
+    "title": "Savlon Soap",
+    "slug": "new-arrival",
+    "parent": "New Arrival",
+    "children": "Bath",
+    "image": "https://i.ibb.co/XL8Dmw5/Savlon-Fresh-Antiseptic-Soap-100-Gm.jpg",
+    "discount": 0,
+    "unit": "100gm",
+    "quantity": 100,
+    "type": "Health Care",
+    "tag": [
+        "bath",
+        "soap"
+    ],
+    "description": "bathroom accessories are items specifically designed for use in a bathroom, such as soap dishes, towel racks, etc. bathroom accessories accessories typically have durable, decorative finishes."
+}
+
 const Product = () => {
-    const { product } = useSelector((state) => state.viewProductSlice)
-    const dispatch = useDispatch()
     const router = useRouter()
-    const id = router.query.id
 
-    // console.log(id);
 
-    useEffect(() => {
-        if (id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/products/${id}`)
-                .then(res => res.json())
-                .then(data => {
-                    dispatch(setProduct(data))
-                })
-        }
-
-    }, [id])
     return (
         <section>
             <div className='bg-white'>

@@ -13,7 +13,7 @@ const Banner = () => {
     const dispatch = useDispatch()
     return (
         <section className=''>
-            <div className='grid lg:grid-cols-4 gap-6 pt-8'>
+            <div className='grid lg:grid-cols-4 gap-6 pt-8 overflow-hidden'>
                 <Categories />
 
                 <div className='lg:col-span-3 order-first lg:order-none'>
@@ -39,7 +39,7 @@ const Banner = () => {
                     </div>
 
 
-                    <div className='relative w-full h-[368px] mt-6'>
+                    <div className='relative w-full h-[368px] mt-6 overflow-hidden'>
                         {/* <Image className='h-[368px] w-full' src={banner} alt="" /> */}
                         <BannerCarousel />
                     </div>

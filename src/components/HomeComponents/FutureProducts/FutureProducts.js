@@ -14,37 +14,18 @@ import bestSeller from '../../../assets/images/product-details/product-images/be
 import StoreCard from '@/components/Commons/StoreCards/StoreCard';
 import { setPopularProducts } from '@/Slices/viewProductSlice';
 
-const products = [
-    { id: '1556', img: img1, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
-    { id: '2df', img: img3, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
-    { id: '3f44fdsf', img: img3, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
-    { id: '4d4f4s', img: img4, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
-    { id: '5d4f4f', img: img5, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
-    { id: '64fd4', img: img4, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
-]
+// const products = [
+//     { id: '1556', img: img1, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
+//     { id: '2df', img: img3, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
+//     { id: '3f44fdsf', img: img3, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
+//     { id: '4d4f4s', img: img4, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
+//     { id: '5d4f4f', img: img5, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
+//     { id: '64fd4', img: img4, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
+// ]
 
+import { prodcuts } from '@/utils/products';
+import { stores } from '@/utils/stores';
 const FutureProducts = () => {
-    const { verifiedStores } = useSelector((state) => state.storeSlice)
-    const { popularProducts } = useSelector((state) => state.viewProductSlice)
-    const dispatch = useDispatch()
-
-
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/store/getVerifiedStores`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setVerifiedStores(data));
-            })
-    }, [])
-
-    useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/popular-product`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setPopularProducts(data));
-            })
-    }, [])
-
 
     return (
         <section className='mt-32 cursor-pointer'>
@@ -52,7 +33,7 @@ const FutureProducts = () => {
             <div className='mt-16 md:mt-28'>
                 <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8'>
                     {
-                        verifiedStores && verifiedStores?.map((store, i) => <StoreCard key={i} store={store} />)
+                        stores && stores?.map((store, i) => <StoreCard key={i} store={store} />)
                     }
                 </div>
                 <Link href='/stores' className='flex justify-center items-center bg-primary hover:bg-darkPrimary duration-150 h-14 md:w-60 mt-20 mx-auto'>
@@ -76,7 +57,7 @@ const FutureProducts = () => {
                         <Image className='h-52 mx-auto mr-0' src={bestSeller} alt="" />
                     </Link>
                     {
-                        popularProducts?.map((product, i) => <ProductCard key={i} product={product} />)
+                        prodcuts?.map((product, i) => <ProductCard key={i} product={product} />)
                     }
                 </div>
             </div>

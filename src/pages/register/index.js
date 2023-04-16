@@ -33,21 +33,7 @@ const index = () => {
             dispatch(setPasswordError({ error: true, message: 'Password Not Matched' }))
             return;
         }
-        // console.log(newUser);
-        fetch(`https://heylink.ahmadalanazi.com/api/user/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newUser)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data?.success === true) {
-                    router.push('/login')
-                    alert('User Register Successfull')
-                }
-            })
+        router.push("/personalize")
     }
 
     return (
