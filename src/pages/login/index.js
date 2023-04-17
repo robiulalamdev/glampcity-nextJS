@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
 import facebook from '../../assets/icons/login-register-icons/facebook.png'
 import google from '../../assets/icons/login-register-icons/google.png'
@@ -8,12 +8,15 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { setName } from '@/Slices/controllerSlice';
 import { useRouter } from 'next/router';
+import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
+import { Button } from '@material-tailwind/react';
 const index = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const [show, setShow] = useState(false)
     const router = useRouter()
 
     const handleLogin = (data) => {
-        fetch(`https://heylink.ahmadalanazi.com/api/user/login`, {
+        fetch(`http://localhost:5055/api/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +35,7 @@ const index = () => {
                     const token = localStorage.getItem('glampcity-token')
                     if (token) {
                         router.push('/home')
-                        alert('User Login Successfull')
+                        setShow(true)
                     }
                 }
             })
@@ -66,9 +69,11 @@ const index = () => {
                                 <Link className='text-primary text-sm' href='/'>Forget Password?</Link>
                             </div>
                         </div>
-                        <button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary text-white font-bold'>
+
+                        <Button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary text-white font-bold'>
                             <h1>Log In</h1>
-                        </button>
+                        </Button>
+
                     </form>
                     <div className='flex justify-center items-center gap-2 mt-8'>
                         {/* <Image className='w-32' src={hrLine} alt="" /> */}
@@ -88,6 +93,10 @@ const index = () => {
                     <h1 className='mt-6 text-sm text-gray-600 text-center'>Don’t have any account? Click here to <Link href='/register' className='text-primary font-bold'>Register</Link></h1>
                 </div>
             </div>
+
+            {
+                show && <SuccessAlert show={show} setShow={setShow} textResult={"User Login Successfull"} />
+            }
         </div>
     );
 };

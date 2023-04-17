@@ -30,7 +30,7 @@ const FutureProducts = () => {
 
 
     useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/store/getVerifiedStores`)
+        fetch(`http://localhost:5055/api/store/getVerifiedStores`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setVerifiedStores(data));
@@ -38,7 +38,7 @@ const FutureProducts = () => {
     }, [])
 
     useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/popular-product`)
+        fetch(`http://localhost:5055/api/popular-product`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setPopularProducts(data));

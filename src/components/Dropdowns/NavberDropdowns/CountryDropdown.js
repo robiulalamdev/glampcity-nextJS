@@ -3,13 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import img from '../../../assets/icons/navber-icons/bd.png'
 
 
-const countries = [
-    { shortName: 'BD', fullName: 'Bangladesh', img: img },
-    { shortName: 'US', fullName: 'United State', img: img },
-    { shortName: 'PK', fullName: 'Pakistan', img: img },
-    { shortName: 'ID', fullName: 'Idia', img: img },
-    { shortName: 'BD', fullName: 'Bangladesh', img: img },
-]
 const CountryDropdown = ({ closeDropdown }) => {
 
     let dropdownRef = useRef();

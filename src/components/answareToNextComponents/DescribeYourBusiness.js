@@ -23,7 +23,7 @@ const DescribeYourBusiness = () => {
 
     const sendData = () => {
         const describeYourBusiness = [data1, data2, data3, data4, data5, data6, data7, data8]
-        fetch(`https://heylink.ahmadalanazi.com/api/user/${userInfo?._id}`, {
+        fetch(`http://localhost:5055/api/user/${userInfo?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

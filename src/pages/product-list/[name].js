@@ -17,7 +17,7 @@ const ParentByProducts = () => {
     // console.log(data, name);
 
     const handleFetchData = (endPoint) => {
-        fetch(`https://heylink.ahmadalanazi.com/api/${endPoint}`)
+        fetch(`http://localhost:5055/api/${endPoint}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);
@@ -26,7 +26,7 @@ const ParentByProducts = () => {
     }
 
     const handleAllProductsOfCTG = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/products/cat/${name}`)
+        fetch(`http://localhost:5055/api/products/cat/${name}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);

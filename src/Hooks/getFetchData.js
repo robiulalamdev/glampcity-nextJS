@@ -5,7 +5,7 @@ export const useFetchData = ({ endPoint }) => {
 
     console.log(endPoint);
     useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/${endPoint}`)
+        fetch(`http://localhost:5055/api/${endPoint}`)
             .then(res => res.json())
             .then(data => {
                 setData(data)

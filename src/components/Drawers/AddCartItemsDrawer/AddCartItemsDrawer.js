@@ -11,7 +11,7 @@ const AddCartItemsDrawer = () => {
     const dispatch = useDispatch()
 
     const handleGetCartProducts = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/cartProduct/${userInfo?._id}`)
+        fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -27,7 +27,7 @@ const AddCartItemsDrawer = () => {
 
 
     const handleCartProductRemove = (id) => {
-        fetch(`https://heylink.ahmadalanazi.com/api/cartProduct/${id}`, {
+        fetch(`http://localhost:5055/api/cartProduct/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

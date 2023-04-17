@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${userInfo?._id}`)
+        fetch(`http://localhost:5055/api/wishlist/${userInfo?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
 
     const handleWishlistRemove = (id) => {
         if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/wishlist/${id}`, {
+            fetch(`http://localhost:5055/api/wishlist/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -48,7 +48,7 @@ const ProductCard = ({ product }) => {
 
     const handleAddWishlist = (product) => {
         if (userInfo?._id) {
-            fetch(`https://heylink.ahmadalanazi.com/api/wishlist`, {
+            fetch(`http://localhost:5055/api/wishlist`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

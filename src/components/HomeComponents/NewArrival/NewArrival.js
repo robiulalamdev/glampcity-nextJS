@@ -24,7 +24,7 @@ const NewArrival = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`https://heylink.ahmadalanazi.com/api/products/cat/new-arrival`)
+        fetch(`http://localhost:5055/api/products/cat/new-arrival`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setNewArrivalProducts(data));

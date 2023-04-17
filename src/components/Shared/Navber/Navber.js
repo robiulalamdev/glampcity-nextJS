@@ -108,7 +108,7 @@ const Navber = () => {
                 {/* -----------toggler button end----------- */}
 
             </div>
-            <div className={`absolute z-50 duration-300 border-r mt-[17px] lg:hidden flex flex-col items-start w-72 min-h-screen bg-white px-4 py-4
+            <div className={`absolute z-40 duration-300 border-r mt-[17px] lg:hidden flex flex-col items-start w-72 min-h-screen bg-white px-4 py-4
             ${open ? 'left-0' : '-left-[300px]'}`}>
                 <div className='lg:hidden w-full flex items-center px-2 text-left hover:bg-[#0029FF]'>
                     <Link href='/home' className='text-black font-semibold hover:text-white w-full py-2'>Home</Link>

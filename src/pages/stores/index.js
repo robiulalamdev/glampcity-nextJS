@@ -16,7 +16,7 @@ const Stores = ({ stores }) => {
 
 export async function getServerSideProps() {
     // Fetch data from external API
-    const res = await fetch(`https://heylink.ahmadalanazi.com/api/store`)
+    const res = await fetch(`http://localhost:5055/api/store`)
     const stores = await res.json()
     // Pass data to the page via props
     return { props: { stores } }

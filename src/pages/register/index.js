@@ -34,7 +34,7 @@ const index = () => {
             return;
         }
         // console.log(newUser);
-        fetch(`https://heylink.ahmadalanazi.com/api/user/register`, {
+        fetch(`http://localhost:5055/api/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

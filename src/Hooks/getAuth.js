@@ -4,7 +4,7 @@ export const useAuth = () => {
     const [user, setUser] = useState(null)
     useEffect(() => {
         if (user === null) {
-            fetch(`https://heylink.ahmadalanazi.com/api/user`, {
+            fetch(`http://localhost:5055/api/user`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('glampcity-token')}`,
                     'Content-Type': 'application/json',

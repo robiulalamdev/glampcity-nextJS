@@ -14,7 +14,7 @@ const ChatBox = ({ chat, currentUser }) => {
 
     useEffect(() => {
         const fetchMessage = () => {
-            fetch(`https://heylink.ahmadalanazi.com/api/message/${chat?._id}`,)
+            fetch(`http://localhost:5055/api/message/${chat?._id}`,)
                 .then(res => res.json())
                 .then(data => {
                     setMessages(data);
@@ -32,7 +32,7 @@ const ChatBox = ({ chat, currentUser }) => {
 
 
     const refetchMessage = () => {
-        fetch(`https://heylink.ahmadalanazi.com/api/message/${chat?._id}`,)
+        fetch(`http://localhost:5055/api/message/${chat?._id}`,)
             .then(res => res.json())
             .then(data => {
                 setMessages(data);
@@ -56,7 +56,7 @@ const ChatBox = ({ chat, currentUser }) => {
             text: newMessage
         }
 
-        fetch(`https://heylink.ahmadalanazi.com/api/message`, {
+        fetch(`http://localhost:5055/api/message`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
