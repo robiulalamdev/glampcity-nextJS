@@ -121,7 +121,7 @@ const CommonProductCard = ({ product, action }) => {
             <div className='relative w-full h-28 overflow-hidden'>
 
                 {
-                    product?.image ? <img className='w-full h-28 rounded-xl hover:scale-150 duration-500' src={product?.image} alt="" />
+                    product?.image ? <img className='w-full h-28 rounded-xl hover:scale-150 duration-500' src="https://media.glampinghub.com/CACHE/images/accommodations/elegant-tent-for-jungle-getaway-in-bali-indonesia-1532512274167/e58cc460603e3de2336c06d7f6aee50b.JPG" alt="" />
                         :
                         <Image className='w-full h-28 rounded-xl hover:scale-150 duration-500' src={product.img} alt="" />
                 }

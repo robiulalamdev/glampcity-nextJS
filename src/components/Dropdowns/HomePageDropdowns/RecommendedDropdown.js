@@ -19,7 +19,7 @@ const RecommendedDropdown = () => {
         }
     });
     return (
-        <div ref={outsideRef} className='absolute bg-white w-full h-fit p-6 shadow'>
+        <div ref={outsideRef} className='absolute z-50 bg-white w-full h-fit p-6 shadow'>
             <h1 className='text-xl font-bold text-gray-900'>Recommended for you</h1>
             <div className='mt-4'>
                 <div className='flex items-center gap-4 hover:bg-gray-200 w-full h-12 rounded-md px-2'>

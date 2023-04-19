@@ -15,7 +15,7 @@ const SelectLanguageAndCategory = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/category`)
+        fetch(`http://localhost:5055/api/category/show`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCategories(data))

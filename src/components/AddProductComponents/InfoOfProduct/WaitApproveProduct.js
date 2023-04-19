@@ -1,4 +1,3 @@
-import { Button } from '@material-tailwind/react';
 import React, { useState } from 'react';
 
 const WaitApproveProduct = () => {
@@ -15,9 +14,9 @@ const WaitApproveProduct = () => {
                             <span className='text-primary text-sm'>Check which categories the product will be listed under.</span></span>
 
                         <div className='flex flex-col-reverse md:flex-row md:items-center gap-2'>
-                            <Button className='w-fit px-4 h-12 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
+                            <button className='w-fit px-4 h-12 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
                                 <h1 className='text-white font-semibold'>Back to manage product</h1>
-                            </Button>
+                            </button>
                             <span>You can continue to <span className='text-primary text-sm'>Display a New Product</span></span>
                         </div>
                     </div>

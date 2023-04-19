@@ -27,7 +27,7 @@ const PlaceOrder = ({ nextHandle }) => {
                             <div className='w-full h-fit flex justify-between gap-5 items-center'>
                                 <div className='flex justify-between items-center gap-4'>
                                     <div>
-                                        <Image className='w-20 h-16' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
+                                        <img className='w-20 h-16' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
                                     </div>
                                     <div className='text-left'>
                                         <h1 className='text-black font-semibold text-xl text-left'>Wholesale men’s casual shoes</h1>
@@ -39,7 +39,7 @@ const PlaceOrder = ({ nextHandle }) => {
                                 </div>
                                 <div className='flex items-center gap-2'>
                                     <p className='text-gray-500'>Qty: 1</p>
-                                    <Image className='w-4' src={delet} alt="" />
+                                    <img className='w-4' src={delet} alt="" />
                                 </div>
                                 <h1 className='text-xl font-bold text-primary'>$10.00</h1>
                             </div>
@@ -51,9 +51,9 @@ const PlaceOrder = ({ nextHandle }) => {
                                     </button>
 
                                     <button className='h-10 w-full border border-[#0029FFA6] rounded-md flex justify-between items-center px-2'>
-                                        <Image className='w-4' src={voucher} alt="" />
+                                        <img className='w-4' src={voucher} alt="" />
                                         <span className='text-black'>Get Voucher</span>
-                                        <Image className='w-3' src={rightArrow} alt="" />
+                                        <img className='w-3' src={rightArrow} alt="" />
                                     </button>
                                 </div>
                                 <h1 className='md:col-span-1 text-right'>
@@ -66,7 +66,7 @@ const PlaceOrder = ({ nextHandle }) => {
                             <div className='w-full h-fit flex justify-between gap-5 items-center'>
                                 <div className='flex justify-between items-center gap-4'>
                                     <div>
-                                        <Image className='w-20 h-16' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
+                                        <img className='w-20 h-16' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
                                     </div>
                                     <div className='text-left'>
                                         <h1 className='text-black font-semibold text-xl text-left'>Wholesale men’s casual shoes</h1>
@@ -78,7 +78,7 @@ const PlaceOrder = ({ nextHandle }) => {
                                 </div>
                                 <div className='flex items-center gap-2'>
                                     <p className='text-gray-500'>Qty: 1</p>
-                                    <Image className='w-4' src={delet} alt="" />
+                                    <img className='w-4' src={delet} alt="" />
                                 </div>
                                 <h1 className='text-xl font-bold text-primary'>$10.00</h1>
                             </div>
@@ -90,9 +90,9 @@ const PlaceOrder = ({ nextHandle }) => {
                                     </button>
 
                                     <button className='h-10 w-full border border-[#0029FFA6] rounded-md flex justify-between items-center px-2'>
-                                        <Image className='w-4' src={voucher} alt="" />
+                                        <img className='w-4' src={voucher} alt="" />
                                         <span className='text-black'>Get Voucher</span>
-                                        <Image className='w-3' src={rightArrow} alt="" />
+                                        <img className='w-3' src={rightArrow} alt="" />
                                     </button>
                                 </div>
                                 <h1 className='md:col-span-1 text-right'>

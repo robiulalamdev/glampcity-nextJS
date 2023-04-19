@@ -1,7 +1,8 @@
-import { Input, Option, Select } from '@material-tailwind/react';
-import React from 'react';
+import { Select } from 'antd';
+import React, { useState } from 'react';
 
 const LogisticsInformation = () => {
+    const [fobPrice, setFobPrice] = useState("")
     return (
         <div>
             <div className='w-full grid grid-cols-1 gap-4'>
@@ -20,20 +21,48 @@ const LogisticsInformation = () => {
                         <div className=' grid lg:grid-cols-3 gap-2'>
                             <input className='max-w-full w-full  h-10 border border-gray-400 focus:border-primary rounded focus:outline-none block px-2 text-sm text-gray-900 focus:ring-blue-500' label="Product Name" />
 
-                            <Select className='z-auto' >
-                                <Option>Material Tailwind HTML</Option>
-                                <Option>Material Tailwind React</Option>
-                                <Option>Material Tailwind Vue</Option>
-                                <Option>Material Tailwind Angular</Option>
-                                <Option>Material Tailwind Svelte</Option>
-                            </Select>
-                            <Select className='z-auto' >
-                                <Option>Material Tailwind HTML</Option>
-                                <Option>Material Tailwind React</Option>
-                                <Option>Material Tailwind Vue</Option>
-                                <Option>Material Tailwind Angular</Option>
-                                <Option>Material Tailwind Svelte</Option>
-                            </Select>
+                            <Select
+                                showSearch
+                                className='w-full h-10'
+                                placeholder="Select Product Group"
+                                optionFilterProp="children"
+                                onChange={(value) => setFobPrice(value)}
+                                // onSearch={onSearch}
+                                filterOption={(input, option) =>
+                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={[
+                                    {
+                                        value: 'Nigeria',
+                                        label: 'Nigeria',
+                                    },
+                                    {
+                                        value: 'UK',
+                                        label: 'UK',
+                                    }
+                                ]}
+                            />
+                            <Select
+                                showSearch
+                                className='w-full h-10'
+                                placeholder="Select Product Group"
+                                optionFilterProp="children"
+                                onChange={(value) => setFobPrice(value)}
+                                // onSearch={onSearch}
+                                filterOption={(input, option) =>
+                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={[
+                                    {
+                                        value: 'Nigeria',
+                                        label: 'Nigeria',
+                                    },
+                                    {
+                                        value: 'UK',
+                                        label: 'UK',
+                                    }
+                                ]}
+                            />
                         </div>
                         <span>Please select both the amount and type in unit.</span>
                     </div>

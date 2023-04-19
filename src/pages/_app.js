@@ -6,7 +6,6 @@ import Navber from '@/components/Shared/Navber/Navber'
 import TopNavber from '@/components/Shared/Navber/TopNavber'
 import store from '@/store'
 import '@/styles/globals.css'
-import { ThemeProvider } from '@material-tailwind/react'
 import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 
@@ -25,17 +24,15 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Provider store={store}>
-        <ThemeProvider>
-          <TopNavber />
-          <Navber />
-          {
-            loading ? <SmallLoader /> : <Component {...pageProps} />
-          }
-          <Footer />
+        <TopNavber />
+        <Navber />
+        {
+          loading ? <SmallLoader /> : <Component {...pageProps} />
+        }
+        <Footer />
 
-          <PremiumServiceBtn />
-          <CartBtn />
-        </ThemeProvider>
+        <PremiumServiceBtn />
+        <CartBtn />
       </Provider>
     </>
   )

@@ -107,7 +107,7 @@ const ProductReview = () => {
                         <Image className='w-6' src={message} alt="" />
                         <span className='text-white'>Contact Supplier</span>
                     </Link>
-                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary hover:bg-gray-300 text-primary duration-300 rounded-[50px]'>
+                    <Link href='/conversation' className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary hover:bg-gray-300 text-primary duration-300 rounded-[50px]'>
                         <Image className='w-6' src={comment} alt="" />
                         <span className=''>Contact Supplier</span>
                     </Link>

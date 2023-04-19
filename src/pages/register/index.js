@@ -8,18 +8,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import CountriesDropdown from '@/components/LoginRegisterCompo/CountriesDropdown';
-import { setPasswordError, setRole, setShowCountries, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
+import { setPasswordError, setRole, setSelectedCountry, setShowCountries, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
 import PhoneCodeDropdown from '@/components/LoginRegisterCompo/PhoneCodeDropdown';
 import { useRouter } from 'next/router';
+import { Checkbox, Select } from 'antd';
+import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
+import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
+
 
 const index = () => {
     const { role, selectedCountry, showCountries, selectedPhoneCode, showPhoneCode, passwordError } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
-    const { register, handleSubmit, setError, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm()
+    const [agree, setAgree] = useState(false)
+    const [show, setShow] = useState(false)
+    const [isloading, setIsloading] = useState(false)
     const router = useRouter()
+
+    const onChange = (value) => {
+        dispatch(setSelectedCountry(value))
+    };
+    const onSearch = (value) => {
+        console.log('search:', value);
+    };
 
 
     const handleRegister = (data) => {
+        setIsloading(true)
         const newUser = {
             name: data?.firstName + ' ' + data?.lastName,
             country: data?.country,
@@ -30,6 +45,7 @@ const index = () => {
             role: role,
         }
         if (data?.password !== data?.confirmPassword) {
+            setIsloading(false)
             dispatch(setPasswordError({ error: true, message: 'Password Not Matched' }))
             return;
         }
@@ -44,11 +60,17 @@ const index = () => {
             .then(res => res.json())
             .then(data => {
                 if (data?.success === true) {
+                    setIsloading(false)
                     router.push('/login')
-                    alert('User Register Successfull')
+                    setShow(true)
+                }
+                else {
+                    setIsloading(false)
                 }
             })
     }
+
+    // console.log(agree);
 
     return (
         <div className='bg-[#F5F5F5] min-w-full md:min-h-screen'>
@@ -60,19 +82,29 @@ const index = () => {
 
                         <div className='flex flex-col items-start w-full gap-2 mb-6'>
                             <label className='text-left font-bold text-gray-900' htmlFor="region" id='region'>Region <span className='text-primary'>*</span></label>
-                            <div className='relative'>
-                                <div onClick={() => dispatch(setShowCountries(!showCountries))}
-                                    className='cursor-pointer w-full h-10 border rounded flex items-center px-2'>
-                                    <input
-                                        {...register('country')}
-                                        className='cursor-pointer w-full text-gray-900 h-full focus:outline-none'
-                                        defaultValue={selectedCountry} readOnly type="text" name="country" id="country" />
-                                    <Image className='w-3' src={arrowDown} alt="" />
-                                </div>
-                                {
-                                    showCountries && <CountriesDropdown />
+
+                            <Select
+                                showSearch
+                                className='w-full h-10'
+                                placeholder="Select a Region"
+                                optionFilterProp="children"
+                                onChange={onChange}
+                                onSearch={onSearch}
+                                filterOption={(input, option) =>
+                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                 }
-                            </div>
+                                options={[
+                                    {
+                                        value: 'Nigeria',
+                                        label: 'Nigeria',
+                                    },
+                                    {
+                                        value: 'UK',
+                                        label: 'UK',
+                                    }
+                                ]}
+                            />
+
                             {/* {errors.country && <p className='text-red-600 text-sm'>{errors.country.message}</p>} */}
                         </div>
 
@@ -164,14 +196,23 @@ const index = () => {
                         </div>
 
                         <div className='flex items-center cursor-pointer'>
-                            <input type="checkbox" name="signed" id="signed" />
-                            <label className='text-gray-600 text-sm ml-2' htmlFor="signed" id='signed'>I have read the <Link className='text-primary' href=''>Privacy Policy</Link> and agree to it. *</label>
+                            <Checkbox onChange={(e) => setAgree(e.target.checked)}>I have read the <Link className='text-primary' href=''>Privacy Policy</Link> and agree to it. *</Checkbox>
+
                         </div>
 
-                        <button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary text-white font-bold'>
-                            <h1>Register</h1>
-                        </button>
+                        {
+                            agree ? <button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary hover:bg-darkPrimary duration-200 text-white font-bold'>
+                                {
+                                    isloading ? <div className='flex items-center gap-2'><h1>Register</h1><ButtonSpinner className="w-5" /></div> : <h1>Register</h1>
+                                }
+                            </button>
+                                :
+                                <button disabled className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-gray-500 cursor-not-allowed text-white font-bold'>
+                                    <h1>Register</h1>
+                                </button>
+                        }
                     </form>
+
                     <div className='flex justify-center items-center gap-2 mt-8'>
                         {/* <Image className='w-32' src={hrLine} alt="" /> */}
                         <span className='text-gray-600'>or</span>
@@ -190,6 +231,10 @@ const index = () => {
                     <h1 className='mt-6 text-sm text-gray-600 text-center'>Already have an account? Click here to <Link href='/login' className='text-primary font-bold'>Log in</Link></h1>
                 </div>
             </div>
+
+            {
+                show && <SuccessAlert show={show} setShow={setShow} textResult={"User Register Successfull"} />
+            }
         </div>
     );
 };

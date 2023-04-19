@@ -10,7 +10,7 @@ const ProceedCheckout = ({ nextHandle }) => {
                     <div className='w-full h-fit flex justify-between gap-5 items-center border rounded-md p-4'>
                         <div className='flex justify-between items-center gap-4'>
                             <div>
-                                <Image className='w-40 h-32' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
+                                <img className='w-40 h-32' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
                             </div>
                             <div className='text-left'>
                                 <h1 className='text-black font-semibold text-xl text-left'>Wholesale men’s casual shoes</h1>
@@ -34,7 +34,7 @@ const ProceedCheckout = ({ nextHandle }) => {
                     <div className='w-full h-fit flex justify-between gap-5 items-center border rounded-md p-4'>
                         <div className='flex justify-between items-center gap-4'>
                             <div>
-                                <Image className='w-40 h-32' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
+                                <img className='w-40 h-32' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
                             </div>
                             <div className='text-left'>
                                 <h1 className='text-black font-semibold text-xl text-left'>Wholesale men’s casual shoes</h1>

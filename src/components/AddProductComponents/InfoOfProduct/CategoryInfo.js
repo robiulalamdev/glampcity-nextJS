@@ -1,7 +1,11 @@
-import { Input, Option, Select } from '@material-tailwind/react';
-import React from 'react';
+import React, { useState } from 'react';
+import { Checkbox, Select } from 'antd';
 
 const CategoryInfo = () => {
+    const [productGroup, setProductGroup] = useState("")
+    const [placeOfOrigin, setPlaceOfOrigin] = useState("")
+
+    console.log(productGroup);
     return (
         <div>
             <div className='w-full grid grid-cols-1 gap-4'>
@@ -16,13 +20,28 @@ const CategoryInfo = () => {
                 <div className='grid lg:grid-cols-8 items-center gap-2 w-full'>
                     <span className='lg:col-span-1 lg:text-right'>Product Group</span>
                     <div className="w-72">
-                        <Select className='z-auto' >
-                            <Option>Material Tailwind HTML</Option>
-                            <Option>Material Tailwind React</Option>
-                            <Option>Material Tailwind Vue</Option>
-                            <Option>Material Tailwind Angular</Option>
-                            <Option>Material Tailwind Svelte</Option>
-                        </Select>
+                        <Select
+                            showSearch
+                            className='w-full h-10'
+                            placeholder="Select Product Group"
+                            optionFilterProp="children"
+                            onChange={(value) => setProductGroup(value)}
+                            // onSearch={onSearch}
+                            filterOption={(input, option) =>
+                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                            }
+                            options={[
+                                {
+                                    value: 'Nigeria',
+                                    label: 'Nigeria',
+                                },
+                                {
+                                    value: 'UK',
+                                    label: 'UK',
+                                }
+                            ]}
+                        />
+
                     </div>
                 </div>
             </div>
@@ -52,13 +71,27 @@ const CategoryInfo = () => {
                 <div className='grid lg:grid-cols-8 items-center gap-2 w-full'>
                     <span className='lg:col-span-1 lg:text-right'>Place of Origin</span>
                     <div className="w-72">
-                        <Select className='z-auto' placeholder='Please Select' >
-                            <Option>Material Tailwind HTML</Option>
-                            <Option>Material Tailwind React</Option>
-                            <Option>Material Tailwind Vue</Option>
-                            <Option>Material Tailwind Angular</Option>
-                            <Option>Material Tailwind Svelte</Option>
-                        </Select>
+                        <Select
+                            showSearch
+                            className='w-full h-10'
+                            placeholder="-Select-"
+                            optionFilterProp="children"
+                            onChange={(value) => setPlaceOfOrigin(value)}
+                            // onSearch={onSearch}
+                            filterOption={(input, option) =>
+                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                            }
+                            options={[
+                                {
+                                    value: 'Nigeria',
+                                    label: 'Nigeria',
+                                },
+                                {
+                                    value: 'UK',
+                                    label: 'UK',
+                                }
+                            ]}
+                        />
                     </div>
                 </div>
                 <div className='grid grid-cols-8 items-center gap-2 w-full'>

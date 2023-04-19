@@ -5,17 +5,24 @@ import google from '../../assets/icons/login-register-icons/google.png'
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { setName } from '@/Slices/controllerSlice';
+
 import { useRouter } from 'next/router';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
-import { Button } from '@material-tailwind/react';
+import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
+
+
 const index = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [show, setShow] = useState(false)
+    const [isloading, setIsloading] = useState(false)
+
+    const [emailResult, setEmailResult] = useState("")
+    const [passwordResult, setPasswordResult] = useState("")
+
     const router = useRouter()
 
     const handleLogin = (data) => {
+        setIsloading(true)
         fetch(`http://localhost:5055/api/user/login`, {
             method: 'POST',
             headers: {
@@ -25,15 +32,25 @@ const index = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data?.login === false) {
-                    alert(data?.message)
+
+                if (data?.message?.emailMessage) {
+                    setEmailResult(data?.message?.emailMessage)
+                    setIsloading(false)
                 }
+                if (data?.message?.passwordMessage) {
+                    setPasswordResult(data?.message?.passwordMessage)
+                    setIsloading(false)
+                }
+
+
                 if (data?.success === true) {
+                    setIsloading(false)
                     localStorage.setItem('glampcity-token', data.token)
                 }
                 if (data?.token) {
                     const token = localStorage.getItem('glampcity-token')
                     if (token) {
+                        setIsloading(false)
                         router.push('/home')
                         setShow(true)
                     }
@@ -41,25 +58,35 @@ const index = () => {
             })
     }
 
+
     return (
         <div className='bg-[#F5F5F5] min-w-full md:min-h-screen'>
             <div className='max-w-[1440px] mx-auto md:pt-16'>
                 <div className='w-full md:w-[550px] bg-white py-8 rouonded-xl md:shadow-md md:border mx-auto'>
-                    <h1 className='text-3xl font-bold text-center text-primary py-6'>Log In</h1>
+                    <h1 className='text-3xl font-bold text-center text-primary py-4'>Log In</h1>
 
                     <form onSubmit={handleSubmit(handleLogin)} className='px-6 md:px-12'>
-                        <div className='flex flex-col items-start gap-2 mb-6'>
+                        <div className='flex flex-col items-start gap-1 mb-4'>
                             <label className='text-left font-bold text-gray-900' htmlFor="email" id='email'>Email address <span className='text-primary'>*</span></label>
                             <input {...register('email', { required: 'Email is required' })}
-                                className='w-full h-10 px-3 border rounded focus:outline-primary' type="email" name="email" id="email" />
+                                onChange={(e) => setEmailResult("")}
+                                className={`w-full h-10 px-3 rounded focus:outline-primary
+                                ${emailResult || errors.email ? "border border-red-600" : "border"}`}
+                                type="email" name="email" id="email" />
                             {errors.email && <p className='text-red-600 text-sm'>{errors.email.message}</p>}
+                            {emailResult && <p className='text-red-600 text-sm'>{emailResult}</p>}
                         </div>
-                        <div className='flex flex-col items-start gap-2 mb-1'>
+
+                        <div className='flex flex-col items-start gap-1 mb-1'>
                             <label className='text-left font-bold text-gray-900' htmlFor="password" id='password'>Password <span className='text-primary'>*</span></label>
                             <input {...register('password', { required: 'Password is required' })}
-                                className='w-full h-10 px-3 border rounded focus:outline-primary' type="password" name="password" id="password" />
+                                onChange={(e) => setPasswordResult("")}
+                                className={`w-full h-10 px-3 rounded focus:outline-primary
+                                ${passwordResult || errors.password ? "border border-red-600" : "border"}`} type="password" name="password" id="password" />
                             {errors.password && <p className='text-red-600 text-sm'>{errors.password.message}</p>}
+                            {passwordResult && <p className='text-red-600 text-sm'>{passwordResult}</p>}
                         </div>
+
                         <div className='flex justify-between items-center'>
                             <div>
                                 <input type="checkbox" name="signed" id="signed" />
@@ -70,17 +97,19 @@ const index = () => {
                             </div>
                         </div>
 
-                        <Button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary text-white font-bold'>
-                            <h1>Log In</h1>
-                        </Button>
+                        <button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary hover:bg-darkPrimary duration-200 text-white font-bold'>
+                            {
+                                isloading ? <div className='flex items-center gap-2'><h1>Log in</h1><ButtonSpinner className="w-5" /></div> : <h1>Log in</h1>
+                            }
+                        </button>
 
                     </form>
-                    <div className='flex justify-center items-center gap-2 mt-8'>
+                    <div className='flex justify-center items-center gap-2 mt-4'>
                         {/* <Image className='w-32' src={hrLine} alt="" /> */}
                         <span className='text-gray-600'>or</span>
                         {/* <Image className='w-32' src={hrLine} alt="" /> */}
                     </div>
-                    <div className='flex justify-center items-center gap-6 md:gap-8 mt-8'>
+                    <div className='flex justify-center items-center gap-6 mt-4'>
                         <div className='w-36 md:w-52 h-12 border rounded-md flex justify-center items-center gap-4'>
                             <Image className='w-8' src={facebook} alt="" />
                             <h1 className='text-gray-900 font-bold'>Facebook</h1>
