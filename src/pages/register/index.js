@@ -23,18 +23,34 @@ const index = () => {
     const [agree, setAgree] = useState(false)
     const [show, setShow] = useState(false)
     const [isloading, setIsloading] = useState(false)
+
+    const [countryResult, setCountryResult] = useState("")
+    const [companyResult, setCompanyResult] = useState("")
+    const [emailResult, setEmailResult] = useState("")
+    const [passwordResult, setPasswordResult] = useState("")
+
     const router = useRouter()
 
     const onChange = (value) => {
+        setCountryResult("")
         dispatch(setSelectedCountry(value))
     };
-    const onSearch = (value) => {
-        console.log('search:', value);
-    };
-
 
     const handleRegister = (data) => {
+        console.log(data);
         setIsloading(true)
+
+        if (selectedCountry) {
+            setIsloading(false)
+            setCountryResult("Please Select Country")
+            return;
+        }
+        if (data?.password !== data?.confirmPassword) {
+            setIsloading(false)
+            setPasswordResult("Password Not Matched")
+            return;
+        }
+
         const newUser = {
             name: data?.firstName + ' ' + data?.lastName,
             country: data?.country,
@@ -43,11 +59,6 @@ const index = () => {
             password: data?.password,
             company: data?.company,
             role: role,
-        }
-        if (data?.password !== data?.confirmPassword) {
-            setIsloading(false)
-            dispatch(setPasswordError({ error: true, message: 'Password Not Matched' }))
-            return;
         }
         // console.log(newUser);
         fetch(`http://localhost:5055/api/user/register`, {
@@ -59,6 +70,15 @@ const index = () => {
         })
             .then(res => res.json())
             .then(data => {
+
+                if (data?.message?.companyMessage) {
+                    setCompanyResult(data?.message?.companyMessage)
+                    setIsloading(false)
+                }
+                if (data?.message?.emailMessage) {
+                    setEmailResult(data?.message?.emailMessage)
+                    setIsloading(false)
+                }
                 if (data?.success === true) {
                     setIsloading(false)
                     router.push('/login')
@@ -76,11 +96,11 @@ const index = () => {
         <div className='bg-[#F5F5F5] min-w-full md:min-h-screen'>
             <div className='max-w-[1440px] mx-auto md:pt-16'>
                 <div className='w-full md:w-[550px] bg-white py-8 rouonded-xl md:shadow-md md:border mx-auto'>
-                    <h1 className='text-3xl font-bold text-center text-primary py-6'>Registration</h1>
+                    <h1 className='text-3xl font-bold text-center text-primary py-3'>Registration</h1>
 
                     <form onSubmit={handleSubmit(handleRegister)} className='px-6 md:px-12'>
 
-                        <div className='flex flex-col items-start w-full gap-2 mb-6'>
+                        <div className='flex flex-col items-start w-full gap-1 mb-3'>
                             <label className='text-left font-bold text-gray-900' htmlFor="region" id='region'>Region <span className='text-primary'>*</span></label>
 
                             <Select
@@ -89,7 +109,7 @@ const index = () => {
                                 placeholder="Select a Region"
                                 optionFilterProp="children"
                                 onChange={onChange}
-                                onSearch={onSearch}
+                                // onSearch={() => setCountryResult("")}
                                 filterOption={(input, option) =>
                                     (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                 }
@@ -105,10 +125,10 @@ const index = () => {
                                 ]}
                             />
 
-                            {/* {errors.country && <p className='text-red-600 text-sm'>{errors.country.message}</p>} */}
+                            {countryResult && <p className='text-red-600 text-sm'>{countryResult}</p>}
                         </div>
 
-                        <div className='mb-6 flex flex-col items-start gap-2'>
+                        <div className='mb-6 flex flex-col items-start gap-1'>
                             <label className='text-left font-bold text-gray-900' htmlFor="region" id='region'>Please Select Trade Role</label>
                             <div className='flex items-center gap-6'>
                                 <div onClick={() => dispatch(setRole('buyer'))} >
@@ -127,45 +147,51 @@ const index = () => {
                             {role === '' && <p className='text-red-600 text-sm'>Please select Role</p>}
                         </div>
 
-                        <div className='flex flex-col items-start gap-2 mb-6'>
+                        <div className='flex flex-col items-start gap-1 mb-3'>
                             <label className='text-left font-bold text-gray-900' htmlFor="email" id='email'>Email address <span className='text-primary'>*</span></label>
                             <input {...register('email', { required: 'Email is required' })}
+                                onChange={(e) => setEmailResult("")}
                                 className='w-full h-10 px-3 border rounded focus:outline-primary' type="email" name="email" id="email" />
-                            {errors.email && <p className='text-red-600 text-sm'>{errors.email.message}</p>}
+                            {errors.email && !emailResult && <p className='text-red-600 text-sm'>{errors.email.message}</p>}
+                            {emailResult && <p className='text-red-600 text-sm'>{emailResult}</p>}
                         </div>
 
-                        <div className='flex flex-col items-start gap-2 mb-6'>
+                        <div className='flex flex-col items-start gap-1 mb-3'>
                             <label className='text-left font-bold text-gray-900' htmlFor="password" id='password'>Password <span className='text-primary'>*</span></label>
                             <input {...register('password', { required: 'Password is required' })}
+                                onChange={(e) => setPasswordResult("")}
                                 className='w-full h-10 px-3 border rounded focus:outline-primary' type="password" name="password" id="password" />
-                            {errors.password && <p className='text-red-600 text-sm'>{errors.password.message}</p>}
-                            {passwordError.error && <p className='text-red-600 text-sm'>{passwordError.message}</p>}
+                            {errors.password && !passwordResult && <p className='text-red-600 text-sm'>{errors.password.message}</p>}
+                            {passwordResult && <p className='text-red-600 text-sm'>{passwordResult}</p>}
                         </div>
 
-                        <div className='flex flex-col items-start gap-2 mb-6'>
+                        <div className='flex flex-col items-start gap-1 mb-3'>
                             <label className='text-left font-bold text-gray-900' htmlFor="confirmPassword" id='confirmPassword'>Confirm Password <span className='text-primary'>*</span></label>
                             <input {...register('confirmPassword', { required: 'Confirm Password is required' })}
+                                onChange={(e) => setPasswordResult("")}
                                 className='w-full h-10 px-3 border rounded focus:outline-primary' type="password" name="confirmPassword" id="confirmPassword" />
-                            {errors.confirmPassword && <p className='text-red-600 text-sm'>{errors.confirmPassword.message}</p>}
-                            {passwordError.error && <p className='text-red-600 text-sm'>{passwordError.message}</p>}
+                            {errors.confirmPassword && !passwordResult && <p className='text-red-600 text-sm'>{errors.confirmPassword.message}</p>}
+                            {passwordResult && <p className='text-red-600 text-sm'>{passwordResult}</p>}
                         </div>
 
-                        <div className='flex flex-col items-start gap-2 mb-6'>
+                        <div className='flex flex-col items-start gap-1 mb-3'>
                             <label className='text-left font-bold text-gray-900' htmlFor="company" id='company'>Company Name <span className='text-primary'>*</span></label>
                             <input {...register('company', { required: 'Company Name is required' })}
+                                onChange={(e) => setCompanyResult("")}
                                 className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="company" id="company" />
-                            {errors.company && <p className='text-red-600 text-sm'>{errors.company.message}</p>}
+                            {errors.company && !companyResult && <p className='text-red-600 text-sm'>{errors.company.message}</p>}
+                            {companyResult && <p className='text-red-600 text-sm'>{companyResult}</p>}
                         </div>
 
                         <div className='grid grid-cols-2 gap-2 mb-6'>
-                            <div className='flex flex-col items-start gap-2'>
+                            <div className='flex flex-col items-start gap-1'>
                                 <label className='text-left font-bold text-gray-900' htmlFor="firstName" id='firstName'>First Name Name <span className='text-primary'>*</span></label>
                                 <input {...register('firstName', { required: 'First Name Name is required' })}
                                     className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="firstName" id="firstName" />
                                 {errors.firstName && <p className='text-red-600 text-sm'>{errors.firstName.message}</p>}
                             </div>
 
-                            <div className='flex flex-col items-start gap-2 mb-1'>
+                            <div className='flex flex-col items-start gap-1 mb-3'>
                                 <label className='text-left font-bold text-gray-900' htmlFor="lastName" id='lastName'>Last Name Name</label>
                                 <input {...register('lastName')}
                                     className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="lastName" id="lastName" />
@@ -173,7 +199,7 @@ const index = () => {
                             </div>
                         </div>
 
-                        <div className='flex flex-col items-start gap-2 mb-6'>
+                        <div className='flex flex-col items-start gap-1 mb-3'>
                             <label className='text-left font-bold text-gray-900' htmlFor="phoneCode" id='phoneCode'>Phone Number <span className='text-primary'>*</span></label>
                             <div className='flex justify-between items-start w-full gap-2'>
                                 <div className='relative'>
@@ -189,10 +215,10 @@ const index = () => {
                                     }
                                 </div>
 
-                                <input {...register('phone')}
+                                <input {...register('phone', { required: 'Phone Number is required' })}
                                     className='flex-grow w-full h-10 px-3 border rounded focus:outline-primary' type="number" name="phone" id="phone" />
-                                {/* {errors.phone && <p className='text-red-600 text-sm'>{errors.phone.message}</p>} */}
                             </div>
+                            {errors.phone && <p className='text-red-600 text-sm'>{errors.phone.message}</p>}
                         </div>
 
                         <div className='flex items-center cursor-pointer'>

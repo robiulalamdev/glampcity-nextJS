@@ -1,12 +1,26 @@
-import { setSelectedPhoneCode } from '@/Slices/loginRegisterSlice';
-import React from 'react';
+import { setSelectedPhoneCode, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PhoneCodeDropdown = () => {
     const { phoneCodes } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
+
+
+    let dropdownRef = useRef();
+    useEffect(() => {
+        let handler = (e) => {
+            if (!dropdownRef.current.contains(e.target)) {
+                dispatch(setShowPhoneCode(false))
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        }
+    });
     return (
-        <div class="absolute right-0 z-50 w-fit rounded bg-gray-50 shadow shadow-gray-400">
+        <div ref={dropdownRef} class="absolute right-0 z-50 w-full rounded bg-white shadow shadow-gray-400">
             <div className=''>
                 {
                     phoneCodes && phoneCodes.map(pCode => <div
