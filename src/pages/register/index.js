@@ -81,7 +81,7 @@ const index = () => {
                 }
                 if (data?.success === true) {
                     setIsloading(false)
-                    router.push('/login')
+                    router.push('/personalize')
                     setShow(true)
                 }
                 else {

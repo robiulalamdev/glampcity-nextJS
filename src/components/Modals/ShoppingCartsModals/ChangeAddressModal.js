@@ -3,18 +3,17 @@ import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
+const ChangeAddressModal = ({ closeModal, sucsess, address, refetch }) => {
     const userInfo = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const [deliveryAddress, setDeliveryAddress] = useState('')
+    const [deliveryAddress, setDeliveryAddress] = useState(address?.deliveryAddress)
 
-    const handleAddAddress = (data) => {
+    const handleChangeAddress = (data) => {
         if (!deliveryAddress) {
             return;
         }
         else {
             const newData = {
-                userId: userInfo._id,
                 name: data.name,
                 address: data.address,
                 mobileNumber: data.mobileNumber,
@@ -26,8 +25,8 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
             }
 
             // console.log(newData);
-            fetch(`http://localhost:5055/api/address`, {
-                method: "POST",
+            fetch(`http://localhost:5055/api/address/${address?._id}`, {
+                method: "PATCH",
                 headers: {
                     "content-type": "application/json"
                 },
@@ -35,8 +34,9 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    if (data?.status === "success") {
+                    if (data?.update) {
                         sucsess(true)
+                        refetch()
                         closeModal(false)
                     }
                     // console.log(data);
@@ -64,10 +64,9 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
             <div ref={modalRef} className='w-full md:max-w-[1000px] h-fit bg-white shadow-xl p-5 m-5'>
                 <div>
 
-                    <button onClick={() => setShow(true)}>ddddd</button>
-                    <h1 className='text-center font-bold text-gray-600 text-xl'>Add New Delivery Address</h1>
+                    <h1 className='text-center font-bold text-gray-600 text-xl'>Change Delivery Address</h1>
 
-                    <form onSubmit={handleSubmit(handleAddAddress)}
+                    <form onSubmit={handleSubmit(handleChangeAddress)}
                         className='px-6 md:px-12 mt-4'>
                         <div className='grid md:grid-cols-2 gap-6 '>
                             <div className=''>
@@ -75,7 +74,8 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
                                 <div className='flex flex-col items-start gap-2 mb-6'>
                                     <label className='text-left font-bold text-gray-900' htmlFor="name" id='name'>Full Name <span className='text-primary'>*</span></label>
                                     <input {...register('name', { required: 'Full Name is required' })}
-                                        className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="name" id="name" />
+                                        className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                        type="text" name="name" defaultValue={address?.name} />
                                     {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
                                 </div>
 
@@ -83,21 +83,23 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
                                     <label className='text-left font-bold text-gray-900' htmlFor="mobileNumber" id='phone'>Mobile Number <span className='text-primary'>*</span></label>
                                     <input {...register('mobileNumber', { required: 'Mobile Number is required' })}
                                         className='w-full h-10 px-3 border rounded focus:outline-primary'
-                                        type="text" name="mobileNumber" id='mobileNumber' />
+                                        type="text" name="mobileNumber" defaultValue={address?.mobileNumber} />
                                     {errors.mobileNumber && <p className='text-red-600 text-sm'>{errors.mobileNumber.message}</p>}
                                 </div>
 
                                 <div className='flex flex-col items-start gap-2 mb-6'>
                                     <label className='text-left font-bold text-gray-900' htmlFor="providence" id='providence'>Providence <span className='text-primary'>*</span></label>
                                     <input {...register('providence', { required: 'Providence is required' })}
-                                        className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="providence" id='providence' />
+                                        className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                        type="text" name="providence" defaultValue={address?.providence} />
                                     {errors.providence && <p className='text-red-600 text-sm'>{errors.providence.message}</p>}
                                 </div>
 
                                 <div className='flex flex-col items-start gap-2 mb-6'>
                                     <label className='text-left font-bold text-gray-900' htmlFor="providence" id='providence'>Area <span className='text-primary'>*</span></label>
                                     <input {...register('area', { required: 'Area is required' })}
-                                        className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="area" id='area' />
+                                        className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                        type="text" name="area" defaultValue={address?.area} />
                                     {errors.area && <p className='text-red-600 text-sm'>{errors.area.message}</p>}
                                 </div>
                             </div>
@@ -106,21 +108,24 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
                                 <div className='flex flex-col items-start gap-2 mb-6'>
                                     <label className='text-left font-bold text-gray-900' htmlFor="address" id='providence'>Address <span className='text-primary'>*</span></label>
                                     <input {...register('address', { required: 'Address is required' })}
-                                        className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="address" id='address' />
+                                        className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                        type="text" name="address" defaultValue={address?.address} />
                                     {errors.address && <p className='text-red-600 text-sm'>{errors.address.message}</p>}
                                 </div>
 
                                 <div className='flex flex-col items-start gap-2 mb-6'>
                                     <label className='text-left font-bold text-gray-900' htmlFor="landmark" id='providence'>Landmark</label>
                                     <input {...register('landmark')}
-                                        className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="landmark" id='landmark' />
+                                        className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                        type="text" name="landmark" defaultValue={address?.landmark} />
                                     {errors.landmark && <p className='text-red-600 text-sm'>{errors.landmark.message}</p>}
                                 </div>
 
                                 <div className='flex flex-col items-start gap-2 mb-6'>
                                     <label className='text-left font-bold text-gray-900' htmlFor="city" id='city'>City <span className='text-primary'>*</span></label>
                                     <input {...register('city', { required: 'City is required' })}
-                                        className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="city" id='city' />
+                                        className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                        type="text" name="city" defaultValue={address?.city} />
                                     {errors.city && <p className='text-red-600 text-sm'>{errors.city.message}</p>}
                                 </div>
 
@@ -150,11 +155,11 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
                         <div className='flex items-center gap-5'>
                             {
                                 deliveryAddress ? <button className='w-56 h-10 rounded-3xl flex justify-center items-center bg-primary hover:bg-darkPrimary duration-200' type="submit">
-                                    <span className='text-white'>SAVE</span>
+                                    <span className='text-white'>CHANGE</span>
                                 </button>
                                     :
                                     <button disabled className='w-56 cursor-not-allowed h-10 rounded-3xl flex justify-center items-center bg-gray-600' type="submit">
-                                        <span className='text-white'>SAVE</span>
+                                        <span className='text-white'>CHANGE</span>
                                     </button>
                             }
                             <button onClick={() => closeModal(false)} className='md:hidden w-56 h-10 rounded-3xl flex justify-center items-center bg-rose-600' type="submit">
@@ -169,4 +174,4 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
     );
 };
 
-export default AddDeliveryAddressModal;
+export default ChangeAddressModal;

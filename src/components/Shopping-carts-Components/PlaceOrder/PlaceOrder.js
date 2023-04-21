@@ -1,27 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import delet from '../../../assets/icons/shopping-cart-icons/delete.png'
 import voucher from '../../../assets/icons/shopping-cart-icons/voucher.png'
 import rightArrow from '../../../assets/icons/shopping-cart-icons/right-arrow.png'
 import AddDeliveryAddressModal from '@/components/Modals/ShoppingCartsModals/AddDeliveryAddressModal';
 import Image from 'next/image';
+import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
+import { useAuth } from '@/Hooks/getAuth';
+import ShoppingAddress from './ShoppingAddress';
 
-const PlaceOrder = ({ nextHandle }) => {
+const PlaceOrder = ({ address, refetch }) => {
+    const userInfo = useAuth()
     const [openModal, setOpenModal] = useState(false)
+    const [allAddress, setAllAddress] = useState(address)
+    const [show, setShow] = useState(false)
     const closeModal = () => {
         setOpenModal(false)
     }
 
-    console.log(openModal);
+    console.log(allAddress);
+
+    // console.log(openModal);
     return (
         <section className='min-h-screen mt-16 relative'>
 
             <div className={`${openModal && 'opacity-50'}`}>
-                <div onClick={() => setOpenModal(true)} className='w-full h-14 flex justify-center items-center rounded-md cursor-pointer my-4 bg-[#0029FF14]'>
-                    <h1 className='text-black font-semibold text-xl'>+ Add New Address</h1>
-                </div>
+
+                <button className='mb-2 text-primary' onClick={() => refetch()} >Shopping Address</button>
+                <button onClick={() => setOpenModal(true)}
+                    className='w-full h-14 flex justify-center items-center rounded-md text-black cursor-pointer my-4 bg-[#0029FF14] hover:bg-primary hover:text-white duration-300 '>
+                    <h1 className=' font-semibold text-xl'>+ Add New Address</h1>
+                </button>
+
+
                 <div className='w-full grid lg:grid-cols-3 gap-5'>
 
                     <div className='lg:col-span-2 h-fit grid grid-cols-1 w-full gap-5'>
+
+
+                        <div className='grid grid-cols-1 gap-4 w-full' >
+                            {
+                                allAddress && allAddress.map((address, i) => <ShoppingAddress key={i} address={address} refetch={refetch} />)
+                            }
+                        </div>
 
                         <div className='h-fit border rounded-md p-4'>
                             <div className='w-full h-fit flex justify-between gap-5 items-center'>
@@ -132,7 +152,7 @@ const PlaceOrder = ({ nextHandle }) => {
                                 <p className='text-xl font-bold text-black'>$21.00</p>
                             </div>
                             <div className='w-full mt-4'>
-                                <button className='flex justify-center items-center w-full h-10 rounded-[50px] bg-primary'>
+                                <button className='flex justify-center items-center w-full h-10 rounded-[50px] bg-primary hover:bg-darkPrimary active:bg-rose-600'>
                                     <span className='text-white uppercase'>Place order</span>
                                 </button>
                             </div>
@@ -143,7 +163,10 @@ const PlaceOrder = ({ nextHandle }) => {
 
             <div className='flex justify-center items-center'>
                 {
-                    openModal && <AddDeliveryAddressModal closeModal={closeModal} />
+                    openModal && <AddDeliveryAddressModal closeModal={closeModal} sucsess={setShow} />
+                }
+                {
+                    show && <SuccessAlert show={show} setShow={setShow} textResult="New Address Successfully Added" />
                 }
             </div>
         </section>
