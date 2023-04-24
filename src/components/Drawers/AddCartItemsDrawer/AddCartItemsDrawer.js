@@ -10,6 +10,16 @@ const AddCartItemsDrawer = () => {
     const userInfo = useAuth()
     const dispatch = useDispatch()
 
+
+    const calculateTotalPrice = () => {
+        let totalPrice = 0;
+        cartItems.forEach((product) => {
+            totalPrice += product.price;
+        });
+        return totalPrice;
+    };
+
+
     const handleGetCartProducts = () => {
         fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
             .then(res => res.json())
@@ -97,11 +107,12 @@ const AddCartItemsDrawer = () => {
                         cartItems.length > 0 && <div className="border-t border-gray-200 py-6">
                             <div className="flex justify-between text-base font-medium text-gray-900">
                                 <p>Subtotal</p>
-                                <p>$262.00</p>
+                                <p>${calculateTotalPrice()}</p>
                             </div>
                             <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                             <div className="mt-6">
-                                <Link href='/'
+                                <Link href='/shopping-carts'
+                                    onClick={() => dispatch(setOpenAddCartItemsSidebar(false))}
                                     className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-darkPrimary"
                                 >
                                     Checkout

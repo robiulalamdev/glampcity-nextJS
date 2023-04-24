@@ -48,24 +48,7 @@ const Banner = () => {
 
 
                     <div className='relative w-full max-h-[368px] mt-6'>
-                        {/* <Image className='h-[368px] w-full' src={banner} alt="" /> */}
-                        {/* <BannerCarousel /> */}
-                        <Carousel next autoplay arrows
-                            prevArrow={<Arrow type="left" />}
-                            nextArrow={<Arrow type="right" />}>
-                            <div>
-                                <Image className="w-full h-[368px]" src={banner} alt="" />
-                            </div>
-                            <div>
-                                <Image className="w-full h-[368px]" src={banner} alt="" />
-                            </div>
-                            <div>
-                                <Image className="w-full h-[368px]" src={banner} alt="" />
-                            </div>
-                            <div>
-                                <Image className="w-full h-[368px]" src={banner} alt="" />
-                            </div>
-                        </Carousel>
+                        <BannerCarousel />
                     </div>
                 </div>
             </div>

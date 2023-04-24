@@ -11,18 +11,8 @@ import img8 from '../../../assets/images/country-images/img8.png'
 import img9 from '../../../assets/images/country-images/img9.png'
 import img10 from '../../../assets/images/country-images/img10.png'
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
-import "./country.module.css"
-
-// import required modules
-import { Autoplay, FreeMode, Pagination } from "swiper";
 import Image from "next/image";
+import CountryAutoSlider from "./CountryAutoSlider";
 
 const CountryOrRegion = () => {
     return (
@@ -62,30 +52,9 @@ const CountryOrRegion = () => {
                     </div>
                 </div>
             </div>
+
             <div className='md:hidden cursor-pointer'>
-                <Swiper
-                    slidesPerView={3}
-                    spaceBetween={30}
-                    centeredSlides={true}
-                    autoplay={{
-                        delay: 500,
-                        disableOnInteraction: false,
-                    }}
-                    freeMode={true}
-                    modules={[Autoplay, FreeMode]}
-                    className="mySwiper"
-                >
-                    <SwiperSlide><Image className='' src={img1} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img2} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img3} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img4} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img5} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img6} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img7} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img8} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img9} alt="" /></SwiperSlide>
-                    <SwiperSlide><Image className='' src={img10} alt="" /></SwiperSlide>
-                </Swiper>
+                <CountryAutoSlider />
             </div>
         </section>
     );

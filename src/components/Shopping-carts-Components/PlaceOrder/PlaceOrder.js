@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import delet from '../../../assets/icons/shopping-cart-icons/delete.png'
 import voucher from '../../../assets/icons/shopping-cart-icons/voucher.png'
 import rightArrow from '../../../assets/icons/shopping-cart-icons/right-arrow.png'
 import AddDeliveryAddressModal from '@/components/Modals/ShoppingCartsModals/AddDeliveryAddressModal';
-import Image from 'next/image';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
-import { useAuth } from '@/Hooks/getAuth';
 import ShoppingAddress from './ShoppingAddress';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const PlaceOrder = ({ address, refetch }) => {
-    const userInfo = useAuth()
+    const { user, userRefetch } = useContext(AuthContext)
     const [openModal, setOpenModal] = useState(false)
     const [allAddress, setAllAddress] = useState(address)
     const [show, setShow] = useState(false)
@@ -17,7 +16,7 @@ const PlaceOrder = ({ address, refetch }) => {
         setOpenModal(false)
     }
 
-    console.log(allAddress);
+    // console.log(allAddress);
 
     // console.log(openModal);
     return (

@@ -1,104 +1,126 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import blueRight from '../../.././assets/icons/shopping-cart-icons/blue-right.png'
 import img4 from '../../../assets/images/product-details/product-images/img4.png'
 import img1 from '../../../assets/images/product-details/product-images/img1.png'
 import img2 from '../../../assets/images/product-details/product-images/img2.png'
 import img3 from '../../../assets/images/product-details/product-images/img3.png'
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCartItems } from '@/Slices/controllerSlice';
+import MyShoppingCard from './MyShoppingCard';
+import CalculateProducts from './CalculateProducts';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const MyShoppingCarts = ({ nextHandle }) => {
+    const { cartItems } = useSelector((state) => state.controllerSlice)
+    const { user, userRefetch } = useContext(AuthContext)
+    const dispatch = useDispatch()
+
     const nexPermit = (data) => {
         nextHandle(data)
     }
+
+
+    const calculateTotalPrice = () => {
+        let totalPrice = 0;
+        cartItems.forEach((product) => {
+            totalPrice += product.price;
+        });
+        return totalPrice;
+    };
+
+
+    const handleGetCartProducts = () => {
+        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
+            .then(res => res.json())
+            .then(data => {
+                dispatch(setCartItems(data));
+            })
+    }
+
+
+    useEffect(() => {
+        if (user?._id) {
+            handleGetCartProducts()
+        }
+    }, [user?._id])
+
+
+    const handleCartProductRemove = (id) => {
+        console.log(id);
+        fetch(`http://localhost:5055/api/cartProduct/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                handleGetCartProducts()
+            })
+    }
+
+
     return (
         <section className='min-h-screen mt-16'>
             <div className='flex items-center gap-4 mb-4'>
                 <Image className='w-6' src={blueRight} alt="" />
-                <p className='text-[#4CAF50] text-sm md:text-xl font-semibold'>1 new item(s) have been added to your cart</p>
-            </div>
-            <div className='w-full grid lg:grid-cols-3 gap-5'>
-                <div className='w-full md:col-span-2 h-fit flex justify-between gap-5 items-center border rounded-md p-4'>
-                    <div className='flex justify-between items-center gap-4'>
-                        <div>
-                            <img className='w-40 h-32' src='https://i.postimg.cc/6QzF9hp7/img4.png' alt="" />
-                        </div>
-                        <div className='text-left'>
-                            <h1 className='text-black font-semibold text-xl text-left'>Wholesale men’s casual shoes</h1>
-                            <div>
-                                <p className='text-gray-500'>Brand: No</p>
-                                <p className='text-gray-500'>Color: Black</p>
-                            </div>
-                            <div className='flex items-center gap-4 mt-3'>
-                                <p className='text-gray-500'>Price: </p>
-                                <h1 className='text-primary font-bold text-xl'>$10.00</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h1 className='text-black font-semibold text-xl mb-3'>Quantity</h1>
-                        <h1 className='text-black font-semibold text-xl mb-3'>1</h1>
-                        <h1 className='text-[#DB1A10] font-semibold underline'>Remove</h1>
-                    </div>
-                </div>
-                <div className='w-full lg:col-span-1 border rounded-md text-left p-4'>
-                    <h1 className='text-black font-semibold text-xl'>My Shopping Cart <span className='text-gray-500 text-sm'>(2 items)</span></h1>
-
-                    <div className='flex justify-between items-center mt-3'>
-                        <p className='text-gray-500 text-xl'>Subtotal</p>
-                        <p className='text-xl font-bold text-black'>$20.00</p>
-                    </div>
-
-                    <div className='flex items-center mt-4 w-full'>
-                        <input className='w-full h-12 focus:outline-none border border-l border-y border-gray-500 px-2' type="text" placeholder='Enter Voucher Code' />
-                        <button className='w-44 h-12 flex justify-center items-center text-white bg-primary'>
-                            <span className='text-xl uppercase'>Apply</span>
-                        </button>
-                    </div>
-                    <div className='flex justify-between items-center mt-3'>
-                        <p className='text-gray-500 text-xl'>Total</p>
-                        <p className='text-xl font-bold text-black'>$20.00</p>
-                    </div>
-                    <div className='flex justify-center items-center gap-8 mt-4'>
-                        <button className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] border border-primary'>
-                            <span className='text-primary uppercase text-xl'>GO TO CART</span>
-                        </button>
-                        <button onClick={() => nexPermit(2)} className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] bg-primary'>
-                            <span className='text-white uppercase text-xl'>Checkout</span>
-                        </button>
-                    </div>
-                </div>
+                <p className='text-[#4CAF50] text-sm md:text-xl font-semibold'>{cartItems?.length} new item(s) have been added to your cart</p>
             </div>
 
-            <div className='mt-8 py-4'>
-                <h1 className='text-2xl text-black font-semibold text-left mb-4'>Just for you</h1>
+            <div>
+                <div className='w-full grid lg:grid-cols-3 gap-5'>
+                    <div className=' md:col-span-2 grid grid-cols-1 gap-4' >
+                        {
+                            cartItems && cartItems?.map((item, i) => <MyShoppingCard key={i} data={item}
+                                handleRemove={handleCartProductRemove} />)
+                        }
+                    </div>
+                    <div className='w-full lg:col-span-1 border rounded-md text-left p-4'>
+                        <h1 className='text-black font-semibold text-xl'>My Shopping Cart <span className='text-gray-500 text-sm'>({cartItems?.length} items)</span></h1>
 
-                <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-5'>
-                    <div className=''>
-                        <Image className='w-full h-56' src={img1} alt="" />
-                        <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
-                            <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                        <CalculateProducts />
+
+                        <div className='flex justify-center items-center gap-8 mt-4'>
+                            <button className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] border border-primary'>
+                                <span className='text-primary uppercase text-xl'>GO TO CART</span>
+                            </button>
+                            <button onClick={() => nexPermit(2)} className='flex justify-center items-center w-full md:w-56 h-12 rounded-[50px] bg-primary'>
+                                <span className='text-white uppercase text-xl'>Checkout</span>
+                            </button>
                         </div>
                     </div>
-                    <div className=''>
-                        <Image className='w-full h-56' src={img2} alt="" />
-                        <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
-                            <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                </div>
+
+                <div className='mt-8 py-4'>
+                    <h1 className='text-2xl text-black font-semibold text-left mb-4'>Just for you</h1>
+
+                    <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-5'>
+                        <div className=''>
+                            <Image className='w-full h-56' src={img1} alt="" />
+                            <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
+                                <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                                <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className=''>
-                        <Image className='w-full h-56' src={img3} alt="" />
-                        <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
-                            <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                        <div className=''>
+                            <Image className='w-full h-56' src={img2} alt="" />
+                            <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
+                                <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                                <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className=''>
-                        <Image className='w-full h-56' src={img4} alt="" />
-                        <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
-                            <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                        <div className=''>
+                            <Image className='w-full h-56' src={img3} alt="" />
+                            <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
+                                <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                                <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                            </div>
+                        </div>
+                        <div className=''>
+                            <Image className='w-full h-56' src={img4} alt="" />
+                            <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
+                                <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                                <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
+                            </div>
                         </div>
                     </div>
                 </div>

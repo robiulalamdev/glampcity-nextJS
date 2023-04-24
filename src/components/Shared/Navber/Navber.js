@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import logo from '../../../assets/logo/logo.png'
 import love from '../../../assets/icons/navber-icons/love.png'
 import cart from '../../../assets/icons/navber-icons/cart.png'
@@ -12,10 +12,12 @@ import AddCartItemsDrawer from '@/components/Drawers/AddCartItemsDrawer/AddCartI
 import { useAuth } from '@/Hooks/getAuth';
 import { setOpenUserProfileSidebar } from '@/Slices/authSlice';
 import UserProfileSidebar from '@/components/Drawers/UserProfileSidebar/UserProfileSidebar';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 const Navber = () => {
+    const { user } = useContext(AuthContext)
     const { wishlistItems, cartItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
-    const userInfo = useAuth()
+    // const { user } = useAuth()
 
     const [open, setOpen] = useState(false)
 
@@ -76,11 +78,11 @@ const Navber = () => {
                     </div>
                 </div>
                 {
-                    userInfo?._id ? <div className='flex items-center gap-2'>
-                        <h1 className='font-bold text-blue-900 hidden sm:block'>{userInfo?.name?.slice(0, 12)}</h1>
+                    user?._id ? <div className='flex items-center gap-2'>
+                        <h1 className='font-bold text-blue-900 hidden sm:block'>{user?.name?.slice(0, 12)}</h1>
                         <div onClick={() => dispatch(setOpenUserProfileSidebar(true))}
                             className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
-                            <span>{userInfo?.name?.slice(0, 1)} </span>
+                            <span>{user?.name?.slice(0, 1)} </span>
                         </div>
                     </div>
                         :
@@ -126,7 +128,7 @@ const Navber = () => {
                     <Link href='/faq' className='text-black font-semibold hover:text-white w-full py-2'>FAQ</Link>
                 </div>
                 {
-                    !userInfo && <div className='lg:hidden flex items-center gap-6 mt-4'>
+                    !user && <div className='lg:hidden flex items-center gap-6 mt-4'>
                         <Link href='/login' className='w-24 h-8 bg-primary hover:bg-darkPrimary duration-300 flex justify-center items-center rounded'>
                             <h1 className='text-white font-semibold'>LOG IN</h1>
                         </Link>

@@ -1,32 +1,65 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { Component } from "react";
+import Slider from "react-slick";
 import banner from '../../../assets/images/banner-images/banner.png'
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-
-// import required modules
-import { Navigation } from "swiper";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
+import RippleButton from "@/pages/buttons";
 
-const BannerCarousel = () => {
-    return (
-        <div className="w-full max-h-[368px] relative">
-            <Swiper navigation={true} modules={[Navigation]} className="">
-                <SwiperSlide>
-                    <Image className="w-96 md:w-full max-h-[368px]" src={banner} alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image className="w-96 md:w-full max-h-[368px]" src={banner} alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <Image className="w-96 md:w-full max-h-[368px]" src={banner} alt="" />
-                </SwiperSlide>
-            </Swiper>
-        </div>
-    );
+export default class BannerCarousel extends Component {
+    constructor(props) {
+        super(props);
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
+    }
+    next() {
+        this.slider.slickNext();
+    }
+    previous() {
+        this.slider.slickPrev();
+    }
+    render() {
+        const settings = {
+            // dots: true,
+            infinite: true,
+            speed: 500,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+        return (
+            <div className="relative" >
+                <Slider ref={c => (this.slider = c)} {...settings}>
+                    <img className="w-full h-[368px] object-cover" src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
+                    <Image className="w-full h-[368px] object-cover" src={banner} alt="" />
+                    <img className="w-full h-[368px] object-cover" src="https://images.unsplash.com/photo-1582840996732-e9c89c6feb34?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="" />
+                    <img className="w-full h-[368px] object-cover" src="https://images.unsplash.com/photo-1612295778204-0062c7c128d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=914&q=80" alt="" />
+                    <img className="w-full h-[368px] object-cover" src="https://images.unsplash.com/photo-1635314924786-f3a501a87458?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
+                </Slider>
+
+
+                <div className="absolute bottom-5 right-5 gap-4 flex items-center">
+
+                    <RippleButton
+                        className="text-white bg-primary hover:bg-darkPrimary active:bg-green-500 h-10 w-12 rounded-full object-cover"
+                        onClick={this.previous}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </RippleButton>
+
+                    <RippleButton
+                        className="text-white bg-primary hover:bg-darkPrimary active:bg-green-500 h-10 w-12 rounded-full object-cover"
+                        onClick={this.next}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                    </RippleButton>
+
+                </div>
+            </div>
+        );
+    }
 }
-
-export default BannerCarousel;

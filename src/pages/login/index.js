@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 // import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
 import facebook from '../../assets/icons/login-register-icons/facebook.png'
 import google from '../../assets/icons/login-register-icons/google.png'
@@ -9,9 +9,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 
 const index = () => {
+    const { user, userRefetch } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [show, setShow] = useState(false)
     const [isloading, setIsloading] = useState(false)
@@ -44,12 +46,13 @@ const index = () => {
 
 
                 if (data?.success === true) {
-                    setIsloading(false)
                     localStorage.setItem('glampcity-token', data.token)
+                    setIsloading(false)
                 }
                 if (data?.token) {
                     const token = localStorage.getItem('glampcity-token')
                     if (token) {
+                        userRefetch()
                         setIsloading(false)
                         router.push('/home')
                         setShow(true)

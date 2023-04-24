@@ -1,11 +1,13 @@
-import { useAuth } from '@/Hooks/getAuth';
 import MyShoppingCarts from '@/components/Shopping-carts-Components/MyShoppingCarts/MyShoppingCarts';
 import PlaceOrder from '@/components/Shopping-carts-Components/PlaceOrder/PlaceOrder';
 import ProceedCheckout from '@/components/Shopping-carts-Components/ProceedCheckout/ProceedCheckout';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import RippleButton from '../buttons';
+import PrivateRoute from '@/PriveteRoutes/PriveteRoute';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const ShoppingCarts = () => {
-    const userInfo = useAuth()
+    const { user, userRefetch } = useContext(AuthContext)
     const [next, setNext] = useState(1)
     const [allAddress, setAllAddress] = useState([])
 
@@ -14,8 +16,8 @@ const ShoppingCarts = () => {
     }
 
     const getAddress = () => {
-        if (userInfo?._id) {
-            fetch(`http://localhost:5055/api/address/${userInfo?._id}`)
+        if (user?._id) {
+            fetch(`http://localhost:5055/api/address/${user?._id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data?.status === "success") {
@@ -24,29 +26,31 @@ const ShoppingCarts = () => {
                     }
                 })
         }
-        // else {
-        //     getAddress()
-        // }
     }
 
     useEffect(() => {
         getAddress()
-    }, [userInfo])
+    }, [user?._id])
 
     return (
-        <section className='bg-white'>
-            <div className='max-w-[1440px] mx-auto px-3 md:px-8'>
-                {
-                    next === 1 && <MyShoppingCarts nextHandle={nextHandle} />
-                }
-                {
-                    next === 2 && <ProceedCheckout nextHandle={nextHandle} />
-                }
-                {
-                    next === 3 && <PlaceOrder nextHandle={nextHandle} address={allAddress} refetch={getAddress} />
-                }
-            </div>
-        </section>
+        <PrivateRoute>
+            <section className='bg-white'>
+                {/* <RippleButton className="text-white bg-primary active:bg-darkPrimary hover:bg-darkPrimary w-96" >
+                click button
+            </RippleButton> */}
+                <div className='max-w-[1440px] mx-auto px-3 md:px-8'>
+                    {
+                        next === 1 && <MyShoppingCarts nextHandle={nextHandle} />
+                    }
+                    {
+                        next === 2 && <ProceedCheckout nextHandle={nextHandle} />
+                    }
+                    {
+                        next === 3 && <PlaceOrder nextHandle={nextHandle} address={allAddress} refetch={getAddress} />
+                    }
+                </div>
+            </section>
+        </PrivateRoute>
     );
 };
 

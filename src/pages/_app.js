@@ -1,3 +1,4 @@
+import AuthProvider from '@/ContextAPI/AuthProvider'
 import { useAuth } from '@/Hooks/getAuth'
 import CartBtn from '@/components/Buttons/StickyButtons/CartBtn'
 import PremiumServiceBtn from '@/components/Buttons/StickyButtons/PremiumServiceBtn'
@@ -26,15 +27,17 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Provider store={store}>
-        <TopNavber />
-        <Navber />
-        {
-          loading && !userInfo?._id ? < SmallLoader /> : <Component {...pageProps} />
-        }
-        <Footer />
+        <AuthProvider>
+          <TopNavber />
+          <Navber />
+          {
+            loading && !userInfo?._id ? < SmallLoader /> : <Component {...pageProps} />
+          }
+          <Footer />
 
-        <PremiumServiceBtn />
-        <CartBtn />
+          <PremiumServiceBtn />
+          <CartBtn />
+        </AuthProvider>
       </Provider>
     </>
   )
