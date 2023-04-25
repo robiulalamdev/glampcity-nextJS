@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductDetails = () => {
     return (
-        <section className='mt-16'>
+        <section className=''>
             <div>
                 <h1 className='text-2xl text-black font-semibold text-left mb-4'>Overview</h1>
 

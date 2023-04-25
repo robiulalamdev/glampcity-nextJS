@@ -1,19 +1,23 @@
-import ProductDetails from '@/components/Product-View-Components/ProductDetails';
-import ProductReview from '@/components/Product-View-Components/ProductReview';
-import ProductSubmit from '@/components/Product-View-Components/ProductSubmit';
-import SmallTabs from '@/components/TabsComponents/SmallTabs';
 import { setProduct } from '@/Slices/viewProductSlice';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ProductReview from '@/components/Product-View-Components/ProductReview';
+import SmallTabs from '@/components/TabsComponents/SmallTabs';
+import ProductDetails from '@/components/Product-View-Components/ProductDetails';
+import ProductSubmit from '@/components/Product-View-Components/ProductSubmit';
+import CompanyProfile from '@/components/Company-Profile-Components/company-profile/CompanyProfile';
+import BuyerReview from '@/components/buyer-reviews/BuyerReview';
+import Link from 'next/link';
 
-const Product = () => {
+const items = ["Product Details", "Company profile", "Buyer Reviews"]
+
+const Product = ({ id }) => {
     const { product } = useSelector((state) => state.viewProductSlice)
     const dispatch = useDispatch()
-    const router = useRouter()
-    const id = router.query.id
 
-    // console.log(id);
+    const [selectedData, setSelectedData] = useState("Product Details")
+
+    console.log(id);
 
     useEffect(() => {
         if (id) {
@@ -28,17 +32,44 @@ const Product = () => {
     return (
         <section>
             <div className='bg-white'>
-                <div className='max-w-[1440px] mx-auto px-4 md:px-8'>
+                <div className='max-w-[1440px] mx-auto px-4 md:px-8 pb-12'>
                     <ProductReview product={product} />
-                    <SmallTabs />
-                    <hr className='my-6' />
 
-                    <ProductDetails />
-                    <ProductSubmit />
+                    <div className='flex flex-col md:flex-row md:items-center gap-4 my-6'>
+                        {
+                            items?.map((item, i) => (
+                                <button onClick={() => setSelectedData(item)}
+                                    className={`flex justify-center items-center w-full md:w-56 h-12 border rounded-md  
+                    ${selectedData === item ? 'bg-primary text-white' : 'text-primary border-primary hover:bg-blue-400 hover:text-white duration-300'}`}>
+                                    <span className='text-xl font-semibold'>{item}</span>
+                                </button>
+                            ))
+                        }
+
+                        <Link href="/order-refunds"
+                            className={`flex justify-center items-center w-full md:w-56 h-12 border rounded-md  
+                            text-primary border-primary hover:bg-blue-400 hover:text-white duration-300`}>
+                            <span className='text-xl font-semibold'>Order Refunds</span>
+                        </Link>
+
+                    </div>
+
+
+                    {selectedData === "Product Details" && <ProductDetails />}
+                    {selectedData === "Company profile" && <CompanyProfile />}
+                    {selectedData === "Buyer Reviews" && <BuyerReview />}
                 </div>
             </div>
         </section >
     );
 };
+
+export async function getServerSideProps({ params }) {
+    return {
+        props: {
+            id: params.id,
+        },
+    };
+}
 
 export default Product;

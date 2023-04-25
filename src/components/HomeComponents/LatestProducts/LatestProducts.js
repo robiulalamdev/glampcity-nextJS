@@ -9,6 +9,7 @@ import img4 from '../../../assets/images/new-arrival-images/img4.png'
 import img5 from '../../../assets/images/new-arrival-images/img5.png'
 import img6 from '../../../assets/images/new-arrival-images/img6.png'
 import LatestSignelProduct from './LatestSignelProduct';
+import ProductCard from '@/components/ProductCards/ProductCard';
 
 // const latestProducts = [
 //     { id: '1', img: img1, title: 'Nike Shoes - Men', price: '3, 999', description: 'Lorem ipsum dolor sit amet consectetur.' },
@@ -37,10 +38,10 @@ const LatestProducts = () => {
                 <h1 className='text-gray-900 text-2xl text-left font-bold'>Latest Products</h1>
                 <Link href={`/product-list/latest-products`} className='text-primary hover:text-darkPrimary duration-150 font-bold'>See All</Link>
             </div>
-            <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-3'>
 
                 {
-                    latestProducts?.map((product, i) => <LatestSignelProduct key={i} product={product} />)
+                    latestProducts?.map((product, i) => <ProductCard key={i} product={product} />)
                 }
             </div>
         </div>

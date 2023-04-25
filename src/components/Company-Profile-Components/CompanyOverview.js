@@ -1,12 +1,8 @@
 import React from 'react';
-import SmallTabs from '../TabsComponents/SmallTabs';
-
 
 const CompanyOverview = () => {
     return (
-        <section className='mt-6 md:mt-32'>
-            <SmallTabs />
-            <hr className='my-6' />
+        <section className=''>
 
             <div className='mb-6'>
                 <h1 className='text-2xl text-primary font-semibold text-left mb-4'>Company Overview</h1>

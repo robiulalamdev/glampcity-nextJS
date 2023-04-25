@@ -57,8 +57,9 @@ const TradeServices = () => {
             </div>
 
             <div className='mt-16'>
-                <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
-                    <Link href={`/product-list/popular-products`} className='relative col-span-2 flex items-center rounded-xl bg-[#2867ee] mt-6 px-6 py-3 hover:-translate-y-8 duration-700'>
+                <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
+                    <Link href={`/product-list/popular-products`}
+                        className='relative col-span-2 md:col-span-1 flex items-center rounded-xl bg-[#2867ee] px-6 py-3 hover:-translate-y-8 duration-700'>
                         <div className=''>
                             <h1 className='font-bold text-white hover:bg-gray-200 duration-150 text-2xl text-center md:text-left '>The Most <br /> Popular Products</h1>
                             <div className='w-36 h-9 mx-auto md:mx-0 bg-white hover:bg-gray-200 duration-150 rounded-[50px] flex justify-center items-center mt-2'>

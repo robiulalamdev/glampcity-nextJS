@@ -63,7 +63,7 @@ const TopNavber = () => {
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
                     </button>
-                    <ul class="hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
+                    <ul class="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
                     grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-48">
                         {
                             routes?.map((item, i) => (
@@ -76,49 +76,30 @@ const TopNavber = () => {
                     </ul>
                 </div>
 
-                {/* <div>
-
-                    <Dropdown
-                        menu={{
-                            items,
-                        }}
-                        placement="bottom"
-                        arrow={{
-                            pointAtCenter: true,
-                        }}
-                    >
-                        <svg className='w-6 h-6 active:text-primary hover:text-primary' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                    </Dropdown>
-                </div> */}
-
                 <Link href='/customer-support' className='text-sm text-gray-500'>Help Center</Link>
                 <Link href='/contact' className='text-sm text-gray-500'>Contact Us</Link>
 
-                <div className='relative'>
 
-                    <div onClick={() => setCountryDropdown(!countryDropdown)}
-                        className='relative flex justify-between items-center gap-3 hover:text-primary'>
+                <div class="dropdown">
+                    <button id="dropdown-btn" class="flex justify-between items-center gap-3 hover:text-primary">
                         <Image className='w-6' src={uk} alt="" />
                         <h1 className='text-sm text-gray-500 hover:text-primary'>USA</h1>
                         <svg className='w-4' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
+                    </button>
+                    <ul class="absolute top-full right-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
+                    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-48">
+                        {
+                            countries?.map((country, i) => (
+                                <button className='flex items-center gap-2 hover:bg-gray-200 px-2 h-8 w-full' >
+                                    <Image className='w-6 rounded-full' height={70} width={70} src={country.img} alt="" />
+                                    <h1 className='col-span-3 text-left text-black font-semibold'>{country.fullName}</h1>
+                                </button>
+                            ))
+                        }
 
-                    </div>
-                    {
-                        countryDropdown && <div className='absolute top-8 right-0 border z-50 w-44 grid grid-cols-1 mx-auto h-fit gap-0 bg-white'>
-                            {
-                                countries?.map((country, i) => (
-                                    <button className='flex items-center gap-2 hover:bg-gray-200 px-2 h-8' >
-                                        <Image className='w-6 rounded-full' height={70} width={70} src={country.img} alt="" />
-                                        <h1 className='col-span-3 text-left text-black font-semibold'>{country.fullName}</h1>
-                                    </button>
-                                ))
-                            }
-                        </div>
-                    }
+                    </ul>
                 </div>
 
 

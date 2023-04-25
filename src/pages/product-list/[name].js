@@ -1,8 +1,6 @@
-import CommonProductCard from '@/components/Commons/ProductCards/CommonProductCard';
-import LatestSignelProduct from '@/components/HomeComponents/LatestProducts/LatestSignelProduct';
 import SmallLoader from '@/components/Loaders/SmallLoader';
+import ProductCard from '@/components/ProductCards/ProductCard';
 import { setIsloading } from '@/Slices/controllerSlice';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -60,14 +58,12 @@ const ParentByProducts = () => {
     return (
         <section className='max-w-[1440px] mx-auto px-4'>
             <div className='rounded-3xl md:p-4 mt-8'>
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-between items-center mb-2'>
                     <h1 className='text-gray-900 text-2xl text-left font-bold'>{name} Products</h1>
                 </div>
-                <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
-
+                <div className='grid grid-cols-2 lg:grid-cols-4 gap-3'>
                     {
-                        data?.map((product, i) => <CommonProductCard key={i} product={product}
-                            action={name === 'popular-product' ? 'popular-product' : ''} />)
+                        data?.map((product, i) => <ProductCard key={i} product={product} />)
                     }
                 </div>
                 {

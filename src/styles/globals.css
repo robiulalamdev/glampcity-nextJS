@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------- common styles ---------------- */
+
+#box-shadow:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transition-duration: 0.5s;
+}
+
+/* ------------- common styles ---------------- */
+
 #row:nth-child(odd) {
   background-color: #ebebeb;
 }
@@ -67,9 +76,6 @@
 }
 
 .dropdown_menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
   perspective: 1000px;
   z-index: -1;
 }

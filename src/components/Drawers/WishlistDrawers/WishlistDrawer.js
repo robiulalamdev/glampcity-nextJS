@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenWishlistSidebar, setWishlistItems } from '@/Slices/controllerSlice';
-import { useAuth } from '@/Hooks/getAuth';
 import Link from 'next/link';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const WishlistDrawer = () => {
-    const userInfo = useAuth()
+    const { user } = useContext(AuthContext)
     const { openWishlistSidebar, wishlistItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`http://localhost:5055/api/wishlist/${userInfo?._id}`)
+        fetch(`http://localhost:5055/api/wishlist/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -19,10 +19,10 @@ const WishlistDrawer = () => {
     }
 
     useEffect(() => {
-        if (userInfo?._id) {
+        if (user?._id) {
             handleGetWishlist()
         }
-    }, [userInfo?._id])
+    }, [user?._id])
 
 
     const handleWishlistRemove = (id) => {
