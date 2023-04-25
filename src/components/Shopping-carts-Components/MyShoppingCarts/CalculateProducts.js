@@ -101,7 +101,7 @@ const CalculateProducts = () => {
 
                 <div className='flex justify-between items-center mt-3'>
                     <p className='text-gray-500 text-xl'>Total</p>
-                    <p className='text-xl font-bold text-black'>${price}</p>
+                    <p className='text-xl font-bold text-black'>${price ? price : calculateTotalPrice()}</p>
                 </div>
             </div>
         </div>

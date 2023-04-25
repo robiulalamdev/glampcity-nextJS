@@ -56,8 +56,27 @@ const TopNavber = () => {
         <nav className='bg-[#E5EAFF57] cursor-pointer'>
             <div className='flex justify-end items-center gap-8 max-w-[1440px] mx-auto px-4 h-14'>
 
+                <div class="dropdown">
+                    <button id="dropdown-btn" class="px-4 py-2 font-semibold text-gray-700 bg-gray-100 rounded-md
+                    cursor-pointer focus:bg-primary focus:text-white hover:text-primary hover:ring-2 focus:hover:ring-0">
+                        <svg className='w-6 h-6' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                    <ul class="hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
+                    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-48">
+                        {
+                            routes?.map((item, i) => (
+                                <Link href={item?.url} class="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
+                                    <span>{item.title}</span>
+                                </Link>
+                            ))
+                        }
 
-                <div>
+                    </ul>
+                </div>
+
+                {/* <div>
 
                     <Dropdown
                         menu={{
@@ -72,7 +91,7 @@ const TopNavber = () => {
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
                     </Dropdown>
-                </div>
+                </div> */}
 
                 <Link href='/customer-support' className='text-sm text-gray-500'>Help Center</Link>
                 <Link href='/contact' className='text-sm text-gray-500'>Contact Us</Link>
