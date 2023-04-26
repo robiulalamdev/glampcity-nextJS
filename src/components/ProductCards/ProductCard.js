@@ -48,6 +48,7 @@ const ProductCard = ({ product }) => {
     }
 
     const handleAddWishlist = (product) => {
+        console.log(product);
         if (user?._id) {
             fetch(`http://localhost:5055/api/wishlist`, {
                 method: "POST",
@@ -55,7 +56,7 @@ const ProductCard = ({ product }) => {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    productId: product?.productId,
+                    productId: product?.productId ? product?.productId : product?._id,
                     userId: user?._id,
                     sku: product?.sku,
                     title: product?.title,
@@ -78,7 +79,7 @@ const ProductCard = ({ product }) => {
     }
 
 
-    const wishlised = wishlistItems.find(p => p?.productId === product?.productId)
+    const wishlised = product?.productId ? wishlistItems.find(p => p?.productId === product?.productId) : wishlistItems.find(p => p?.productId === product?._id)
     // console.log(wishlised);
 
     return (
@@ -106,10 +107,10 @@ const ProductCard = ({ product }) => {
                 <img draggable="false" className='w-full h-40 object-cover' src={product?.image} alt="" />
                 {wishlised ?
                     <Image onClick={() => handleWishlistRemove(wishlised?._id)}
-                        className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love2} alt="" />
+                        className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200 cursor-pointer' src={love2} alt="" />
                     :
                     <Image onClick={() => handleAddWishlist(product)}
-                        className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200' src={love} alt="" />
+                        className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200 cursor-pointer' src={love} alt="" />
                 }
             </div>
 
