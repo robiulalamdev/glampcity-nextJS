@@ -89,44 +89,47 @@ const BuyerReview = () => {
                         <label htmlFor='negetive' id='negetive' className='text-xl text-gray-900'>Negative Review</label>
                     </div>
                 </div>
-                <div className='grid grid-cols-1 gap-6'>
-                    <div className='flex items-center gap-8 md:gap-44 mt-4'>
-                        <div className='grid grid-cols-1 gap-4'>
-                            <h1 className='text-3xl font-bold text-black'>Nikolas410</h1>
+
+
+                <div className='grid grid-cols-1 gap-6 mt-6'>
+
+                    <div className='flex items-center gap-8 md:gap-44'>
+                        <div className='grid grid-cols-1 gap-1'>
+                            <h1 className='text-xl font-bold text-black'>Nikolas410</h1>
                             <div className='flex justify-start items-center gap-3'>
-                                <Image className='w-14' src={img1} alt="" />
-                                <h1 className='text-3xl font-bold text-black'>USA</h1>
+                                <Image className='w-7' src={img1} alt="" />
+                                <h1 className='text-sm font-bold text-black'>USA</h1>
                             </div>
                         </div>
-                        <div className='grid grid-cols-1 gap-4'>
-                            <Image className='w-36' src={stars} alt="" />
-                            <h1 className='text-2xl text-gray-600'>Very good</h1>
+                        <div className='grid grid-cols-1 gap-1'>
+                            <Image className='w-24' src={stars} alt="" />
+                            <h1 className='text-gray-600'>Very good</h1>
                         </div>
                     </div>
-                    <div className='flex items-center gap-8 md:gap-44 mt-4'>
-                        <div className='grid grid-cols-1 gap-4'>
-                            <h1 className='text-3xl font-bold text-black'>Nikolas410</h1>
+                    <div className='flex items-center gap-8 md:gap-44'>
+                        <div className='grid grid-cols-1 gap-1'>
+                            <h1 className='text-xl font-bold text-black'>Nikolas410</h1>
                             <div className='flex justify-start items-center gap-3'>
-                                <Image className='w-14' src={img1} alt="" />
-                                <h1 className='text-3xl font-bold text-black'>USA</h1>
+                                <Image className='w-7' src={img1} alt="" />
+                                <h1 className='text-sm font-bold text-black'>USA</h1>
                             </div>
                         </div>
-                        <div className='grid grid-cols-1 gap-4'>
-                            <Image className='w-36' src={stars} alt="" />
-                            <h1 className='text-2xl text-gray-600'>Very good</h1>
+                        <div className='grid grid-cols-1 gap-1'>
+                            <Image className='w-24' src={stars} alt="" />
+                            <h1 className='text-gray-600'>Very good</h1>
                         </div>
                     </div>
-                    <div className='flex items-center gap-8 md:gap-44 mt-4'>
-                        <div className='grid grid-cols-1 gap-4'>
-                            <h1 className='text-3xl font-bold text-black'>Nikolas410</h1>
+                    <div className='flex items-center gap-8 md:gap-44'>
+                        <div className='grid grid-cols-1 gap-1'>
+                            <h1 className='text-xl font-bold text-black'>Nikolas410</h1>
                             <div className='flex justify-start items-center gap-3'>
-                                <Image className='w-14' src={img1} alt="" />
-                                <h1 className='text-3xl font-bold text-black'>USA</h1>
+                                <Image className='w-7' src={img1} alt="" />
+                                <h1 className='text-sm font-bold text-black'>USA</h1>
                             </div>
                         </div>
-                        <div className='grid grid-cols-1 gap-4'>
-                            <Image className='w-36' src={stars} alt="" />
-                            <h1 className='text-2xl text-gray-600'>Very good</h1>
+                        <div className='grid grid-cols-1 gap-1'>
+                            <Image className='w-24' src={stars} alt="" />
+                            <h1 className='text-gray-600'>Very good</h1>
                         </div>
                     </div>
                 </div>

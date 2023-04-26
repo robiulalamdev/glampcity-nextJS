@@ -19,7 +19,7 @@ const ProductReview = () => {
             <div className='grid md:grid-cols-2 lg:grid-cols-10 gap-5 cursor-pointer'>
                 <div className='lg:col-span-3 border rounded-md w-full'>
                     <div>
-                        <img className='w-full h-96' src={product?.image} alt="" />
+                        <img className='w-full h-72 object-cover' src={product?.image} alt="" />
                     </div>
                     <div className='grid grid-cols-4 gap-4 p-4'>
                         {
@@ -44,9 +44,9 @@ const ProductReview = () => {
                         <h1 className='text-gray-500 mt-2 font-semibold text-left text-xl'>Enter Promo Code</h1>
 
                         <div className='flex items-center mt-4 w-full'>
-                            <input className='w-full h-12 focus:outline-none border border-l border-y hover:border-primary focus:border-primary border-gray-500 px-2' type="text" placeholder='Promo Code' />
-                            <button className='w-44 h-12 flex justify-center items-center text-white bg-primary hover:bg-darkPrimary duration-300'>
-                                <span className='text-xl uppercase'>Submit</span>
+                            <input className='w-full h-10 focus:outline-none border border-l border-y hover:border-primary focus:border-primary border-gray-500 px-2' type="text" placeholder='Promo Code' />
+                            <button className='w-44 h-10 flex justify-center items-center text-white bg-primary hover:bg-darkPrimary duration-300'>
+                                <span className=' uppercase'>Submit</span>
                             </button>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ const ProductReview = () => {
                     </div>
                 </div>
                 <div className='lg:col-span-3 border rounded-md w-full p-2 md:p-4'>
-                    <p className='text-center text-xl text-gray-500 mb-4'>For more detailed information including pricing, customization, and shipping</p>
+                    <p className='text-center text-gray-500 mb-4'>For more detailed information including pricing, customization, and shipping</p>
 
                     <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-12 bg-primary hover:bg-darkPrimary duration-300 rounded-[50px]'>
                         <Image className='w-6' src={message} alt="" />
@@ -120,12 +120,12 @@ const ProductReview = () => {
                         </div>
                         <div className='flex justify-center items-center gap-2 mt-6'>
                             <div className='flex flex-col justify-center items-center w-full h-20 p-1 bg-[#F2F4FF] rounded-md'>
-                                <h1 className='text-gray-500 text-xl text-center'>Response time</h1>
-                                <h1 className='text-primary font-semibold text-2xl text-center'>2h+</h1>
+                                <h1 className='text-gray-500 text-center'>Response time</h1>
+                                <h1 className='text-primary font-semibold text-xl text-center'>2h+</h1>
                             </div>
                             <div className='flex flex-col justify-center items-center w-full h-20 p-1 bg-[#F2F4FF] rounded-md'>
-                                <h1 className='text-gray-500 text-xl text-center'>On- time Delivery</h1>
-                                <h1 className='text-primary font-semibold text-2xl text-center'>81.6%</h1>
+                                <h1 className='text-gray-500 text-center'>On- time Delivery</h1>
+                                <h1 className='text-primary font-semibold text-xl text-center'>81.6%</h1>
                             </div>
                         </div>
                     </div>

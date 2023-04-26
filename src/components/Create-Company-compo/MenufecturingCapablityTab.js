@@ -1,14 +1,25 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import upperArrow from '../../assets/images/create-company-images/upperArrow.png'
 
 const MenufecturingCapablityTab = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const [cooperationFile, setCooperationFile] = useState(null)
+    console.log(cooperationFile);
 
     const handleCompanyDetails = (data) => {
         console.log(data);
     }
+
+    const cooperationRef = useRef()
+
+    const handleCooperationFile = () => {
+        cooperationRef.current.click()
+    }
+
+
+
     return (
         <form onSubmit={handleSubmit(handleCompanyDetails)} className=''>
             <div
@@ -30,17 +41,22 @@ const MenufecturingCapablityTab = () => {
                 <div className='flex flex-col md:flex-row md:items-start gap-6'>
                     <h1 className='text-left font-bold text-gray-900'>Cooperation contacts:</h1>
                     <div className='flex items-center gap-4'>
-                        <div className='w-40 h-40 flex justify-center items-center bg-gray-200 p-6'>
-                            <Image className='w-full h-full' src={upperArrow} alt="" />
+                        <div onClick={() => handleCooperationFile()} className='w-40 h-40 flex justify-center items-center bg-gray-200 p-6'>
+                            {
+                                cooperationFile ? <img className='w-full h-full'
+                                    src={URL.createObjectURL(cooperationFile)} alt="" />
+                                    :
+                                    <Image className='w-full h-full' src={upperArrow} alt="" />
+                            }
                         </div>
                         <div className='flex flex-col justify-between items-center gap-4 h-40'>
                             <div className='relative flex justify-center items-center w-40 h-10 border border-primary rounded'>
                                 <span className='text-center'>Browse</span>
-                                <input className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
+                                <input onChange={(e) => setCooperationFile(e.target.files[0])} ref={cooperationRef} className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
                             </div>
                             <div className='relative flex justify-center items-center w-40 h-10'>
                                 <span className='text-primary text-center'>Browse</span>
-                                <input className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
+                                <input onChange={(e) => setCooperationFile(e.target.files[0])} ref={cooperationRef} className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
                             </div>
                         </div>
                     </div>
