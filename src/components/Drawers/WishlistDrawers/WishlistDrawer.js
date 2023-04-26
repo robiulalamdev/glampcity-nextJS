@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenWishlistSidebar, setWishlistItems } from '@/Slices/controllerSlice';
 import Link from 'next/link';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import Drawer from '../MainDrawer/Drawer';
 
 const WishlistDrawer = () => {
     const { user } = useContext(AuthContext)
@@ -36,15 +36,13 @@ const WishlistDrawer = () => {
             })
     }
 
-
     return (
+
         <Drawer
-            placement='right'
-            visible={openWishlistSidebar}
-            title='Wishlist Products'
-            closable={true}
-            width='380px'
-            onClose={() => dispatch(setOpenWishlistSidebar(false))}
+            drawer={openWishlistSidebar}
+            close={() => dispatch(setOpenWishlistSidebar(false))}
+            placement="right"
+            className="w-full md:w-[420px] h-full bg-white p-4"
         >
 
             <div className="pointer-events-auto w-full">
@@ -110,6 +108,7 @@ const WishlistDrawer = () => {
                     }
                 </div>
             </div>
+
         </Drawer>
     );
 };

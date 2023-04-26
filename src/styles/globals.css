@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* ------------------- :disabled ------------- */
 div {
   -webkit-user-select: none;
@@ -87,7 +86,7 @@ div {
 
 .dropdown {
   perspective: 1000px;
-  z-index: 100;
+  z-index: 40;
 }
 
 .dropdown_menu {
@@ -162,5 +161,88 @@ div {
 
   100% {
     transform: scaleY(1);
+  }
+}
+
+
+
+
+/* ---------- modal styles --------------- */
+
+.modal {
+  animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes blowUpModal {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- modal styles --------------- */
+
+
+
+
+
+.right {
+  animation-name: right;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  animation-duration: 0.4s;
+  animation-iteration-count: initial;
+}
+
+.left {
+  animation-name: left;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  animation-duration: 0.4s;
+  animation-iteration-count: initial;
+}
+
+.bottom {
+  animation-name: bottom;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-duration: 0.4s;
+  animation-iteration-count: initial;
+}
+
+/* Define the animation */
+@keyframes right {
+  from {
+    right: -100%;
+  }
+
+  to {
+    right: 0;
+  }
+}
+
+@keyframes left {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes bottom {
+  from {
+    bottom: -100%;
+  }
+
+  to {
+    bottom: 0;
   }
 }

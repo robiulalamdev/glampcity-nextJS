@@ -1,10 +1,10 @@
 import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { setOpenUserProfileSidebar } from '@/Slices/authSlice';
-import { Drawer } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Drawer from '../MainDrawer/Drawer';
 
 const UserProfileSidebar = () => {
     const { user } = useContext(AuthContext)
@@ -21,11 +21,10 @@ const UserProfileSidebar = () => {
 
     return (
         <Drawer
+            drawer={openUserProfileSidebar}
             placement='right'
-            visible={openUserProfileSidebar}
-            width='320px'
-            closable={false}
-            onClose={() => dispatch(setOpenUserProfileSidebar(false))}
+            className='w-72 h-full bg-white px-2 py-4'
+            close={() => dispatch(setOpenUserProfileSidebar(false))}
         >
             <ul className="relative flex flex-col overflow-y-auto overflow-x-hidden">
                 <div

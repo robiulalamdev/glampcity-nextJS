@@ -40,26 +40,6 @@ const ShoppingCarts = () => {
                 click button
             </RippleButton> */}
 
-                <div className="relative w-40 dropdown">
-                    <button id="dropdown-btn" className="px-4 py-2 font-semibold text-gray-700 bg-gray-100 rounded-md
-                    cursor-pointer focus:bg-primary focus:text-white">
-                        Dropdown
-                    </button>
-                    <ul className="hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
-                    grid grid-cols-1 bg-white font-bold shadow">
-                        <li className="flex items-center px-2 h-10 w-full hover:bg-primary hover:text-white">
-                            <span>Item 1</span>
-                        </li>
-                        <li className="flex items-center px-2 h-10 w-full hover:bg-primary hover:text-white">
-                            <span>Item 2</span>
-                        </li>
-                        <li className="flex items-center px-2 h-10 w-full hover:bg-primary hover:text-white">
-                            <span>Item 3</span>
-                        </li>
-                    </ul>
-                </div>
-
-
 
                 <div className='max-w-[1440px] mx-auto px-3 md:px-8'>
                     {

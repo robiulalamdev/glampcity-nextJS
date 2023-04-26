@@ -61,10 +61,8 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
 
     return (
         <div className='z-50 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-primary bg-opacity-25 w-full h-full'>
-            <div ref={modalRef} className='w-full md:max-w-[1000px] h-fit bg-white shadow-xl p-5 m-5'>
+            <div ref={modalRef} className='w-full md:max-w-[1000px] h-fit bg-white shadow-xl p-5 m-5 modal'>
                 <div>
-
-                    <button onClick={() => setShow(true)}>ddddd</button>
                     <h1 className='text-center font-bold text-gray-600 text-xl'>Add New Delivery Address</h1>
 
                     <form onSubmit={handleSubmit(handleAddAddress)}

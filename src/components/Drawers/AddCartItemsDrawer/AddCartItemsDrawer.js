@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems, setOpenAddCartItemsSidebar } from '@/Slices/controllerSlice';
 import Link from 'next/link';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import Drawer from '../MainDrawer/Drawer';
 
 const AddCartItemsDrawer = () => {
     const { user } = useContext(AuthContext)
@@ -51,16 +51,14 @@ const AddCartItemsDrawer = () => {
     return (
         <Drawer
             placement='right'
-            visible={openAddCartItemsSidebar}
-            title='Cart Items'
-            closable={true}
-            width='380px'
-            onClose={() => dispatch(setOpenAddCartItemsSidebar(false))}
+            drawer={openAddCartItemsSidebar}
+            close={() => dispatch(setOpenAddCartItemsSidebar(false))}
+            className="w-full md:w-[420px] h-full bg-white p-4"
         >
 
             <div className="pointer-events-auto w-full">
                 <div className="flex h-full flex-col overflow-y-auto">
-                    <div className="flex-1 overflow-y-auto py-6">
+                    <div className="flex-1 overflow-y-auto">
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {cartItems && cartItems?.map((product) => (
                                 <li key={product?.id} className="flex py-6">
