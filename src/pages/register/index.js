@@ -7,22 +7,22 @@ import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import CountriesDropdown from '@/components/LoginRegisterCompo/CountriesDropdown';
-import { setPasswordError, setRole, setSelectedCountry, setShowCountries, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
+import { setRole, setSelectedCountry, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
 import PhoneCodeDropdown from '@/components/LoginRegisterCompo/PhoneCodeDropdown';
 import { useRouter } from 'next/router';
 import { Checkbox, Select } from 'antd';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
 
-
 const index = () => {
-    const { role, selectedCountry, showCountries, selectedPhoneCode, showPhoneCode, passwordError } = useSelector((state) => state.loginRegisterSlice)
+    const { role, selectedCountry, countries, selectedPhoneCode, showPhoneCode, passwordError } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [agree, setAgree] = useState(false)
     const [show, setShow] = useState(false)
     const [isloading, setIsloading] = useState(false)
+
+    // console.log(countries);
 
     const [countryResult, setCountryResult] = useState("")
     const [companyResult, setCompanyResult] = useState("")
@@ -30,11 +30,6 @@ const index = () => {
     const [passwordResult, setPasswordResult] = useState("")
 
     const router = useRouter()
-
-    const onChange = (value) => {
-        setCountryResult("")
-        dispatch(setSelectedCountry(value))
-    };
 
     const handleRegister = (data) => {
         console.log(data);
@@ -100,32 +95,31 @@ const index = () => {
 
                     <form onSubmit={handleSubmit(handleRegister)} className='px-6 md:px-12'>
 
-                        <div className='flex flex-col items-start w-full gap-1 mb-3'>
-                            <label className='text-left font-bold text-gray-900' htmlFor="region" id='region'>Region <span className='text-primary'>*</span></label>
+                        <div className="dropdown">
 
-                            <Select
-                                showSearch
-                                className='w-full h-10'
-                                placeholder="Select a Region"
-                                optionFilterProp="children"
-                                onChange={onChange}
-                                // onSearch={() => setCountryResult("")}
-                                filterOption={(input, option) =>
-                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                            <div className='flex flex-col items-start gap-1 mb-3'>
+                                <p className='text-left font-bold text-gray-900'>Your Region<span className='text-primary'>*</span></p>
+                                <input {...register('country', { required: 'Region is required' })}
+                                    onChange={() => setCountryResult("")}
+                                    className='w-full h-10 px-3 border rounded focus:outline-primary cursor-pointer'
+                                    type="country" name="country" value={selectedCountry} id="dropdown-btn" readOnly placeholder="Select Your Region" />
+
+                                {errors.country && !countryResult && <p className='text-red-600 text-sm'>{errors.country.message}</p>}
+                                {countryResult && <p className='text-red-600 text-sm'>{countryResult}</p>}
+                            </div>
+
+                            <ul className="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
+                    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-full">
+                                {
+                                    countries?.map((country, i) => (
+                                        <span key={i} onClick={() => dispatch(setSelectedCountry(country.fullName))}
+                                            className="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
+                                            <span>{country.fullName}</span>
+                                        </span>
+                                    ))
                                 }
-                                options={[
-                                    {
-                                        value: 'Nigeria',
-                                        label: 'Nigeria',
-                                    },
-                                    {
-                                        value: 'UK',
-                                        label: 'UK',
-                                    }
-                                ]}
-                            />
 
-                            {countryResult && <p className='text-red-600 text-sm'>{countryResult}</p>}
+                            </ul>
                         </div>
 
                         <div className='mb-6 flex flex-col items-start gap-1'>
@@ -151,7 +145,8 @@ const index = () => {
                             <label className='text-left font-bold text-gray-900' htmlFor="email" id='email'>Email address <span className='text-primary'>*</span></label>
                             <input {...register('email', { required: 'Email is required' })}
                                 onChange={(e) => setEmailResult("")}
-                                className='w-full h-10 px-3 border rounded focus:outline-primary' type="email" name="email" id="email" />
+                                className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                type="email" name="email" placeholder='Enter Your Email' />
                             {errors.email && !emailResult && <p className='text-red-600 text-sm'>{errors.email.message}</p>}
                             {emailResult && <p className='text-red-600 text-sm'>{emailResult}</p>}
                         </div>
@@ -160,7 +155,8 @@ const index = () => {
                             <label className='text-left font-bold text-gray-900' htmlFor="password" id='password'>Password <span className='text-primary'>*</span></label>
                             <input {...register('password', { required: 'Password is required' })}
                                 onChange={(e) => setPasswordResult("")}
-                                className='w-full h-10 px-3 border rounded focus:outline-primary' type="password" name="password" id="password" />
+                                className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                type="password" name="password" placeholder='Enter Your Password' />
                             {errors.password && !passwordResult && <p className='text-red-600 text-sm'>{errors.password.message}</p>}
                             {passwordResult && <p className='text-red-600 text-sm'>{passwordResult}</p>}
                         </div>
@@ -169,7 +165,8 @@ const index = () => {
                             <label className='text-left font-bold text-gray-900' htmlFor="confirmPassword" id='confirmPassword'>Confirm Password <span className='text-primary'>*</span></label>
                             <input {...register('confirmPassword', { required: 'Confirm Password is required' })}
                                 onChange={(e) => setPasswordResult("")}
-                                className='w-full h-10 px-3 border rounded focus:outline-primary' type="password" name="confirmPassword" id="confirmPassword" />
+                                className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                type="password" name="confirmPassword" placeholder='Enter Confirm Password' />
                             {errors.confirmPassword && !passwordResult && <p className='text-red-600 text-sm'>{errors.confirmPassword.message}</p>}
                             {passwordResult && <p className='text-red-600 text-sm'>{passwordResult}</p>}
                         </div>
@@ -178,7 +175,8 @@ const index = () => {
                             <label className='text-left font-bold text-gray-900' htmlFor="company" id='company'>Company Name <span className='text-primary'>*</span></label>
                             <input {...register('company', { required: 'Company Name is required' })}
                                 onChange={(e) => setCompanyResult("")}
-                                className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="company" id="company" />
+                                className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                type="text" name="company" placeholder='Enter Your Company' />
                             {errors.company && !companyResult && <p className='text-red-600 text-sm'>{errors.company.message}</p>}
                             {companyResult && <p className='text-red-600 text-sm'>{companyResult}</p>}
                         </div>
@@ -187,14 +185,16 @@ const index = () => {
                             <div className='flex flex-col items-start gap-1'>
                                 <label className='text-left font-bold text-gray-900' htmlFor="firstName" id='firstName'>First Name Name <span className='text-primary'>*</span></label>
                                 <input {...register('firstName', { required: 'First Name Name is required' })}
-                                    className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="firstName" id="firstName" />
+                                    className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                    type="text" name="firstName" placeholder='Enter First Name' />
                                 {errors.firstName && <p className='text-red-600 text-sm'>{errors.firstName.message}</p>}
                             </div>
 
                             <div className='flex flex-col items-start gap-1 mb-3'>
                                 <label className='text-left font-bold text-gray-900' htmlFor="lastName" id='lastName'>Last Name Name</label>
                                 <input {...register('lastName')}
-                                    className='w-full h-10 px-3 border rounded focus:outline-primary' type="text" name="lastName" id="lastName" />
+                                    className='w-full h-10 px-3 border rounded focus:outline-primary'
+                                    type="text" name="lastName" placeholder='Enter Last Name' />
                                 {errors.lastName && <p className='text-red-600 text-sm'>{errors.lastName.message}</p>}
                             </div>
                         </div>
@@ -207,7 +207,7 @@ const index = () => {
                                         className=' cursor-pointer w-20 h-10 border rounded flex items-center px-2'>
                                         <input {...register('phoneCode')}
                                             className='cursor-pointer w-full text-gray-900 h-full focus:outline-none'
-                                            value={selectedPhoneCode} readOnly type="text" name="phoneCode" id="phoneCode" />
+                                            value={selectedPhoneCode} readOnly type="text" name="phoneCode" />
                                         <Image className='w-3' src={arrowDown} alt="" />
                                     </div>
                                     {
@@ -216,7 +216,7 @@ const index = () => {
                                 </div>
 
                                 <input {...register('phone', { required: 'Phone Number is required' })}
-                                    className='flex-grow w-full h-10 px-3 border rounded focus:outline-primary' type="number" name="phone" id="phone" />
+                                    className='flex-grow w-full h-10 px-3 border rounded focus:outline-primary' type="number" name="phone" placeholder='Enter Your Phone' />
                             </div>
                             {errors.phone && <p className='text-red-600 text-sm'>{errors.phone.message}</p>}
                         </div>

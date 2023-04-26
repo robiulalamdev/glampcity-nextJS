@@ -2,20 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     countries: [
-        { country: 'bangladesh' },
-        { country: 'bangladesh' },
-        { country: 'pakistan' },
-        { country: 'bangladesh' },
-        { country: 'bangladesh' }
+        { shortName: 'UK', fullName: 'United kingdom' },
+        { shortName: 'NI', fullName: 'Nigeria' }
     ],
     phoneCodes: [
-        { country: 'bangladesh', phoneCode: '+880' },
-        { country: 'bangladesh', phoneCode: '+658' },
-        { country: 'bangladesh', phoneCode: '+452' },
-        { country: 'bangladesh', phoneCode: '+56' },
-        { country: 'bangladesh', phoneCode: '+792' }
+        { country: 'United Kingdom', phoneCode: '+44' },
     ],
-    selectedCountry: 'Bangladesh',
+    selectedCountry: '',
     selectedPhoneCode: '+880',
     showCountries: false,
     showPhoneCode: false,
