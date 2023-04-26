@@ -7,9 +7,10 @@ const initialState = {
     ],
     phoneCodes: [
         { country: 'United Kingdom', phoneCode: '+44' },
+        { country: 'Nigeria', phoneCode: '+234' },
     ],
     selectedCountry: '',
-    selectedPhoneCode: '+880',
+    selectedPhoneCode: '+44',
     showCountries: false,
     showPhoneCode: false,
     role: 'seller',

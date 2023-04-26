@@ -1,10 +1,11 @@
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { useAuth } from '@/Hooks/getAuth';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const ChangeAddressModal = ({ closeModal, sucsess, address, refetch }) => {
-    const userInfo = useAuth()
+    const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [deliveryAddress, setDeliveryAddress] = useState(address?.deliveryAddress)
 

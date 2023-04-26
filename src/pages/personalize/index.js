@@ -1,19 +1,18 @@
 import CategoriesSub from '@/components/answareToNextComponents/CategoriesSub';
 import DescribeYourBusiness from '@/components/answareToNextComponents/DescribeYourBusiness';
 import Supplier from '@/components/answareToNextComponents/Supplier';
-import { useAuth } from '@/Hooks/getAuth';
-import { setUserInfo } from '@/Slices/authSlice';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { setNextIncrease } from '@/Slices/loginRegisterSlice';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Personalize = () => {
+    const { user } = useContext(AuthContext)
     const { nextIncrease } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
-    const userInfo = useAuth()
 
-    // console.log(userInfo);
+    // console.log(user);
 
     return (
         <section className='bg-white min-h-screen'>

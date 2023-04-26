@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-// import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
+import { useState } from 'react';
+import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
 import facebook from '../../assets/icons/login-register-icons/facebook.png'
 import google from '../../assets/icons/login-register-icons/google.png'
 import arrowDown from '../../assets/icons/login-register-icons/arrow-down.png'
@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setRole, setSelectedCountry, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
 import PhoneCodeDropdown from '@/components/LoginRegisterCompo/PhoneCodeDropdown';
 import { useRouter } from 'next/router';
-import { Checkbox, Select } from 'antd';
+import { Checkbox } from 'antd';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
 
 const index = () => {
-    const { role, selectedCountry, countries, selectedPhoneCode, showPhoneCode, passwordError } = useSelector((state) => state.loginRegisterSlice)
+    const { role, selectedCountry, countries, selectedPhoneCode, showPhoneCode } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [agree, setAgree] = useState(false)
@@ -239,10 +239,10 @@ const index = () => {
                         }
                     </form>
 
-                    <div className='flex justify-center items-center gap-2 mt-8'>
-                        {/* <Image className='w-32' src={hrLine} alt="" /> */}
+                    <div className='flex justify-center items-center gap-2 mt-4'>
+                        <Image className='w-32' src={hrLine} alt="" />
                         <span className='text-gray-600'>or</span>
-                        {/* <Image className='w-32' src={hrLine} alt="" /> */}
+                        <Image className='w-32' src={hrLine} alt="" />
                     </div>
                     <div className='flex justify-center items-center gap-6 md:gap-8 mt-8'>
                         <div className='w-36 md:w-52 h-12 border rounded-md flex justify-center items-center gap-4'>

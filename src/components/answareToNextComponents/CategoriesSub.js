@@ -1,11 +1,11 @@
-import { useAuth } from '@/Hooks/getAuth';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { setNextIncrease } from '@/Slices/loginRegisterSlice';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 const CategoriesSub = () => {
+    const { user } = useContext(AuthContext)
     const dispatch = useDispatch()
-    const userInfo = useAuth()
     const [data1, setData1] = useState('')
     const [data2, setData2] = useState('')
     const [data3, setData3] = useState('')
@@ -16,7 +16,7 @@ const CategoriesSub = () => {
             tents: data2,
             autoAndTransportation: data3,
         }
-        fetch(`http://localhost:5055/api/user/${userInfo?._id}`, {
+        fetch(`http://localhost:5055/api/user/${user?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

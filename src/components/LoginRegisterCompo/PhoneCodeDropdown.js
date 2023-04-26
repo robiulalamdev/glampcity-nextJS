@@ -20,7 +20,7 @@ const PhoneCodeDropdown = () => {
         }
     });
     return (
-        <div ref={dropdownRef} class="absolute right-0 z-50 w-full rounded bg-white shadow shadow-gray-400">
+        <div ref={dropdownRef} className="absolute right-0 z-50 w-full rounded bg-white shadow shadow-gray-400">
             <div className=''>
                 {
                     phoneCodes && phoneCodes.map(pCode => <div

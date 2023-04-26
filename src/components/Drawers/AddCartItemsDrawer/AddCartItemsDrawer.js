@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Drawer } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems, setOpenAddCartItemsSidebar } from '@/Slices/controllerSlice';
-import { useAuth } from '@/Hooks/getAuth';
 import Link from 'next/link';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const AddCartItemsDrawer = () => {
+    const { user } = useContext(AuthContext)
     const { openAddCartItemsSidebar, cartItems } = useSelector((state) => state.controllerSlice)
-    const userInfo = useAuth()
     const dispatch = useDispatch()
 
 
@@ -21,7 +21,7 @@ const AddCartItemsDrawer = () => {
 
 
     const handleGetCartProducts = () => {
-        fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
+        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -30,10 +30,10 @@ const AddCartItemsDrawer = () => {
 
 
     useEffect(() => {
-        if (userInfo?._id) {
+        if (user?._id) {
             handleGetCartProducts()
         }
-    }, [userInfo?._id])
+    }, [user?._id])
 
 
     const handleCartProductRemove = (id) => {

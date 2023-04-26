@@ -1,5 +1,4 @@
 import AuthProvider from '@/ContextAPI/AuthProvider'
-import { useAuth } from '@/Hooks/getAuth'
 import CartBtn from '@/components/Buttons/StickyButtons/CartBtn'
 import PremiumServiceBtn from '@/components/Buttons/StickyButtons/PremiumServiceBtn'
 import SmallLoader from '@/components/Loaders/SmallLoader'
@@ -12,7 +11,6 @@ import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 
 export default function App({ Component, pageProps }) {
-  const userInfo = useAuth()
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,7 +18,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   });
 
 
@@ -31,7 +29,7 @@ export default function App({ Component, pageProps }) {
           <TopNavber />
           <Navber />
           {
-            loading && !userInfo?._id ? < SmallLoader /> : <Component {...pageProps} />
+            loading ? < SmallLoader /> : <Component {...pageProps} />
           }
           <Footer />
 

@@ -91,10 +91,10 @@ const ChatBox = ({ chat, currentUser }) => {
     }, [messages])
 
     return (
-        <div class="relative border flex flex-col w-full">
+        <div className="relative border flex flex-col w-full">
 
             {/* <!-- Header --> */}
-            <div class="sticky z-50 bg-white top-0 py-2 px-3 border-b w-full cursor-pointer bg-grey-lighter flex flex-row justify-between items-center">
+            <div className="sticky z-50 bg-white top-0 py-2 px-3 border-b w-full cursor-pointer bg-grey-lighter flex flex-row justify-between items-center">
 
                 <div className='flex items-center gap-2 '>
                     <div className='relative flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white font-semibold'>
@@ -107,13 +107,13 @@ const ChatBox = ({ chat, currentUser }) => {
                     </div>
                 </div>
 
-                <div class="ml-6">
+                <div className="ml-6">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="#263238" fill-opacity=".6" d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z"></path></svg>
                 </div>
             </div>
 
 
-            <div class="flex-1 h-full overflow-y-auto" >
+            <div className="flex-1 h-full overflow-y-auto" >
                 <div className='relative p-6 max-h-[400px] overflow-y-auto'>
                     {
                         messages?.map(message => (
@@ -128,7 +128,7 @@ const ChatBox = ({ chat, currentUser }) => {
             </div>
 
             {/* <!-- Input --> */}
-            <div class="bg-grey-lighter px-4 py-4 flex items-center">
+            <div className="bg-grey-lighter px-4 py-4 flex items-center">
                 <div className='w-full flex items-center gap-2 px-3' >
                     <InputEmoji
                         setValue={newMessage}

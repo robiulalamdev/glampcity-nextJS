@@ -1,16 +1,16 @@
-import { useAuth } from '@/Hooks/getAuth';
-import React from 'react';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
+import React, { useContext } from 'react';
 
 const ProfileSidebar = ({ view, setView }) => {
-    const userInfo = useAuth()
+    const { user } = useContext(AuthContext)
     return (
         <div>
             <aside className="hidden lg:block flex flex-col w-56 h-screen py-4 overflow-y-auto bg-blue-gray-50 cursor-pointer">
 
                 <div className="flex flex-col items-center mt-6 -mx-2">
                     <img className="object-cover w-24 h-24 mx-2 rounded-full" src="https://cdn-icons-png.flaticon.com/128/3177/3177440.png" alt="avatar" />
-                    <h4 className="mx-2 mt-2 font-medium text-xl text-gray-900">{userInfo?.name}</h4>
-                    <p className="mx-2 mt-1 text-sm font-medium text-gray-600">{userInfo?.email}</p>
+                    <h4 className="mx-2 mt-2 font-medium text-xl text-gray-900">{user?.name}</h4>
+                    <p className="mx-2 mt-1 text-sm font-medium text-gray-600">{user?.email}</p>
                 </div>
 
                 <div className="flex flex-col justify-between flex-1 mt-6">

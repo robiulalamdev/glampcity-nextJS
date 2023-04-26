@@ -1,12 +1,12 @@
-import { useAuth } from '@/Hooks/getAuth';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { setNextIncrease } from '@/Slices/loginRegisterSlice';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 
 const DescribeYourBusiness = () => {
+    const { user } = useContext(AuthContext)
     const dispatch = useDispatch()
-    const userInfo = useAuth()
 
 
     const [data1, setData1] = useState('')
@@ -23,7 +23,7 @@ const DescribeYourBusiness = () => {
 
     const sendData = () => {
         const describeYourBusiness = [data1, data2, data3, data4, data5, data6, data7, data8]
-        fetch(`http://localhost:5055/api/user/${userInfo?._id}`, {
+        fetch(`http://localhost:5055/api/user/${user?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

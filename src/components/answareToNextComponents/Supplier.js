@@ -1,9 +1,9 @@
-import { useAuth } from '@/Hooks/getAuth';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 const Supplier = () => {
-    const userInfo = useAuth()
+    const { user } = useContext(AuthContext)
     const router = useRouter()
 
     const [data1, setData1] = useState('')
@@ -18,7 +18,7 @@ const Supplier = () => {
 
     const sendData = () => {
         const supplier = [data1, data2, data3, data4, data5, data6, data7, data8];
-        fetch(`http://localhost:5055/api/user/${userInfo?._id}`, {
+        fetch(`http://localhost:5055/api/user/${user?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

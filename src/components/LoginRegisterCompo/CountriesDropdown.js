@@ -7,7 +7,7 @@ const CountriesDropdown = () => {
     const dispatch = useDispatch()
 
     return (
-        <div class="absolute right-0 z-10 w-fit rounded bg-gray-50 shadow shadow-gray-400">
+        <div className="absolute right-0 z-10 w-fit rounded bg-gray-50 shadow shadow-gray-400">
             <div className=''>
                 {
                     countries && countries?.map(r => <div

@@ -1,21 +1,21 @@
-import { useAuth } from '@/Hooks/getAuth';
 import { setCartItems, setWishlistItems } from '@/Slices/controllerSlice';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import love from '../../../assets/icons/latest-products-icons/love.png'
 import love2 from '../../../assets/icons/love.png'
 import { useRouter } from 'next/router';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const LatestSignelProduct = ({ product }) => {
-    const userInfo = useAuth()
+    const { user } = useContext(AuthContext)
     const { wishlistItems } = useSelector((state) => state.controllerSlice)
     const router = useRouter()
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`http://localhost:5055/api/wishlist/${userInfo?._id}`)
+        fetch(`http://localhost:5055/api/wishlist/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -23,14 +23,14 @@ const LatestSignelProduct = ({ product }) => {
     }
 
     useEffect(() => {
-        if (userInfo?._id) {
+        if (user?._id) {
             handleGetWishlist()
         }
-    }, [userInfo?._id])
+    }, [user?._id])
 
     // get cart products
     const handleGetCartProducts = () => {
-        fetch(`http://localhost:5055/api/cartProduct/${userInfo?._id}`)
+        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -39,7 +39,7 @@ const LatestSignelProduct = ({ product }) => {
 
 
     const handleWishlistRemove = (id) => {
-        if (userInfo?._id) {
+        if (user?._id) {
             fetch(`http://localhost:5055/api/wishlist/${id}`, {
                 method: "DELETE"
             })
@@ -55,7 +55,7 @@ const LatestSignelProduct = ({ product }) => {
     }
 
     const handleAddWishlist = (product) => {
-        if (userInfo?._id) {
+        if (user?._id) {
             fetch(`http://localhost:5055/api/wishlist`, {
                 method: "POST",
                 headers: {
@@ -63,7 +63,7 @@ const LatestSignelProduct = ({ product }) => {
                 },
                 body: JSON.stringify({
                     productId: product?._id,
-                    userId: userInfo?._id,
+                    userId: user?._id,
                     sku: product?.sku,
                     title: product?.title,
                     unit: product?.unit,
@@ -86,7 +86,7 @@ const LatestSignelProduct = ({ product }) => {
 
     // add to cart product
     const handleAddToCart = (product) => {
-        if (userInfo?._id) {
+        if (user?._id) {
             fetch(`http://localhost:5055/api/cartProduct`, {
                 method: "POST",
                 headers: {
@@ -94,7 +94,7 @@ const LatestSignelProduct = ({ product }) => {
                 },
                 body: JSON.stringify({
                     productId: product?._id,
-                    userId: userInfo?._id,
+                    userId: user?._id,
                     sku: product?.sku,
                     title: product?.title,
                     unit: product?.unit,

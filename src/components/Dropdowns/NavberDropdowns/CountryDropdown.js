@@ -18,7 +18,7 @@ const CountryDropdown = ({ closeDropdown }) => {
         }
     });
     return (
-        <div ref={dropdownRef} class="absolute right-2 z-50 w-36 rounded bg-gray-50 shadow shadow-gray-400">
+        <div ref={dropdownRef} className="absolute right-2 z-50 w-36 rounded bg-gray-50 shadow shadow-gray-400">
             <div className=''>
                 {
                     countries && countries.map(country => <div className='grid grid-cols-4 hover:bg-gray-200 px-2 py-1'>

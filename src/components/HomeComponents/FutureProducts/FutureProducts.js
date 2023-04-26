@@ -47,10 +47,10 @@ const FutureProducts = () => {
 
 
     return (
-        <section className='mt-32 cursor-pointer'>
+        <section draggable="false" className='mt-32 cursor-pointer'>
             <h1 className='text-gray-900 text-3xl text-center font-semibold mb-5'>Featured Products from <strong>Verified Suppliers</strong></h1>
             <div className='mt-16 md:mt-28'>
-                <div className='flex items-center flex-wrap justify-start gap-4 md:gap-8 w-fit'>
+                <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 w-full'>
                     {
                         verifiedStores && verifiedStores?.map((store, i) => <StoreCard key={i} store={store} />)
                     }

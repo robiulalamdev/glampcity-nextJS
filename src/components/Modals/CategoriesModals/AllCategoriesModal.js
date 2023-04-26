@@ -21,7 +21,7 @@ const AllCategoriesModal = ({ allCategories, closeModal }) => {
     });
     return (
         <div
-            class="h-screen w-full fixed top-0 left-0 right-0 z-40 flex items-center justify-center bg-modal bg-opacity-80 bg-gray-900">
+            className="h-screen w-full fixed top-0 left-0 right-0 z-40 flex items-center justify-center bg-modal bg-opacity-80 bg-gray-900">
             <div ref={modalRef} className='h-full w-full md:h-fit md:w-[600px] mx-auto bg-white shadow border border-blue-600'>
                 <div className='min-h-[300px] max-h-[420px] overflow-y-auto'>
                     <div className='bg-primary h-12 w-full flex justify-center items-center text-white'>

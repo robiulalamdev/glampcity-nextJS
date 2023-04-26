@@ -27,8 +27,8 @@ const BuyerReview = () => {
                             <div className='w-7 h-6 bg-white rounded border'></div>
                             <h1 className='text-black font-bold text-xl'>5</h1>
                             <Image className='w-5' src={star} alt="" />
-                            <div class="w-full bg-gray-200 rounded-full h-5">
-                                <div class="bg-[#FF6600] h-5 rounded-full w-[100%]"></div>
+                            <div className="w-full bg-gray-200 rounded-full h-5">
+                                <div className="bg-[#FF6600] h-5 rounded-full w-[100%]"></div>
                             </div>
                             <h1 className='text-black font-bold text-xl'>5</h1>
                         </div>
@@ -36,8 +36,8 @@ const BuyerReview = () => {
                             <div className='w-7 h-6 bg-white rounded border'></div>
                             <h1 className='text-black font-bold text-xl'>4</h1>
                             <Image className='w-5' src={star} alt="" />
-                            <div class="w-full bg-gray-200 rounded-full h-5">
-                                <div class="bg-[#FF6600] h-5 rounded-full w-[80%]"></div>
+                            <div className="w-full bg-gray-200 rounded-full h-5">
+                                <div className="bg-[#FF6600] h-5 rounded-full w-[80%]"></div>
                             </div>
                             <h1 className='text-gray-300 font-bold text-xl'>4</h1>
                         </div>
@@ -45,8 +45,8 @@ const BuyerReview = () => {
                             <div className='w-7 h-6 bg-white rounded border'></div>
                             <h1 className='text-black font-bold text-xl'>3</h1>
                             <Image className='w-5' src={starG} alt="" />
-                            <div class="w-full bg-gray-200 rounded-full h-5">
-                                <div class="bg-[#FF6600] h-5 rounded-full w-[60%]"></div>
+                            <div className="w-full bg-gray-200 rounded-full h-5">
+                                <div className="bg-[#FF6600] h-5 rounded-full w-[60%]"></div>
                             </div>
                             <h1 className='text-gray-300 font-bold text-xl'>3</h1>
                         </div>
@@ -54,8 +54,8 @@ const BuyerReview = () => {
                             <div className='w-7 h-6 bg-gray-300 rounded border'></div>
                             <h1 className='text-black font-bold text-xl'>2</h1>
                             <Image className='w-5' src={starG} alt="" />
-                            <div class="w-full bg-gray-200 rounded-full h-5">
-                                <div class="bg-[#FF6600] h-5 rounded-full w-[0%]"></div>
+                            <div className="w-full bg-gray-200 rounded-full h-5">
+                                <div className="bg-[#FF6600] h-5 rounded-full w-[0%]"></div>
                             </div>
                             <h1 className='text-gray-300 font-bold text-xl'>0</h1>
                         </div>
@@ -63,8 +63,8 @@ const BuyerReview = () => {
                             <div className='w-7 h-6 bg-gray-300 rounded border'></div>
                             <h1 className='text-black font-bold text-xl'>1</h1>
                             <Image className='w-5' src={starG} alt="" />
-                            <div class="w-full bg-gray-200 rounded-full h-5">
-                                <div class="bg-[#FF6600] h-5 rounded-full w-[0%]"></div>
+                            <div className="w-full bg-gray-200 rounded-full h-5">
+                                <div className="bg-[#FF6600] h-5 rounded-full w-[0%]"></div>
                             </div>
                             <h1 className='text-gray-300 font-bold text-xl'>0</h1>
                         </div>
