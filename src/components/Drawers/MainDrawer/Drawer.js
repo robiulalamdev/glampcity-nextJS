@@ -18,7 +18,6 @@ const Drawer = ({ drawer, close, placement, className, children }) => {
         <>
             {
                 drawer && <div className='fixed top-0 left-0 right-0 bottom-0 bg-gray-600 bg-opacity-50 w-full h-full cursor-pointer' style={{ zIndex: "500" }} >
-                    <button onClick={() => close(!drawer)}>open</button>
                     <div ref={drawerRef}
                         className={`fixed z-auto ${className} scrollbar
             ${drawer && `${placement}`}`}>

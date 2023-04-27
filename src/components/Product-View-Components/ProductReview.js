@@ -11,22 +11,27 @@ import img4 from '../../assets/images/product-details/product-images/img4.png'
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import { setSelectedImage } from '@/Slices/viewProductSlice';
 
 const ProductReview = () => {
-    const { images, product } = useSelector((state) => state.viewProductSlice)
+    const { selectedImage, product } = useSelector((state) => state.viewProductSlice)
+    const dispatch = useDispatch()
     return (
         <section className='mt-8'>
             <div className='grid md:grid-cols-2 lg:grid-cols-10 gap-5 cursor-pointer'>
                 <div className='lg:col-span-3 border rounded-md w-full'>
                     <div>
-                        <img className='w-full h-72 object-cover' src={product?.image} alt="" />
+                        <img className='w-full h-72 object-cover'
+                            src={selectedImage ? selectedImage : product?.images[0]} alt="" />
                     </div>
-                    <div className='grid grid-cols-4 gap-4 p-4'>
+                    <div className='grid grid-cols-4 gap-4 py-4'>
                         {
-                            images.map((img, i) => <div key={i}
+                            product?.images.map((img, i) => <button
+                                onClick={() => dispatch(setSelectedImage(img))}
+                                key={i}
                                 className='w-full h-full'>
-                                <img className='w-full h-full' src='https://i.postimg.cc/x1DwgCZd/img1.png' alt="" />
-                            </div>)
+                                <img className='w-full h-full' src={img} alt="" />
+                            </button>)
                         }
                     </div>
                 </div>
@@ -39,17 +44,17 @@ const ProductReview = () => {
                             <span className='text-primary text-md'>5 Ratings</span>
                         </div>
                     </div>
-                    <div className='border-b border-gray-400 mb-4 pb-4'>
-                        <h1 className='text-primary font-bold text-left text-3xl'>${product?.price}/ pieces</h1>
+                    <h1 className='text-primary font-bold text-left text-3xl'>${product?.price}/ pieces</h1>
+                    {/* <div className='border-b border-gray-400 mb-4 pb-4'>
                         <h1 className='text-gray-500 mt-2 font-semibold text-left text-xl'>Enter Promo Code</h1>
-
+                        
                         <div className='flex items-center mt-4 w-full'>
                             <input className='w-full h-10 focus:outline-none border border-l border-y hover:border-primary focus:border-primary border-gray-500 px-2' type="text" placeholder='Promo Code' />
                             <button className='w-44 h-10 flex justify-center items-center text-white bg-primary hover:bg-darkPrimary duration-300'>
                                 <span className=' uppercase'>Submit</span>
                             </button>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='border-b border-gray-400 mb-4 pb-4'>
                         {
                             product?.color && (
@@ -137,28 +142,28 @@ const ProductReview = () => {
 
                 <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-5'>
                     <div className=''>
-                        <Image className='w-full h-56' src={img1} alt="" />
+                        <Image className='w-full h-56 object-cover' src={img1} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
                             <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
                     <div className=''>
-                        <Image className='w-full h-56' src={img2} alt="" />
+                        <Image className='w-full h-56 object-cover' src={img2} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
                             <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
                     <div className=''>
-                        <Image className='w-full h-56' src={img3} alt="" />
+                        <Image className='w-full h-56 object-cover' src={img3} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
                             <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
                     <div className=''>
-                        <Image className='w-full h-56' src={img4} alt="" />
+                        <Image className='w-full h-56 object-cover' src={img4} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
                             <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>

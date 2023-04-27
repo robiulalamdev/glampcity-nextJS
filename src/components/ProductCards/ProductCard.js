@@ -8,6 +8,7 @@ import love2 from '../../assets/icons/love.png'
 import { useRouter } from 'next/router';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
 import Link from 'next/link';
+import ProductImageCorousel from './ProductImageCorousel';
 
 const ProductCard = ({ product }) => {
     const { user } = useContext(AuthContext)
@@ -102,9 +103,9 @@ const ProductCard = ({ product }) => {
         // </div>
 
 
-        <div className="border border-gray-600/20" id='box-shadow' >
-            <div className='relative w-full h-40 overflow-hidden'>
-                <img draggable="false" className='w-full h-40 object-cover' src={product?.image} alt="" />
+        <div className="border border-gray-600/20 bg-white" id='box-shadow' >
+            <div className='relative w-full h-40 overflow-hidden bg-slate-200 group'>
+                <ProductImageCorousel images={product?.images} />
                 {wishlised ?
                     <Image onClick={() => handleWishlistRemove(wishlised?._id)}
                         className='w-8 absolute z-10 top-3 right-3 shadow-xl shadow-blue-400 hover:shadow-green-600 rounded-full hover:scale-125 duration-200 cursor-pointer' src={love2} alt="" />
