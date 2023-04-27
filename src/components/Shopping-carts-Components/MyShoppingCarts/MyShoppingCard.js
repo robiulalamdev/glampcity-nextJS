@@ -3,13 +3,13 @@ import { Popconfirm } from 'antd';
 
 
 const MyShoppingCard = ({ data, handleRemove }) => {
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className='w-full h-fit flex justify-between gap-5 items-center border rounded-md p-4'>
             <div className='flex justify-between items-center gap-4'>
                 <div>
-                    <img className='w-40 h-32' src={data?.image} alt="" />
+                    <img className='w-40 h-32' src={data?.images[0]} alt="" />
                 </div>
                 <div className='text-left'>
                     <h1 className='text-black font-semibold text-xl text-left'>{data?.title}</h1>
