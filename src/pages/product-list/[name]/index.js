@@ -1,18 +1,15 @@
 import SmallLoader from '@/components/Loaders/SmallLoader';
 import ProductCard from '@/components/ProductCards/ProductCard';
 import { setIsloading } from '@/Slices/controllerSlice';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ParentByProducts = () => {
+const ParentByProducts = ({ name }) => {
     const { isLoading } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
-    const router = useRouter()
-    const name = router.query.name
     const [data, setData] = useState([])
 
-    // console.log(data, name);
+
 
     const handleFetchData = (endPoint) => {
         fetch(`http://localhost:5055/api/${endPoint}`)
@@ -47,7 +44,7 @@ const ParentByProducts = () => {
             handleAllProductsOfCTG()
         }
 
-    }, [router])
+    }, [name])
 
     if (isLoading) {
         return <SmallLoader />
@@ -75,5 +72,14 @@ const ParentByProducts = () => {
         </section>
     );
 };
+
+
+export async function getServerSideProps({ params }) {
+    return {
+        props: {
+            name: params.name,
+        },
+    };
+}
 
 export default ParentByProducts;

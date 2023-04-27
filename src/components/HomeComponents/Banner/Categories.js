@@ -41,7 +41,7 @@ const Categories = () => {
                         <div className='hidden group-focus:block group-hover:block z-50 absolute -right-10 bg-white w-full border-t-8 border-t-primary border-b border-x max-h-72 overflow-y-auto'>
                             {
                                 category?.children?.map((subCTG, i) => <Link key={i}
-                                    href={`/product-list/${category?.slug}/${subCTG?.replaceAll(' ', '-')}`}
+                                    href={`/product-list/${category?.slug}/${subCTG?.toLowerCase().replaceAll(' ', '-')}`}
                                     className='hover:bg-gray-300 border-b border-x h-12 w-full flex items-center px-3 text-gray-900'>
                                     <h1 className='font-semibold'>{subCTG}</h1>
                                 </Link>)

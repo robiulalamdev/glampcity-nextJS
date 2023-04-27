@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ParentByProducts from './pages/product-list/[name]';
+import ParentByProducts from './pages/products/[name]';
 
 const withAuth = (WrappedComponent) => {
     const [user, setUser] = useState(null)
