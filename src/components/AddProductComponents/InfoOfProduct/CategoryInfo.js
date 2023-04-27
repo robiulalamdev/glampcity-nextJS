@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Checkbox, Select } from 'antd';
+
+const items = [
+    {
+        value: 'Nigeria',
+        label: 'Nigeria',
+    },
+    {
+        value: 'UK',
+        label: 'UK',
+    }
+]
 
 const CategoryInfo = () => {
     const [productGroup, setProductGroup] = useState("")
@@ -17,32 +27,26 @@ const CategoryInfo = () => {
                     <span className='lg:col-span-1 lg:text-right'>Product Keyword <span className='text-red-500'>*</span></span>
                     <input className='lg:col-span-7 max-w-full w-full  h-10 border border-gray-400 focus:border-primary rounded focus:outline-none block px-2 text-sm text-gray-900 focus:ring-blue-500' label="Product Name" />
                 </div>
+
                 <div className='grid lg:grid-cols-8 items-center gap-2 w-full'>
                     <span className='lg:col-span-1 lg:text-right'>Product Group</span>
-                    <div className="w-72">
-                        <Select
-                            showSearch
-                            className='w-full h-10'
-                            placeholder="Select Product Group"
-                            optionFilterProp="children"
-                            onChange={(value) => setProductGroup(value)}
-                            // onSearch={onSearch}
-                            filterOption={(input, option) =>
-                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    <div className="dropdown w-full md:w-72">
+                        <input id="dropdown-btn" className='w-full  h-10 border border-gray-400 focus:border-primary rounded focus:outline-none cursor-pointer block px-2 text-sm text-gray-900 focus:ring-blue-500'
+                            type="text" value={productGroup} readOnly placeholder='Select Product Group' />
+                        <ul className="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
+                    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-full">
+                            {
+                                items?.map((item, i) => (
+                                    <span onClick={() => setProductGroup(item?.value)}
+                                        className="flex items-center px-2 h-8 w-full hover:bg-primary cursor-pointer hover:text-white">
+                                        <span>{item.value}</span>
+                                    </span>
+                                ))
                             }
-                            options={[
-                                {
-                                    value: 'Nigeria',
-                                    label: 'Nigeria',
-                                },
-                                {
-                                    value: 'UK',
-                                    label: 'UK',
-                                }
-                            ]}
-                        />
 
+                        </ul>
                     </div>
+
                 </div>
             </div>
             <hr className='my-4 border-primary' />
@@ -70,28 +74,21 @@ const CategoryInfo = () => {
                 </div>
                 <div className='grid lg:grid-cols-8 items-center gap-2 w-full'>
                     <span className='lg:col-span-1 lg:text-right'>Place of Origin</span>
-                    <div className="w-72">
-                        <Select
-                            showSearch
-                            className='w-full h-10'
-                            placeholder="-Select-"
-                            optionFilterProp="children"
-                            onChange={(value) => setPlaceOfOrigin(value)}
-                            // onSearch={onSearch}
-                            filterOption={(input, option) =>
-                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    <div className="dropdown w-full md:w-72">
+                        <input id="dropdown-btn" className='w-full  h-10 border border-gray-400 focus:border-primary rounded focus:outline-none cursor-pointer block px-2 text-sm text-gray-900 focus:ring-blue-500'
+                            type="text" value={placeOfOrigin} readOnly placeholder='Select Place of Origin' />
+                        <ul className="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
+                    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-full">
+                            {
+                                items?.map((item, i) => (
+                                    <span onClick={() => setPlaceOfOrigin(item?.value)}
+                                        className="flex items-center px-2 h-8 w-full hover:bg-primary cursor-pointer hover:text-white">
+                                        <span>{item.value}</span>
+                                    </span>
+                                ))
                             }
-                            options={[
-                                {
-                                    value: 'Nigeria',
-                                    label: 'Nigeria',
-                                },
-                                {
-                                    value: 'UK',
-                                    label: 'UK',
-                                }
-                            ]}
-                        />
+
+                        </ul>
                     </div>
                 </div>
                 <div className='grid grid-cols-8 items-center gap-2 w-full'>

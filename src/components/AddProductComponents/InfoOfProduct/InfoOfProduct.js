@@ -23,8 +23,10 @@ const InfoOfProduct = ({ selectetdTab, setSelectedTab }) => {
                 </div>
             </div>
 
-            <div>
-                <Checkbox onChange={(e) => setAgreeSubmit(e.target.checked)}>Please double check and confirm your submitted information does not violatr anyand all listing related policies before submission.</Checkbox>
+            <div className='flex items-center gap-2'>
+                <input className='cursor-pointer' type='checkbox' name='agree' id='agree'
+                    onChange={(e) => setAgreeSubmit(e.target.checked)} />
+                <label className='cursor-pointer' htmlFor="agree">Please double check and confirm your submitted information does not violatr anyand all listing related policies before submission</label>
             </div>
 
 
