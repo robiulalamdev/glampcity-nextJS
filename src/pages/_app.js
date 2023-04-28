@@ -9,6 +9,7 @@ import store from '@/store'
 import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);

@@ -4,6 +4,9 @@ import ProductCard from '@/components/ProductCards/ProductCard';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import noData from "../../../../assets/icons/no-data.png"
+import Image from 'next/image';
+
 const ChildrenByProducts = ({ path }) => {
     const { isLoading } = useSelector((state) => state.controllerSlice)
 
@@ -36,7 +39,7 @@ const ChildrenByProducts = ({ path }) => {
         <section className='max-w-[1440px] mx-auto px-4 min-h-screen'>
             <div className='rounded-3xl md:p-4 mt-8'>
                 <div className='flex justify-between items-center mb-2'>
-                    <h1 className='text-gray-900 text-2xl text-left font-bold'>{path?.name} Products</h1>
+                    {/* <h1 className='text-gray-900 text-2xl text-left font-bold'>{path?.name} Products</h1> */}
                 </div>
                 <div className='grid grid-cols-2 lg:grid-cols-4 gap-3'>
                     {
@@ -44,8 +47,9 @@ const ChildrenByProducts = ({ path }) => {
                     }
                 </div>
                 {
-                    data.length === 0 && <div className='flex justify-center items-center'>
-                        <h1 className='text-center font-bold text-black text-2xl'>No products of {path?.name} Category</h1>
+                    data.length === 0 && <div className='flex flex-col items-center'>
+                        <Image className='w-60 md:w-96' src={noData} alt="" />
+                        <span className='text-center font-bold' >No Products</span>
                     </div>
                 }
             </div>

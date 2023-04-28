@@ -4,19 +4,28 @@
 
 /* ------------------- :disabled ------------- */
 div {
-  -webkit-user-select: none;
+  /* -webkit-user-select: none; */
   /* Chrome/Safari/Opera */
-  -moz-user-select: none;
+  /* -moz-user-select: none; */
   /* Firefox */
-  -ms-user-select: none;
+  /* -ms-user-select: none; */
   /* Internet Explorer/Edge */
-  user-select: none;
+  /* user-select: none; */
   /* Non-prefixed version */
 }
 
 
 .scrollbar {
   overflow-y: auto;
+}
+
+
+img,
+Image {
+  -webkit-user-drag: none;
+  /* Safari */
+  user-drag: none;
+  /* Other modern browsers */
 }
 
 /* For webkit-based browsers (Chrome, Safari) */
