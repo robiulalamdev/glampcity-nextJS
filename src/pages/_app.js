@@ -10,9 +10,19 @@ import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from 'next/router'
+import ErrorPage from './404'
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
+
+  const router = useRouter()
+  console.log(router);
+
+  if (router.isFallback) {
+    return setLoading(true)
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
   });
@@ -25,19 +35,25 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Provider store={store}>
-        <AuthProvider>
-          <TopNavber />
-          <Navber />
-          {
-            loading ? < SmallLoader /> : <Component {...pageProps} />
-          }
-          <Footer />
+      {
+        router.pathname === "/404" ? <ErrorPage statusCode={404} />
+          :
+          (
+            <Provider store={store}>
+              <AuthProvider>
+                <TopNavber />
+                <Navber />
+                {
+                  loading ? < SmallLoader /> : <Component {...pageProps} />
+                }
+                <Footer />
 
-          <PremiumServiceBtn />
-          <CartBtn />
-        </AuthProvider>
-      </Provider>
+                <PremiumServiceBtn />
+                <CartBtn />
+              </AuthProvider>
+            </Provider>
+          )
+      }
     </>
   )
 }

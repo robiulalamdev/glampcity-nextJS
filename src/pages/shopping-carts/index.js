@@ -3,7 +3,7 @@ import PlaceOrder from '@/components/Shopping-carts-Components/PlaceOrder/PlaceO
 import ProceedCheckout from '@/components/Shopping-carts-Components/ProceedCheckout/ProceedCheckout';
 import { useContext, useEffect, useState } from 'react';
 import RippleButton from '../buttons';
-import PrivateRoute from '@/PriveteRoutes/PriveteRoute';
+import PrivateRoute from '@/PrivateRoutes/PrivateRoute';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const ShoppingCarts = () => {

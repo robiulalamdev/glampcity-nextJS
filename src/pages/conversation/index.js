@@ -1,6 +1,7 @@
 import ChatBox from '@/components/ConversationCompo/ChatBox';
 import ConversationChat from '@/components/ConversationCompo/ConversationChat';
 import { useAuth } from '@/Hooks/getAuth';
+import PrivateRoute from '@/PrivateRoutes/PrivateRoute';
 import { setOnlineUsers, setReceiverData } from '@/Slices/conversationSlice';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,29 +43,31 @@ const Conversation = () => {
             .then(data => setChats(data))
     })
     return (
-        <section className='max-w-[1440px] mx-auto relative px-4 overflow-y-hidden'>
-            <div className='flex justify-between w-full'>
-                <div
-                    className={`absolute md:relative z-50 md:z-10 duration-300 min-h-full overflow-y-auto max-h-[450px] pt-2 px-2 hidden md:block flex flex-col items-start gap-3 w-72 ${open ? 'left-0' : '-left-[300px]'}`}>
-                    <input className='px-3 w-full h-10 border rounded focus:outline-none' type="search" name="search" id="" placeholder='Search Your Chat' />
-                    {
-                        chats?.map((chat, i) => <div onClick={() => handleReceiverData(chat)}>
-                            <ConversationChat key={i} data={chat} currentUser={user} />
-                        </div>)
-                    }
-                </div>
+        <PrivateRoute>
+            <section className='max-w-[1440px] mx-auto relative px-4 overflow-y-hidden'>
+                <div className='flex justify-between w-full'>
+                    <div
+                        className={`absolute md:relative z-50 md:z-10 duration-300 min-h-full overflow-y-auto max-h-[450px] pt-2 px-2 hidden md:block flex flex-col items-start gap-3 w-72 ${open ? 'left-0' : '-left-[300px]'}`}>
+                        <input className='px-3 w-full h-10 border rounded focus:outline-none' type="search" name="search" id="" placeholder='Search Your Chat' />
+                        {
+                            chats?.map((chat, i) => <div onClick={() => handleReceiverData(chat)}>
+                                <ConversationChat key={i} data={chat} currentUser={user} />
+                            </div>)
+                        }
+                    </div>
 
-                <div className='w-full h-full bg-blue-50'>
-                    {
-                        receiverData ? <ChatBox chat={currentChat} currentUser={user} />
-                            :
-                            <div className='min-h-[520px] w-full flex justify-center items-center'>
-                                <h1 className='text-center font-bold text-2xl'>Please Select Your Chat</h1>
-                            </div>
-                    }
+                    <div className='w-full h-full bg-blue-50'>
+                        {
+                            receiverData ? <ChatBox chat={currentChat} currentUser={user} />
+                                :
+                                <div className='min-h-[520px] w-full flex justify-center items-center'>
+                                    <h1 className='text-center font-bold text-2xl'>Please Select Your Chat</h1>
+                                </div>
+                        }
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </PrivateRoute>
     );
 };
 
