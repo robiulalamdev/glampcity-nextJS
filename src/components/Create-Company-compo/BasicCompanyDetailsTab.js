@@ -1,18 +1,38 @@
-import { setShowForm } from '@/Slices/createCompanySlice';
+import { setBasicCompanyDetailsData, setShowForm, setShowTabsData } from '@/Slices/createCompanySlice';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 const BasicCompanyDetailsTab = () => {
-    const { businessType } = useSelector((state) => state.createCompanySlice)
+    const { businessType, basicCompanyDetailsData } = useSelector((state) => state.createCompanySlice)
+    const {
+        company_name,
+        location_of_registration,
+        street,
+        city,
+        country,
+        postal_code,
+        main_product1,
+        main_product2,
+        main_product3,
+        main_product4,
+        company_registered,
+        legal_owner,
+    } = basicCompanyDetailsData;
     const { register, handleSubmit, formState: { errors } } = useForm()
     const dispatch = useDispatch()
 
     const handleCompanyDetails = (data) => {
-        console.log(data);
+        if (data) {
+            dispatch(setBasicCompanyDetailsData(data))
+            if (basicCompanyDetailsData) {
+                dispatch(setShowTabsData("2"))
+            }
+        }
+        // console.log(data);
     }
 
-    console.log(businessType);
+    // console.log(basicCompanyDetailsData);
     // onClick={() => dispatch(setShowTabsData(type?.id))}
     return (
         <form onSubmit={handleSubmit(handleCompanyDetails)} className=''>
@@ -26,7 +46,8 @@ const BasicCompanyDetailsTab = () => {
                     <div className='grid grid-cols-1 gap-1'>
                         <input {...register('company_name', { required: 'Company Name is required' })}
                             className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.company_name ? 'border-rose-600' : 'border-blue-400'}`}
-                            type="text" name="company_name" placeholder='Enter Company Name' />
+                            type="text" name="company_name" placeholder='Enter Company Name'
+                            defaultValue={company_name && company_name} />
                     </div>
                 </div>
 
@@ -39,7 +60,8 @@ const BasicCompanyDetailsTab = () => {
                     <div className='grid grid-cols-1 gap-1'>
                         <input {...register('location_of_registration', { required: 'Location is required' })}
                             className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.location_of_registration ? 'border-rose-600' : 'border-blue-400'}`}
-                            type="text" name="location_of_registration" placeholder='Enter Country/ Region' />
+                            type="text" name="location_of_registration" placeholder='Enter Country/ Region'
+                            defaultValue={location_of_registration && location_of_registration} />
                     </div>
                 </div>
 
@@ -55,7 +77,8 @@ const BasicCompanyDetailsTab = () => {
                             </div>
 
                             <input {...register('street', { required: 'Street is required' })}
-                                className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.street ? 'border-rose-600' : 'border-blue-400'}`} type="text" name="street" placeholder='Enter Street Address' />
+                                className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.street ? 'border-rose-600' : 'border-blue-400'}`} type="text" name="street" placeholder='Enter Street Address'
+                                defaultValue={street && street} />
                         </div>
 
                         <div className='flex flex-col md:flex-row md:items-center md:gap-1 w-full'>
@@ -65,7 +88,8 @@ const BasicCompanyDetailsTab = () => {
 
                             <input {...register('city', { required: 'city is required' })}
                                 className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.city ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="city" placeholder='Enter City Address' />
+                                type="text" name="city" placeholder='Enter City Address'
+                                defaultValue={city && city} />
                         </div>
 
                         <div className='flex flex-col md:flex-row md:items-center md:gap-1 w-full'>
@@ -74,7 +98,8 @@ const BasicCompanyDetailsTab = () => {
                             </div>
 
                             <input {...register('country', { required: 'Country is required' })}
-                                className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.country ? 'border-rose-600' : 'border-blue-400'}`} type="text" name="country" placeholder='Enter Country Name' />
+                                className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.country ? 'border-rose-600' : 'border-blue-400'}`} type="text" name="country" placeholder='Enter Country Name'
+                                defaultValue={country && country} />
                         </div>
 
                         <div className='flex flex-col md:flex-row md:items-center md:gap-1 w-full'>
@@ -82,13 +107,14 @@ const BasicCompanyDetailsTab = () => {
                                 <span className='text-sm'>Postal code</span>
                             </div>
                             <input {...register('postal_code', { required: 'postal code is required' })}
-                                className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.postal_code ? 'border-rose-600' : 'border-blue-400'}`} type="text" name="postal_code" placeholder='Enter Postal Code' />
+                                className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.postal_code ? 'border-rose-600' : 'border-blue-400'}`} type="text" name="postal_code" placeholder='Enter Postal Code'
+                                defaultValue={postal_code && postal_code} />
                         </div>
                     </div>
                 </div>
 
                 <div className='flex flex-col md:flex-row gap-2 w-full'>
-                    <div className='flex md:items-center md:justify-end w-80'>
+                    <div className='flex md:items-start md:justify-end w-80'>
                         <p className='text-left font-bold text-gray-900'><span className='text-primary'>*</span>Main Product:</p>
                     </div>
 
@@ -98,19 +124,23 @@ const BasicCompanyDetailsTab = () => {
 
                             <input {...register('main_product1', { required: 'main product is required' })}
                                 className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.main_product1 ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="main_product1" placeholder='Product No 1' />
+                                type="text" name="main_product1" placeholder='Product No 1'
+                                defaultValue={main_product1 && main_product1} />
 
                             <input {...register('main_product2', { required: 'main product is required' })}
                                 className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.main_product2 ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="main_product2" placeholder='Product No 2' />
+                                type="text" name="main_product2" placeholder='Product No 2'
+                                defaultValue={main_product2 && main_product2} />
 
                             <input {...register('main_product3', { required: 'main product is required' })}
                                 className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.main_product3 ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="main_product3" placeholder='Product No 3' />
+                                type="text" name="main_product3" placeholder='Product No 3'
+                                defaultValue={main_product3 && main_product3} />
 
                             <input {...register('main_product4', { required: 'main product is required' })}
                                 className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.main_product4 ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="main_product4" placeholder='Product No 4' />
+                                type="text" name="main_product4" placeholder='Product No 4'
+                                defaultValue={main_product4 && main_product4} />
                         </div>
 
                     </div>
@@ -124,7 +154,8 @@ const BasicCompanyDetailsTab = () => {
                     <div className='grid grid-cols-1 gap-1'>
                         <input {...register('company_registered', { required: 'Company Registered is required' })}
                             className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.company_registered ? 'border-rose-600' : 'border-blue-400'}`}
-                            type="text" name="company_registered" placeholder='Enter Your Company Registered' />
+                            type="text" name="company_registered" placeholder='Enter Your Company Registered'
+                            defaultValue={company_registered && company_registered} />
                     </div>
                 </div>
 
@@ -136,7 +167,8 @@ const BasicCompanyDetailsTab = () => {
                     <div className='grid grid-cols-1 gap-1'>
                         <input {...register('legal_owner', { required: 'Company Name is required' })}
                             className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.legal_owner ? 'border-rose-600' : 'border-blue-400'}`}
-                            type="text" name="legal_owner" placeholder='Enter Legal Owner' />
+                            type="text" name="legal_owner" placeholder='Enter Legal Owner'
+                            defaultValue={legal_owner && legal_owner} />
                     </div>
                 </div>
 

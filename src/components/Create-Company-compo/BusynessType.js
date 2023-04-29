@@ -30,24 +30,39 @@ const BusynessType = () => {
                 <div className='grid grid-cols-1 gap-3'>
 
                     <div className='flex items-center gap-2 cursor-pointer'>
-                        <input className='cursor-pointer' type="checkbox" name="manufacture" id="manufacture" />
-                        <label onClick={() => setType1(type1 ? "" : "Manufacture")} className='cursor-pointer' htmlFor="manufacture">Manufacture</label>
+                        <input className='cursor-pointer' type="checkbox"
+                            checked={businessType.includes("Manufacture") || type1 ? true : false}
+                            name="manufacture" id="manufacture" />
+                        <label onClick={() => setType1(type1 ? "" : "Manufacture")}
+                            className='cursor-pointer' htmlFor="manufacture">Manufacture</label>
                     </div>
                     <div className='flex items-center gap-2 cursor-pointer'>
-                        <input className='cursor-pointer' type="checkbox" name="tradingCompany" id="tradingCompany" />
-                        <label onClick={() => setType2(type2 ? "" : "Trading Company")} className='cursor-pointer' htmlFor="tradingCompany">Trading Company</label>
+                        <input className='cursor-pointer' type="checkbox"
+                            checked={businessType.includes("Trading Company") || type2 ? true : false}
+                            name="tradingCompany" id="tradingCompany" />
+                        <label onClick={() => setType2(type2 ? "" : "Trading Company")}
+                            className='cursor-pointer' htmlFor="tradingCompany">Trading Company</label>
                     </div>
                     <div className='flex items-center gap-2 cursor-pointer'>
-                        <input className='cursor-pointer' type="checkbox" name="agent" id="agent" />
-                        <label onClick={() => setType3(type3 ? "" : "Agent")} className='cursor-pointer' htmlFor="agent">Agent</label>
+                        <input className='cursor-pointer' type="checkbox"
+                            checked={businessType.includes("Agent") || type3 ? true : false}
+                            name="agent" id="agent" />
+                        <label onClick={() => setType3(type3 ? "" : "Agent")}
+                            className='cursor-pointer' htmlFor="agent">Agent</label>
                     </div>
                     <div className='flex items-center gap-2 cursor-pointer'>
-                        <input className='cursor-pointer' type="checkbox" name="businessService" id="businessService" />
-                        <label onClick={() => setType4(type4 ? "" : "Business Service")} className='cursor-pointer' htmlFor="businessService">Business Service</label>
+                        <input className='cursor-pointer' type="checkbox"
+                            checked={businessType.includes("Business Service") || type4 ? true : false}
+                            name="businessService" id="businessService" />
+                        <label onClick={() => setType4(type4 ? "" : "Business Service")}
+                            className='cursor-pointer' htmlFor="businessService">Business Service</label>
                     </div>
                     <div className='flex items-center gap-2 cursor-pointer'>
-                        <input className='cursor-pointer' type="checkbox" name="other" id="other" />
-                        <label onClick={() => setType5(type5 ? "" : "Other")} className='cursor-pointer' htmlFor="other">Other</label>
+                        <input className='cursor-pointer' type="checkbox"
+                            checked={businessType.includes("Other") || type5 ? true : false}
+                            name="other" id="other" />
+                        <label onClick={() => setType5(type5 ? "" : "Other")}
+                            className='cursor-pointer' htmlFor="other">Other</label>
                     </div>
 
                 </div>

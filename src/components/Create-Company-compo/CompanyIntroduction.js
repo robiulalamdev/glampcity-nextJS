@@ -2,37 +2,90 @@ import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import upperArrow from '../../assets/images/create-company-images/upperArrow.png'
-import { setShowTabsData } from '@/Slices/createCompanySlice';
-import { useDispatch } from 'react-redux';
+import { setCompanyIntroductionData, setShowTabsData } from '@/Slices/createCompanySlice';
+import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from "react-datepicker";
 
-const months = ["January", "February"]
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 
 const CompanyIntroduction = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const {
+        businessType,
+        basicCompanyDetailsData,
+        manufacturingCapabilityData,
+        companyIntroductionData
+    } = useSelector((state) => state.createCompanySlice)
+    const {
+
+    } = companyIntroductionData;
+
+    const [month, setMonth] = useState("")
+    const [year, setYear] = useState("")
     const [companyLogo, setCompanyLogo] = useState(null)
     const [companyPhotos, setCompanyPhotos] = useState([])
+    const [tradeShowPhotos, setTradeShowPhotos] = useState([])
     const dispatch = useDispatch()
 
-    console.log(companyPhotos);
-
-    const [startDate, setStartDate] = useState(new Date());
-
-    const companyLogoRef = useRef()
-    const companyPhotoRef = useRef()
-
     const handleCompanyDetails = (data) => {
+        if (companyLogo) {
+            data.company_logo = companyLogo
+        }
+        if (companyPhotos) {
+            data.company_photos = companyPhotos
+        }
+        if (tradeShowPhotos) {
+            data.trade_show_photos = tradeShowPhotos
+        }
+        if (data) {
+            dispatch(setCompanyIntroductionData(data))
+            if (companyIntroductionData) {
+
+            }
+        }
         console.log(data);
     }
 
 
+    const companyLogoRef = useRef()
+    const companyPhotoRef = useRef()
+    const tradeShowPhotoRef = useRef()
+
+    // handle company logo with on click
     const handleCompanyLogo = () => {
         companyLogoRef.current.click()
     }
+    const handleGetCompanyLogo = (file) => {
+        if (file) {
+            setCompanyLogo(file)
+        }
+    }
 
+    // handle company photos
     const handleCompanyPhoto = () => {
         companyPhotoRef.current.click()
     }
+
+    const handleGetCompanyPhoto = (file) => {
+        if (file) {
+            setCompanyPhotos([...companyPhotos, file])
+        }
+    }
+
+
+    // handle trade show photos
+    const handleTradeShowPhoto = () => {
+        tradeShowPhotoRef.current.click()
+    }
+
+    const handleGetTradeShowPhoto = (file) => {
+        if (file) {
+            setTradeShowPhotos([...tradeShowPhotos, file])
+        }
+    }
+
+    // console.log(companyPhotos);
 
     return (
         <form onSubmit={handleSubmit(handleCompanyDetails)} className=''>
@@ -57,11 +110,11 @@ const CompanyIntroduction = () => {
                         <div className='flex flex-col justify-between items-center gap-4 h-40'>
                             <div className='relative flex justify-center items-center w-28 h-10 border border-primary rounded'>
                                 <span className='text-center'>Browse</span>
-                                <input ref={companyLogoRef} onChange={(e) => setCompanyLogo(e.target.files[0])} className='absolute w-full h-full opacity-0' type="file" name="image" />
+                                <input ref={companyLogoRef} onChange={(e) => handleGetCompanyLogo(e.target.files[0])} className='absolute w-full h-full opacity-0' type="file" name="image" accept="image/*" />
                             </div>
-                            <button onClick={() => handleCompanyLogo()} className='relative flex justify-center items-center w-28 h-10'>
+                            <span onClick={() => handleCompanyLogo()} className='relative flex justify-center items-center w-28 h-10'>
                                 <span className='text-primary text-center'>Browse</span>
-                            </button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -70,7 +123,7 @@ const CompanyIntroduction = () => {
                     <div className='flex md:items-start md:justify-end w-48'>
                         <h1 className='md:col-span-2 text-left font-bold text-gray-900'>Detailed Company:</h1>
                     </div>
-                    <textarea className='w-full md:w-96 h-48 p-4 border border-blue-400 focus:border-primary rounded focus:outline-none resize-none' name="detailedCompany" placeholder='Detailed Company' ></textarea>
+                    <textarea className='w-full md:w-96 h-48 p-4 border border-blue-400 focus:border-primary rounded focus:outline-none resize-none' name="detailed_company" placeholder='Detailed Company' ></textarea>
                 </div>
 
                 <div className='flex flex-col md:flex-row md:gap-2 w-full'>
@@ -82,25 +135,31 @@ const CompanyIntroduction = () => {
                             <div className='relative flex justify-center items-center w-32 h-10 border border-primary rounded'>
                                 <span className='text-center'>Browse</span>
                                 <input ref={companyPhotoRef}
-                                    onChange={(e) => setCompanyPhotos([...companyPhotos, e.target.files[0]])}
-                                    className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
+                                    onChange={(e) => handleGetCompanyPhoto(e.target.files[0])}
+                                    className='absolute w-full h-full opacity-0'
+                                    accept="image/*" type="file" name="image" id="" />
                             </div>
-                            <button onClick={() => handleCompanyPhoto()} className='relative flex justify-center items-center w-32 h-10'>
+                            <span onClick={() => handleCompanyPhoto()} className='relative flex justify-center items-center w-32 h-10'>
                                 <span className='text-primary text-center'>Browse</span>
-                            </button>
+                            </span>
                         </div>
 
                         <hr className='border border-dashed border-blue-400 my-4' />
-                        <div className='flex items-center gap-4'>
-                            <div onClick={() => handleCompanyPhoto()} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
-                                <Image className='w-full h-full' src={upperArrow} alt="" />
-                            </div>
-                            <div onClick={() => handleCompanyPhoto()} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
-                                <Image className='w-full h-full' src={upperArrow} alt="" />
-                            </div>
-                            <div onClick={() => handleCompanyPhoto()} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
-                                <Image className='w-full h-full' src={upperArrow} alt="" />
-                            </div>
+                        <div className='grid grid-cols-3 gap-3'>
+                            {
+                                companyIntroductionData?.company_photos && companyIntroductionData?.company_photos?.map((photo, i) => (
+                                    <div key={i} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
+                                        <img className='w-full h-full' src={photo && URL?.createObjectURL(photo)} alt="" />
+                                    </div>
+                                ))
+                            }
+                            {
+                                companyPhotos && companyPhotos?.map((photo, i) => (
+                                    <div key={i} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
+                                        <img className='w-full h-full' src={photo && URL?.createObjectURL(photo)} alt="" />
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
 
@@ -115,9 +174,9 @@ const CompanyIntroduction = () => {
                     </div>
 
                     <div className='grid grid-cols-1 gap-1'>
-                        <input {...register('cTradeName', { required: 'Company Name is required' })}
-                            className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.cTradeName ? 'border-rose-600' : 'border-blue-400'}`}
-                            type="text" name="cTradeName" placeholder='CTrade show name' />
+                        <input {...register('ctrade_show_name', { required: 'Company Name is required' })}
+                            className={`w-full md:w-96 h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.ctrade_show_name ? 'border-rose-600' : 'border-blue-400'}`}
+                            type="text" name="ctrade_show_name" placeholder='CTrade show name' />
                     </div>
                 </div>
 
@@ -127,18 +186,23 @@ const CompanyIntroduction = () => {
                         <p className='text-left font-bold text-gray-900'><span className='text-rose-600'>*</span>Date Attended:</p>
                     </div>
 
-                    <div className='grid grid-cols-2 gap-2'>
+                    <div className={`relative w-full md:w-96 h-10 grid grid-cols-2 gap-2`}>
+
+                        <input {...register('date_attended', { required: 'Year is required' })}
+                            className='absolute opacity-0'
+                            type="text" name='date_attended'
+                            value={month && year ? `${month}/${year}` : ""} />
 
                         <div className="dropdown w-full">
-                            <input {...register('year', { required: 'Year is required' })}
-                                className={`w-full md:w-[188px] h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.year ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="year" id="dropdown-btn" placeholder='Month' />
+                            <input
+                                className={`w-full md:w-[188px] h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.date_attended ? 'border-rose-600' : 'border-blue-400'}`}
+                                type="text" name="year" id="dropdown-btn" readOnly value={month} placeholder='Month' />
 
                             <ul className="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
-                            grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md">
+    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md">
                                 {
                                     months?.map((item, i) => (
-                                        <span key={i} className="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
+                                        <span onClick={() => setMonth(item)} key={i} className="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
                                             <span>{item}</span>
                                         </span>
                                     ))
@@ -147,15 +211,15 @@ const CompanyIntroduction = () => {
                             </ul>
                         </div>
                         <div className="dropdown w-full">
-                            <input {...register('year', { required: 'Year is required' })}
-                                className={`w-full md:w-[188px] h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.year ? 'border-rose-600' : 'border-blue-400'}`}
-                                type="text" name="year" id="dropdown-btn" placeholder='Year' />
+                            <input
+                                className={`w-full md:w-[188px] h-10 px-3 border focus:border-primary rounded focus:outline-none ${errors?.date_attended ? 'border-rose-600' : 'border-blue-400'}`}
+                                type="text" name="year" id="dropdown-btn" readOnly value={year} placeholder='Year' />
 
                             <ul className="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
-                            grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md">
+    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md">
                                 {
                                     months?.map((item, i) => (
-                                        <span key={i} className="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
+                                        <span onClick={() => setYear(item)} key={i} className="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
                                             <span>{item}</span>
                                         </span>
                                     ))
@@ -194,25 +258,32 @@ const CompanyIntroduction = () => {
                         <div className='flex justify-between items-center gap-4'>
                             <div className='relative flex justify-center items-center w-32 h-10 border border-primary rounded'>
                                 <span className='text-center'>Browse</span>
-                                <input className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
+                                <input ref={tradeShowPhotoRef}
+                                    onChange={(e) => handleGetTradeShowPhoto(e.target.files[0])}
+                                    className='absolute w-full h-full opacity-0'
+                                    accept="image/*" type="file" name="image" />
                             </div>
-                            <div className='relative flex justify-center items-center w-32 h-10'>
+                            <span onClick={() => handleTradeShowPhoto()} className='relative flex justify-center items-center w-32 h-10'>
                                 <span className='text-primary text-center'>Browse</span>
-                                <input className='absolute w-full h-full opacity-0' type="file" name="image" id="" />
-                            </div>
+                            </span>
                         </div>
 
                         <hr className='border border-dashed border-blue-400 my-4' />
-                        <div className='flex items-center gap-4'>
-                            <div className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
-                                <Image className='w-full h-full' src={upperArrow} alt="" />
-                            </div>
-                            <div className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
-                                <Image className='w-full h-full' src={upperArrow} alt="" />
-                            </div>
-                            <div className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
-                                <Image className='w-full h-full' src={upperArrow} alt="" />
-                            </div>
+                        <div className='grid grid-cols-3 gap-3'>
+                            {
+                                companyIntroductionData?.trade_show_photos && companyIntroductionData?.trade_show_photos?.map((photo, i) => (
+                                    <div key={i} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
+                                        <img className='w-full h-full' src={photo && URL?.createObjectURL(photo)} alt="" />
+                                    </div>
+                                ))
+                            }
+                            {
+                                tradeShowPhotos && tradeShowPhotos?.map((photo, i) => (
+                                    <div key={i} className='w-20 md:w-28 h-20 md:h-28 flex justify-center items-center bg-gray-200 p-6'>
+                                        <img className='w-full h-full' src={photo && URL?.createObjectURL(photo)} alt="" />
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
 
