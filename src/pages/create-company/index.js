@@ -19,16 +19,16 @@ const CreateCompany = () => {
                 }
 
                 {
-                    showForm === '2' && <div>
-                        <div className='flex items-center gap-2'>
+                    showForm === '2' && <div className='w-full'>
+                        <div className='flex flex-col md:flex-row md:items-center gap-2'>
                             <h1 className='font-semibold'>Business type selected:</h1>
                             <div className='flex items-center gap-2'>
                                 {
-                                    businessType?.map((type, i) => <span key={i} className='text-primary' >{type}</span>)
+                                    businessType?.map((type, i) => <span key={i} className='text-primary' >{type},</span>)
                                 }
                             </div>
                         </div>
-                        <div className='flex items-center flex-wrap gap-4 mt-6 cursor-pointer'>
+                        <div className='flex items-center flex-wrap gap-4 mt-6 cursor-pointer w-full'>
                             {
                                 busynessTypeTabs?.map(type => (
                                     <div onClick={() => dispatch(setShowTabsData(type?.id))} className={`h-8 w-fit

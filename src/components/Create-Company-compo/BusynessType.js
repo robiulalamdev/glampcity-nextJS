@@ -14,7 +14,7 @@ const BusynessType = () => {
 
     // console.log(type1, type2, type3, type4, type5);
     const handleBusinessType = () => {
-        const types = [type1, type2, type3, type4, type5]
+        const types = [type1 && type1, type2 && type2, type3 && type3, type4 && type4, type5 && type5].filter(Boolean);
         dispatch(setBusinessType(types))
         dispatch(setShowForm('2'))
     }

@@ -12,7 +12,7 @@ const BasicCompanyDetailsTab = () => {
         console.log(data);
     }
 
-    // console.log(businessType);
+    console.log(businessType);
     // onClick={() => dispatch(setShowTabsData(type?.id))}
     return (
         <form onSubmit={handleSubmit(handleCompanyDetails)} className=''>
