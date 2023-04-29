@@ -48,24 +48,24 @@ const ProductCard = ({ product }) => {
         }
     }
 
-    const handleAddWishlist = (product) => {
-        console.log(product);
+    const handleAddWishlist = (productData) => {
+        const wishlistProduct = {
+            productId: productData?.productId ? productData?.productId : product?._id,
+            userId: user?._id,
+            title: productData?.title,
+            description: productData?.description,
+            price: productData?.price,
+            images: productData?.images,
+        }
+        console.log(wishlistProduct);
+
         if (user?._id) {
             fetch(`http://localhost:5055/api/wishlist`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({
-                    productId: product?.productId ? product?.productId : product?._id,
-                    userId: user?._id,
-                    sku: product?.sku,
-                    title: product?.title,
-                    unit: product?.unit,
-                    description: product?.description,
-                    price: product?.price,
-                    image: product?.image,
-                })
+                body: JSON.stringify(wishlistProduct)
             })
                 .then(res => res.json())
                 .then(data => {
