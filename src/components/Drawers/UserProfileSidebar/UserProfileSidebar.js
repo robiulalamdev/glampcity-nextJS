@@ -34,7 +34,7 @@ const UserProfileSidebar = () => {
                     </div>
                     <div className='flex flex-col items-start'>
                         <span className='text-black uppercase font-bold'>{user?.name}</span>
-                        <Link href="/my-profile"
+                        <Link href="/my-account"
                             onClick={() => dispatch(setOpenUserProfileSidebar(false))}
                             className='text-blue-600 text-sm'>View Profile</Link>
                     </div>
@@ -49,6 +49,15 @@ const UserProfileSidebar = () => {
                         <span className="ml-2 text-sm tracking-wide truncate">Dashboard</span>
                     </Link>
                 </li>
+
+                <Link href="/my-account">
+                    <span onClick={() => dispatch(setOpenUserProfileSidebar(false))} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        <span className="inline-flex justify-center items-center ml-4">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </span>
+                        <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
+                    </span>
+                </Link>
 
                 <li>
                     <Link href="/all-orders"
@@ -116,14 +125,7 @@ const UserProfileSidebar = () => {
                         <div className="text-sm font-light tracking-wide text-gray-500">Settings</div>
                     </div>
                 </li> */}
-                <Link href="/my-profile">
-                    <span onClick={() => dispatch(setOpenUserProfileSidebar(false))} className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
-                        <span className="inline-flex justify-center items-center ml-4">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        </span>
-                        <span className="ml-2 text-sm tracking-wide truncate">Profile</span>
-                    </span>
-                </Link>
+
                 <li>
                     <a href="#" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                         <span className="inline-flex justify-center items-center ml-4">

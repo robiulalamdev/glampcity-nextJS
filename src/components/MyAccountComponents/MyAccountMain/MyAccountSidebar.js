@@ -57,7 +57,7 @@ const MyAccountSidebar = () => {
                         tabs.map((tab, i) => (
                             <button onClick={() => handleRoute(tab)}
                                 className={`w-full h-10 hover:bg-slate-400 flex items-center gap-2 px-4
-                            ${router?.pathname.includes(tab?.url) ? "bg-primary text-white" : "bg-white hover:bg-slate-300 duration-100"}`}>
+                            ${router?.pathname.includes(tab?.url) ? "bg-primary text-white" : "bg-white hover:bg-slate-100 duration-100"}`}>
                                 {tab.icon}
                                 <span>{tab?.title}</span>
                             </button>

@@ -1,5 +1,6 @@
 {
   "name": "client-side",
+  "homepage": "https://theglampcity.com/",
   "version": "0.1.0",
   "private": true,
   "scripts": {

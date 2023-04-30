@@ -1,23 +1,27 @@
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import { setNextIncrease } from '@/Slices/loginRegisterSlice';
 import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const Supplier = () => {
     const { user } = useContext(AuthContext)
+    const dispatch = useDispatch()
     const router = useRouter()
 
-    const [data1, setData1] = useState('')
-    const [data2, setData2] = useState('')
-    const [data3, setData3] = useState('')
-    const [data4, setData4] = useState('')
-    const [data5, setData5] = useState('')
-    const [data6, setData6] = useState('')
-    const [data7, setData7] = useState('')
-    const [data8, setData8] = useState('')
+    const [data1, setData1] = useState(user && user?.supplier && user?.supplier.includes("Manufacturer") ? "Manufacturer" : "")
+    const [data2, setData2] = useState(user && user?.supplier && user?.supplier.includes("Online shop") ? "Online shop" : "")
+    const [data3, setData3] = useState(user && user?.supplier && user?.supplier.includes("Trade company") ? "Trade company" : "")
+    const [data4, setData4] = useState(user && user?.supplier && user?.supplier.includes("Retailer") ? "Retailer" : "")
+    const [data5, setData5] = useState(user && user?.supplier && user?.supplier.includes("Distributor") ? "Distributor" : "")
+    const [data6, setData6] = useState(user && user?.supplier && user?.supplier.includes("Buying office") ? "Buying office" : "")
+    const [data7, setData7] = useState(user && user?.supplier && user?.supplier.includes("Individual") ? "Individual" : "")
+    const [data8, setData8] = useState(user && user?.supplier && user?.supplier.includes("Other") ? "Other" : "")
     // console.log(data1);
 
     const sendData = () => {
-        const supplier = [data1, data2, data3, data4, data5, data6, data7, data8];
+        const supplier = [data1, data2, data3, data4, data5, data6, data7, data8].filter(Boolean)
+
         fetch(`http://localhost:5055/api/user/${user?._id}`, {
             method: 'PATCH',
             headers: {
@@ -27,8 +31,8 @@ const Supplier = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                router.push('/home')
+                dispatch(setNextIncrease('1'))
+                router.push('/my-account/personalize')
             })
     }
     return (
