@@ -8,24 +8,28 @@ const MyDetailsPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
 
     const { name, email, password, phone, country, company } = user;
-    console.log(user);
+    // console.log(user);
 
     const [isEditable, setIsEditable] = useState(false);
 
-    function handleEditClick() {
-        setIsEditable(true);
-    }
-
-    function handleSaveClick() {
-        setIsEditable(false);
-
-        // Save the updated user info to the server here
-    }
-
     // handle update user data
     const handleUpdate = (data) => {
-        console.log(data);
-        setIsEditable(false)
+        fetch(`http://localhost:5055/api/user/${user?._id}`, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                if (data?.update) {
+                    userRefetch()
+                    setIsEditable(false)
+                }
+                setIsEditable(false)
+            })
     }
 
 
@@ -40,7 +44,7 @@ const MyDetailsPage = () => {
 
                 <form onSubmit={handleSubmit(handleUpdate)}>
 
-                    <div className="flex items-center gap-2 my-6">
+                    <div className="flex items-center gap-2 my-6 md:hidden">
                         <div className='w-16 h-16 rounded-full'>
                             <img className="object-cover w-16 h-16 rounded-full"
                                 src={user?.image ? user?.image : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"} alt="avatar" />
@@ -137,7 +141,7 @@ const MyDetailsPage = () => {
 
                         {!isEditable && (
                             <div
-                                onClick={handleEditClick}
+                                onClick={() => setIsEditable(true)}
                                 className="w-24 h-10 flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold px-2 rounded cursor-pointer"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -148,7 +152,7 @@ const MyDetailsPage = () => {
                         )}
                         {isEditable && (
                             <div
-                                onClick={handleSaveClick}
+                                onClick={() => setIsEditable(false)}
                                 className="w-24 h-10 flex items-center justify-center bg-rose-500 hover:bg-rose-700 text-white font-semibold px-2 rounded cursor-pointer"
                             >
                                 CANCEL
