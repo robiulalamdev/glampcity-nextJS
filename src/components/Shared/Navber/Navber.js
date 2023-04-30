@@ -13,11 +13,16 @@ import { useAuth } from '@/Hooks/getAuth';
 import { setOpenUserProfileSidebar } from '@/Slices/authSlice';
 import UserProfileSidebar from '@/components/Drawers/UserProfileSidebar/UserProfileSidebar';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import { setOpenMyAccountSidebar } from '@/Slices/myAccountSlice';
+import { useRouter } from 'next/router';
 const Navber = () => {
     const { user } = useContext(AuthContext)
     const { wishlistItems, cartItems } = useSelector((state) => state.controllerSlice)
+    const { openMyAccountSidebar } = useSelector((state) => state.myAccountSlice)
     const dispatch = useDispatch()
     // const { user } = useAuth()
+
+    const { pathname } = useRouter()
 
     const [open, setOpen] = useState(false)
 
@@ -36,8 +41,21 @@ const Navber = () => {
     return (
         <nav ref={navberRef} className='bg-white py-4 uppercase border-b'>
             <div className='relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 md:px-8 max-w-[1440px] mx-auto'>
-                <div className='flex-grow'>
+                <div className='flex-grow flex items-center gap-4'>
                     <Link href='/'><Image className='w-10 md:w-16' src={logo} alt="navberImage" /></Link>
+
+                    <button onClick={() => dispatch(setOpenMyAccountSidebar(!openMyAccountSidebar))}
+                        className={pathname?.includes("my-account") ? "lg:hidden" : "hidden"} >
+                        {
+                            openMyAccountSidebar ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                                :
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+                        }
+                    </button>
                 </div>
                 <div className='hidden lg:block'>
                     <Link href='/home' className='text-black hover:text-primary duration-100 font-semibold'>Home</Link>
