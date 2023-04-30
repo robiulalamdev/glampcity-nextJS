@@ -56,7 +56,7 @@ const index = () => {
             role: role,
         }
         // console.log(newUser);
-        fetch(`http://localhost:5055/api/user/register`, {
+        fetch(`https://server.theglampcity.com/api/user/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

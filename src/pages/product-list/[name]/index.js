@@ -15,7 +15,7 @@ const ParentByProducts = ({ name }) => {
 
 
     const handleFetchData = (endPoint) => {
-        fetch(`http://localhost:5055/api/${endPoint}`)
+        fetch(`https://server.theglampcity.com/api/${endPoint}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);
@@ -24,7 +24,7 @@ const ParentByProducts = ({ name }) => {
     }
 
     const handleAllProductsOfCTG = () => {
-        fetch(`http://localhost:5055/api/products/cat/${name}`)
+        fetch(`https://server.theglampcity.com/api/products/cat/${name}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);

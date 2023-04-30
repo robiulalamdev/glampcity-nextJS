@@ -11,7 +11,7 @@ const WishlistDrawer = () => {
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`http://localhost:5055/api/wishlist/${user?._id}`)
+        fetch(`https://server.theglampcity.com/api/wishlist/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -26,7 +26,7 @@ const WishlistDrawer = () => {
 
 
     const handleWishlistRemove = (id) => {
-        fetch(`http://localhost:5055/api/wishlist/${id}`, {
+        fetch(`https://server.theglampcity.com/api/wishlist/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

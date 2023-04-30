@@ -9,7 +9,7 @@ const TopRanking = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`http://localhost:5055/api/top-ranking-product`)
+        fetch(`https://server.theglampcity.com/api/top-ranking-product`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setTopRankingProducts(data));

@@ -26,7 +26,7 @@ const ChangeAddressModal = ({ closeModal, sucsess, address, refetch }) => {
             }
 
             // console.log(newData);
-            fetch(`http://localhost:5055/api/address/${address?._id}`, {
+            fetch(`https://server.theglampcity.com/api/address/${address?._id}`, {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json"

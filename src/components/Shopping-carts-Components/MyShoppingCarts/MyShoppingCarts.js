@@ -23,7 +23,7 @@ const MyShoppingCarts = ({ nextHandle }) => {
     }
 
     const handleGetCartProducts = () => {
-        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
+        fetch(`https://server.theglampcity.com/api/cartProduct/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -40,7 +40,7 @@ const MyShoppingCarts = ({ nextHandle }) => {
 
     const handleCartProductRemove = (id) => {
         console.log(id);
-        fetch(`http://localhost:5055/api/cartProduct/${id}`, {
+        fetch(`https://server.theglampcity.com/api/cartProduct/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

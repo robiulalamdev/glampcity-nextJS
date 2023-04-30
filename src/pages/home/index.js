@@ -63,7 +63,7 @@ const index = () => {
 
 export async function getServerSideProps() {
     // Fetch data from external API
-    const res = await fetch(`http://localhost:5055/api/category/show`)
+    const res = await fetch(`https://server.theglampcity.com/api/category/show`)
     const data = await res.json()
 
     // Pass data to the page via props

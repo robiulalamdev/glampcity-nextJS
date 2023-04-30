@@ -14,7 +14,7 @@ const MyDetailsPage = () => {
 
     // handle update user data
     const handleUpdate = (data) => {
-        fetch(`http://localhost:5055/api/user/${user?._id}`, {
+        fetch(`https://server.theglampcity.com/api/user/${user?._id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

@@ -14,7 +14,7 @@ const ChatBox = ({ chat, currentUser }) => {
 
     useEffect(() => {
         const fetchMessage = () => {
-            fetch(`http://localhost:5055/api/message/${chat?._id}`,)
+            fetch(`https://server.theglampcity.com/api/message/${chat?._id}`,)
                 .then(res => res.json())
                 .then(data => {
                     setMessages(data);
@@ -32,7 +32,7 @@ const ChatBox = ({ chat, currentUser }) => {
 
 
     const refetchMessage = () => {
-        fetch(`http://localhost:5055/api/message/${chat?._id}`,)
+        fetch(`https://server.theglampcity.com/api/message/${chat?._id}`,)
             .then(res => res.json())
             .then(data => {
                 setMessages(data);
@@ -56,7 +56,7 @@ const ChatBox = ({ chat, currentUser }) => {
             text: newMessage
         }
 
-        fetch(`http://localhost:5055/api/message`, {
+        fetch(`https://server.theglampcity.com/api/message`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

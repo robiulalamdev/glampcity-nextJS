@@ -16,7 +16,7 @@ const CategoriesSub = () => {
             tents: data2,
             autoAndTransportation: data3,
         }
-        fetch(`http://localhost:5055/api/user/${user?._id}`, {
+        fetch(`https://server.theglampcity.com/api/user/${user?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

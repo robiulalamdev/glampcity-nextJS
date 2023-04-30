@@ -15,7 +15,7 @@ const Stores = ({ stores }) => {
 };
 
 export async function getServerSideProps() {
-    const res = await fetch(`http://localhost:5055/api/store`)
+    const res = await fetch(`https://server.theglampcity.com/api/store`)
     const stores = await res.json()
     return { props: { stores } }
 }

@@ -27,7 +27,7 @@ const CalculateProducts = () => {
             return setVoucherResult("Enter Your Voucher")
         }
         else {
-            fetch(`http://localhost:5055/api/voucher/validate/${voucherCode}`)
+            fetch(`https://server.theglampcity.com/api/voucher/validate/${voucherCode}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

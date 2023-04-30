@@ -8,7 +8,7 @@ const ShoppingAddress = ({ address, refetch }) => {
     const [show, setShow] = useState(false)
 
     const confirm = () => {
-        fetch(`http://localhost:5055/api/address/${address?._id}`, {
+        fetch(`https://server.theglampcity.com/api/address/${address?._id}`, {
             method: "DELETE",
         })
             .then(res => res.json())
