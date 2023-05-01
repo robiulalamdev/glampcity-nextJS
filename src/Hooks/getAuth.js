@@ -6,7 +6,7 @@
 //         if (user === null) {
 //             fetch(`https://server.theglampcity.com/api/user`, {
 //                 headers: {
-//                     authorization: `Bearer ${localStorage.getItem('glampcity-token')}`,
+//                     authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
 //                     'Content-Type': 'application/json',
 //                 }
 //             })
@@ -34,7 +34,7 @@ export const useAuth = () => {
         setLoading(true);
         fetch(`https://server.theglampcity.com/api/user`, {
             headers: {
-                authorization: `Bearer ${localStorage.getItem('glampcity-token')}`,
+                authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
                 'Content-Type': 'application/json',
             }
         })

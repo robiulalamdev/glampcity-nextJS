@@ -46,11 +46,11 @@ const index = () => {
 
 
                 if (data?.success === true) {
-                    localStorage.setItem('glampcity-token', data.token)
+                    localStorage.setItem('theglampcity-token', data.token)
                     setIsloading(false)
                 }
                 if (data?.token) {
-                    const token = localStorage.getItem('glampcity-token')
+                    const token = localStorage.getItem('theglampcity-token')
                     if (token) {
                         userRefetch()
                         setIsloading(false)

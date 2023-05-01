@@ -13,7 +13,7 @@ const UserProfileSidebar = () => {
     const router = useRouter()
 
     const handleLogout = () => {
-        localStorage.removeItem("glampcity-token")
+        localStorage.removeItem("theglampcity-token")
         dispatch(setOpenUserProfileSidebar(false))
         setUser(null)
         router.push("/login")

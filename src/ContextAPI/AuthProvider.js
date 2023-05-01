@@ -4,13 +4,13 @@ export const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const token = typeof window !== 'undefined' && localStorage.getItem("glampcity-token");
+    const token = typeof window !== 'undefined' && localStorage.getItem("theglampcity-token");
 
     const userRefetch = () => {
         if (token) {
             fetch(`https://server.theglampcity.com/api/user`, {
                 headers: {
-                    authorization: `Bearer ${localStorage.getItem('glampcity-token')}`,
+                    authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
                     'Content-Type': 'application/json',
                 }
             })
@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
             if (token) {
                 fetch(`https://server.theglampcity.com/api/user`, {
                     headers: {
-                        authorization: `Bearer ${localStorage.getItem('glampcity-token')}`,
+                        authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
                         'Content-Type': 'application/json',
                     }
                 })
