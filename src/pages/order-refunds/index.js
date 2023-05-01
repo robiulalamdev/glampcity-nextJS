@@ -10,11 +10,11 @@ const index = () => {
     const dispatch = useDispatch()
     return (
         <section className='bg-white'>
-            <div className='max-w-[1440px] mx-auto pt-8 px-4 md:px-0'>
+            <div className='max-w-[1440px] mx-auto pt-8 px-2 md:px-4'>
                 <h1 className='text-xl font-bold text-black my-6'>Order Refunds</h1>
                 <div className='flex-grow flex items-center'>
-                    <input className='flex-grow h-12 w-full focus:outline-none border px-2' type="search" name="search" placeholder='Please enter order no.' />
-                    <button className='w-36 h-12 text-white bg-primary flex justify-center items-center' type="submit"><span>Search</span></button>
+                    <input className='flex-grow h-10 md:h-12 w-full focus:outline-none border px-2' type="search" name="search" placeholder='Please enter order no.' />
+                    <button className='w-36 h-10 md:h-12 text-white bg-primary flex justify-center items-center' type="submit"><span>Search</span></button>
                 </div>
 
                 <div className='grid md:grid-cols-3 gap-4 mt-8'>
@@ -41,19 +41,19 @@ const index = () => {
                         </thead>
                         <tbody className='mainTbody h-12 cursor-pointer'>
                             <tr className='mainTr border-t pt-1 md:pt-0 md:border-none border-primary'>
-                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-3 md:px-6 py-2'
+                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-2 md:px-6 py-2'
                                     data-label="Product ID">
                                     #01287whu77
                                 </td>
-                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-3 md:px-6 py-2'
+                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-2 md:px-6 py-2'
                                     data-label="Refund Amount">
                                     $450
                                 </td>
-                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-3 md:px-6 py-1'
+                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-2 md:px-6 py-1'
                                     data-label="Status">
-                                    <button className='w-fit mx-auto mr-0 md:mx-0 px-4 h-10 bg-primary rounded-md text-white flex justify-center items-center'><span>Refund in progress (0)</span></button>
+                                    <button className='w-fit mx-auto mr-0 md:mx-0 px-2 h-8 md:h-10 bg-primary rounded-md text-white flex justify-center items-center text-sm'><span>Refund in progress (0)</span></button>
                                 </td>
-                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-3 md:px-6 py-2 ' data-label="Action">
+                                <td className='mainTd bg-gray-200 md:bg-white my-1 px-2 md:px-6 py-2 ' data-label="Action">
                                     <div className='flex justify-start items-center gap-2 w-fit mx-auto mr-0 md:mx-0'>
                                         <Image className='w-9' src={edit} alt="" />
                                         <Image className='w-9' src={remove} alt="" />
