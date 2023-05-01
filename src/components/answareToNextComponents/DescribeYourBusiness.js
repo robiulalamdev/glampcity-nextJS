@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 
 const DescribeYourBusiness = () => {
-    const { user } = useContext(AuthContext)
+    const { user, userRefetch } = useContext(AuthContext)
     const dispatch = useDispatch()
 
 
@@ -32,7 +32,8 @@ const DescribeYourBusiness = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
+                userRefetch()
                 dispatch(setNextIncrease('2'))
             })
     }

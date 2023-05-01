@@ -5,7 +5,7 @@ import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 const Supplier = () => {
-    const { user } = useContext(AuthContext)
+    const { user, userRefetch } = useContext(AuthContext)
     const dispatch = useDispatch()
     const router = useRouter()
 
@@ -32,6 +32,7 @@ const Supplier = () => {
             .then(res => res.json())
             .then(data => {
                 dispatch(setNextIncrease('1'))
+                userRefetch()
                 router.push('/my-account/personalize')
             })
     }
