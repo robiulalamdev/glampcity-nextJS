@@ -43,7 +43,7 @@ const NewArrival = () => {
         // </div>
 
 
-        <div className='bg-secondary rounded-3xl p-4 md:p-7 cursor-pointer'>
+        <div className='bg-secondary md:rounded-3xl md:p-7 cursor-pointer'>
 
             <div className='mb-5 flex justify-between items-center'>
                 <h1 className='text-gray-900 text-xl md:text-2xl text-left font-bold'>New Arrival</h1>
