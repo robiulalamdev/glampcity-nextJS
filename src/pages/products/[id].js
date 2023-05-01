@@ -2,7 +2,7 @@ import { setProduct } from '@/Slices/viewProductSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductReview from '@/components/Product-View-Components/ProductReview';
-import SmallTabs from '@/components/TabsComponents/SmallTabs';
+// import SmallTabs from '@/components/TabsComponents/SmallTabs';
 import ProductDetails from '@/components/Product-View-Components/ProductDetails';
 import ProductSubmit from '@/components/Product-View-Components/ProductSubmit';
 import CompanyProfile from '@/components/Company-Profile-Components/company-profile/CompanyProfile';
@@ -17,7 +17,7 @@ const Product = ({ id }) => {
 
     const [selectedData, setSelectedData] = useState("Product Details")
 
-    console.log(id);
+    // console.log(id);
 
     useEffect(() => {
         if (id) {
@@ -32,7 +32,7 @@ const Product = ({ id }) => {
     return (
         <section>
             <div className='bg-white'>
-                <div className='max-w-[1440px] mx-auto px-4 md:px-8 pb-12'>
+                <div className='max-w-[1440px] mx-auto px-2 md:px-8 pb-12'>
                     <ProductReview product={product} />
 
                     <div className='flex flex-col md:flex-row md:items-center gap-4 my-6'>

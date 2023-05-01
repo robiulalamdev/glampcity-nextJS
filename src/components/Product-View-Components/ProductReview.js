@@ -21,7 +21,7 @@ const ProductReview = () => {
             <div className='grid md:grid-cols-2 lg:grid-cols-10 gap-5 cursor-pointer'>
                 <div className='lg:col-span-3 border rounded-md w-full'>
                     <div>
-                        <img className='w-full h-72 object-cover'
+                        <img className='w-full h-52 md:h-72 object-cover'
                             src={selectedImage ? selectedImage : product?.images[0]} alt="" />
                     </div>
                     <div className='grid grid-cols-4 gap-4 py-4'>
@@ -44,7 +44,7 @@ const ProductReview = () => {
                             <span className='text-primary text-md'>5 Ratings</span>
                         </div>
                     </div>
-                    <h1 className='text-primary font-bold text-left text-3xl'>${product?.price}/ pieces</h1>
+                    <h1 className='text-primary font-bold text-left text-xl md:text-3xl'>${product?.price}/ pieces</h1>
                     {/* <div className='border-b border-gray-400 mb-4 pb-4'>
                         <h1 className='text-gray-500 mt-2 font-semibold text-left text-xl'>Enter Promo Code</h1>
                         
@@ -84,7 +84,7 @@ const ProductReview = () => {
                         }
                         <div className='grid md:grid-cols-5 mb-2 mt-4'>
                             <h1 className='md:col-span-1 text-xl text-gray-500 text-left'>Shipping:</h1>
-                            <h1 className='md:col-span-4 text-gray-500 text-left text-xl'>Express ( Ocean, Land, Air )</h1>
+                            <h1 className='md:col-span-4 text-gray-500 text-left md:text-xl'>Express ( Ocean, Land, Air )</h1>
                         </div>
                     </div>
                     <div className=''>
@@ -108,18 +108,18 @@ const ProductReview = () => {
                 <div className='lg:col-span-3 border rounded-md w-full p-2 md:p-4'>
                     <p className='text-center text-gray-500 mb-4'>For more detailed information including pricing, customization, and shipping</p>
 
-                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-12 bg-primary hover:bg-darkPrimary duration-300 rounded-[50px]'>
+                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-10 md:h-12 bg-primary hover:bg-darkPrimary duration-150 rounded-[50px]'>
                         <Image className='w-6' src={message} alt="" />
                         <span className='text-white'>Contact Supplier</span>
                     </Link>
-                    <Link href='/conversation' className='flex justify-center items-center gap-4 mb-4 w-full h-12 border border-primary hover:bg-gray-300 text-primary duration-300 rounded-[50px]'>
+                    <Link href='/conversation' className='flex justify-center items-center gap-4 mb-4 w-full h-10 md:h-12 border border-primary hover:bg-gray-300 text-primary duration-150 rounded-[50px]'>
                         <Image className='w-6' src={comment} alt="" />
                         <span className=''>Contact Supplier</span>
                     </Link>
 
-                    <div className='mt-6 border p-3 rounded-md'>
-                        <h1 className='text-xl text-left text-black font-semibold'>Baoding Shunxuan Trading Co, Ltd</h1>
-                        <div className='flex items-center gap-2 mt-4'>
+                    <div className='mt-6 border-t md:border md:p-3 md:rounded-md'>
+                        <h1 className='md:text-xl text-left text-black font-semibold'>Baoding Shunxuan Trading Co, Ltd</h1>
+                        <div className='flex items-center gap-2 mt-3'>
                             <Image className='w-6' src={card} alt="" />
                             <h1 className='text-gray-500 text-xl'>Trading Company</h1>
                         </div>
@@ -140,32 +140,32 @@ const ProductReview = () => {
             <div className='mt-8 py-4'>
                 <h1 className='text-2xl text-black font-semibold text-left mb-4'>You may also like</h1>
 
-                <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-5'>
+                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-5'>
                     <div className=''>
-                        <Image className='w-full h-56 object-cover' src={img1} alt="" />
+                        <Image className='w-full h-28 md:h-48 object-cover' src={img1} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                            <h1 className='md:text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
                     <div className=''>
-                        <Image className='w-full h-56 object-cover' src={img2} alt="" />
+                        <Image className='w-full h-28 md:h-48 object-cover' src={img2} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                            <h1 className='md:text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
                     <div className=''>
-                        <Image className='w-full h-56 object-cover' src={img3} alt="" />
+                        <Image className='w-full h-28 md:h-48 object-cover' src={img3} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                            <h1 className='md:text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
                     <div className=''>
-                        <Image className='w-full h-56 object-cover' src={img4} alt="" />
+                        <Image className='w-full h-28 md:h-48 object-cover' src={img4} alt="" />
                         <div className='p-2 border-b border-x rounded-b-md border-[#0029FF4D]'>
-                            <h1 className='text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
+                            <h1 className='md:text-xl text-black text-left mb-2'>Trending product 2023 new arrival</h1>
                             <p className='font-semibold text-xl text-black text-left'><strong>$</strong>10.50</p>
                         </div>
                     </div>
