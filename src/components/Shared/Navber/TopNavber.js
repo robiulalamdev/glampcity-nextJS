@@ -30,7 +30,7 @@ const TopNavber = () => {
 
     return (
         <nav className='bg-[#E5EAFF57] cursor-pointer'>
-            <div className='flex justify-end items-center gap-8 max-w-[1440px] mx-auto px-4 h-14'>
+            <div className='flex justify-end items-center gap-6 max-w-[1440px] mx-auto px-4 h-14'>
 
                 <div className="dropdown">
                     <button id="dropdown-btn" className="p-1 font-semibold text-gray-700 bg-gray-100 rounded-md

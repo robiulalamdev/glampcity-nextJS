@@ -10,7 +10,7 @@ const index = () => {
     const dispatch = useDispatch()
     return (
         <section className='bg-white'>
-            <div className='max-w-[1440px] mx-auto pt-8 px-2 md:px-4'>
+            <div className='max-w-[1440px] mx-auto py-4 px-2 md:px-6'>
                 <h1 className='text-xl font-bold text-black my-6'>Order Refunds</h1>
                 <div className='flex-grow flex items-center'>
                     <input className='flex-grow h-10 md:h-12 w-full focus:outline-none border px-2' type="search" name="search" placeholder='Please enter order no.' />
