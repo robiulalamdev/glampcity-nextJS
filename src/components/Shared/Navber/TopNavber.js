@@ -33,7 +33,7 @@ const TopNavber = () => {
             <div className='flex justify-end items-center gap-8 max-w-[1440px] mx-auto px-4 h-14'>
 
                 <div className="dropdown">
-                    <button id="dropdown-btn" className="px-4 py-2 font-semibold text-gray-700 bg-gray-100 rounded-md
+                    <button id="dropdown-btn" className="p-1 font-semibold text-gray-700 bg-gray-100 rounded-md
                     cursor-pointer focus:bg-primary focus:text-white hover:text-primary hover:ring-2 focus:hover:ring-0">
                         <svg class='w-6 h-6' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

@@ -94,7 +94,7 @@ const Footer = () => {
                 </div>
 
                 <div className='mb-4 mt-20'>
-                    <h1 className='text-gray-600 text-center'>Copyright © 2022 Glampcity</h1>
+                    <h1 className='text-gray-600 text-center'>Copyright © 2022 Theglampcity</h1>
                     <div className='flex justify-center items-center flex-wrap gap-2 w-full mt-2'>
                         <h1>All Rights Reserved |</h1>
                         <Link href='/' className='text-primary underline'>Terms and Conditions </Link>
