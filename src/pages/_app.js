@@ -17,7 +17,6 @@ export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
   const router = useRouter()
-  console.log(router);
 
   if (router.isFallback) {
     return setLoading(true)

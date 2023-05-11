@@ -26,9 +26,7 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        if (!user?._id) {
-            userRefetch()
-        }
+        userRefetch()
     }, [token]);
 
     // signup with google

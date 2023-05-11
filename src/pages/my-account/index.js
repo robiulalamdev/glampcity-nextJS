@@ -4,8 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const MyAccountMain = ({ children }) => {
-    const router = useRouter()
-    console.log(router);
+
     return (
         <PrivateRoute>
             <main className='bg-slate-100 h-screen w-full '>

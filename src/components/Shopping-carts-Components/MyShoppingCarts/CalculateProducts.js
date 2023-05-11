@@ -10,8 +10,6 @@ const CalculateProducts = () => {
     const [price, setPrice] = useState("")
     const [isLoading, setIsloading] = useState(false)
 
-    console.log(valid);
-
     const handleDiscountChange = (discount) => {
         const price = calculateTotalPrice()
         setPrice(price * (100 - parseInt(discount)) / 100);
@@ -30,7 +28,6 @@ const CalculateProducts = () => {
             fetch(`http://localhost:5055/api/voucher/validate/${voucherCode}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     if (data?.valid) {
                         setValid(data?.valid)
                         handleDiscountChange(data?.discount)

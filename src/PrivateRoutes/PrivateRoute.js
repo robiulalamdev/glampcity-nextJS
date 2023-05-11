@@ -6,8 +6,6 @@ const PrivateRoute = ({ children }) => {
     const router = useRouter();
     const { user, loading } = useAuth();
 
-    console.log(user, loading);
-
     if (user === null) {
         // console.log("loading....................");
         return <SmallLoader />

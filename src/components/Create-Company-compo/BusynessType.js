@@ -19,8 +19,6 @@ const BusynessType = () => {
         dispatch(setShowForm('2'))
     }
 
-    console.log(businessType);
-
     return (
         <div>
             <h1 className='text-xl font-bold text-left mb-4'>Manage Company Information</h1>

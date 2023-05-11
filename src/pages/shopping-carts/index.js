@@ -21,7 +21,7 @@ const ShoppingCarts = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data?.status === "success") {
-                        console.log(data.data);
+                        // console.log(data.data);
                         setAllAddress(data.data)
                     }
                 })

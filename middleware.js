@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export function middleware(req) {
 
     const token = localStorage.getItem('theglampcity-token')
-    console.log(token);
+    // console.log(token);
     if (token) {
 
         if (req.nextUrl.pathname.startsWith('/home')) {

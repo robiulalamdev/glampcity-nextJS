@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 const SuccessAlert = ({ show, setShow, textResult }) => {
     const [animate, setAnimate] = useState(false)
 
-    console.log(textResult);
-
     useEffect(() => {
         if (show) {
             setTimeout(() => {

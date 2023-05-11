@@ -15,7 +15,7 @@ const CategoryInfo = () => {
     const [productGroup, setProductGroup] = useState("")
     const [placeOfOrigin, setPlaceOfOrigin] = useState("")
 
-    console.log(productGroup);
+    // console.log(productGroup);
     return (
         <div>
             <div className='w-full grid grid-cols-1 gap-4'>

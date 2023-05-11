@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 const FooterInbox = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const handleInbox = (data) => {
-        console.log(data);
+        // console.log(data);
     }
     return (
         <section className='w-full h-[427px] mt-24'>

@@ -27,7 +27,6 @@ const ProceedCheckout = ({ nextHandle }) => {
 
 
     const handleCartProductRemove = (id) => {
-        console.log(id);
         fetch(`http://localhost:5055/api/cartProduct/${id}`, {
             method: "DELETE"
         })

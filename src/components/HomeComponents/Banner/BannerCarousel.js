@@ -30,7 +30,7 @@ export default class BannerCarousel extends Component {
             slidesToScroll: 1
         };
         return (
-            <div className="relative" >
+            <div className="relative cursor-pointer" >
                 <Slider ref={c => (this.slider = c)} {...settings}>
                     <img className="w-full h-[368px] object-cover" src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="" />
                     <Image className="w-full h-[368px] object-cover" src={banner} alt="" />

@@ -25,7 +25,7 @@ const ContactForm = () => {
     const dispatch = useDispatch()
 
     const handleContact = (data) => {
-        console.log(data);
+        // console.log(data);
     }
 
     let dropdownRef = useRef();

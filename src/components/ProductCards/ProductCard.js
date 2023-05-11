@@ -57,7 +57,6 @@ const ProductCard = ({ product }) => {
             price: productData?.price,
             images: productData?.images,
         }
-        console.log(wishlistProduct);
 
         if (user?._id) {
             fetch(`http://localhost:5055/api/wishlist`, {

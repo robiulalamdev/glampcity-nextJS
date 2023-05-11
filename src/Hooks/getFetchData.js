@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 
 export const useFetchData = ({ endPoint }) => {
     const [data, setData] = useState(null)
-
-    console.log(endPoint);
     useEffect(() => {
         fetch(`http://localhost:5055/api/${endPoint}`)
             .then(res => res.json())

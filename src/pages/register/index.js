@@ -84,13 +84,12 @@ const index = () => {
                 }
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             }
             )
     }
 
     const handleRegister = (data) => {
-        console.log(data);
         setIsLoading(true)
 
         if (selectedCountry) {

@@ -44,7 +44,6 @@ const CompanyIntroduction = () => {
 
             }
         }
-        console.log(data);
     }
 
 

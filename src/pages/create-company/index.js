@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const CreateCompany = () => {
     const { showForm, showTabsData, busynessTypeTabs, businessType } = useSelector((state) => state.createCompanySlice)
     const dispatch = useDispatch()
-    // console.log(showForm);   onClick={() => dispatch(setShowTabsData(type?.id))}
-    console.log(businessType);
     return (
         <section className='bg-white'>
             <div className='max-w-[1440px] mx-auto px-4 py-12'>

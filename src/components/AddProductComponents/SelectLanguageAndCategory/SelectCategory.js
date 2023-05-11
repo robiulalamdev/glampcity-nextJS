@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const SelectCategory = ({ categories }) => {
     const [results, setResults] = useState(null)
 
-    console.log(categories);
+    // console.log(categories);
 
     const handleSearch = (e) => {
         const results = categories.filter((ctg) => ctg?.parent.toLowerCase().includes(e.toLowerCase()))

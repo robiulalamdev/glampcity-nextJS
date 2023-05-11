@@ -74,7 +74,6 @@ const LatestSignelProduct = ({ product }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     handleGetWishlist()
                 })
         }
