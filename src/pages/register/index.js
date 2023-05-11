@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 // import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
 import facebook from '../../assets/icons/login-register-icons/facebook.png'
 import google from '../../assets/icons/login-register-icons/google.png'
@@ -13,14 +13,17 @@ import { useRouter } from 'next/router';
 import { Checkbox } from 'antd';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const index = () => {
+    const { userRefetch, signupWithGoogle } = useContext(AuthContext)
     const { role, selectedCountry, countries, selectedPhoneCode, showPhoneCode } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [agree, setAgree] = useState(false)
     const [show, setShow] = useState(false)
-    const [isloading, setIsloading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     // console.log(countries);
 
@@ -29,19 +32,74 @@ const index = () => {
     const [emailResult, setEmailResult] = useState("")
     const [passwordResult, setPasswordResult] = useState("")
 
+    const googleProvider = new GoogleAuthProvider()
+    const [isLoadingGoogle, setIsLoadingGoogle] = useState(false)
+
     const router = useRouter()
+
+    const handleSaveUser = (newUser) => {
+        setIsLoadingGoogle(true)
+        fetch(`http://localhost:5055/api/user/signup/withsocial`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data?.success === true) {
+                    localStorage.setItem('theglampcity-token', data.token)
+                    setIsLoading(false)
+                }
+                if (data?.token) {
+                    const token = localStorage.getItem('theglampcity-token')
+                    if (token) {
+                        userRefetch()
+                        setIsLoading(false)
+                        router.push('/home')
+                        setShow(true)
+                    }
+                }
+            })
+    }
+
+
+    const handleLoginWithGoogle = () => {
+        signupWithGoogle(googleProvider)
+            .then(result => {
+                const user = result.user
+                const newUser = {
+                    email: user.email,
+                    name: user.displayName,
+                    image: user.photoURL,
+                    createWith: "google",
+                    verified: "true"
+                }
+                const filteredNewUser = Object.fromEntries(
+                    Object.entries(newUser).filter(([key, value]) => value)
+                );
+                if (filteredNewUser) {
+                    handleSaveUser(filteredNewUser);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            }
+            )
+    }
 
     const handleRegister = (data) => {
         console.log(data);
-        setIsloading(true)
+        setIsLoading(true)
 
         if (selectedCountry) {
-            setIsloading(false)
+            setIsLoading(false)
             setCountryResult("Please Select Country")
             return;
         }
         if (data?.password !== data?.confirmPassword) {
-            setIsloading(false)
+            setIsLoading(false)
             setPasswordResult("Password Not Matched")
             return;
         }
@@ -68,19 +126,19 @@ const index = () => {
 
                 if (data?.message?.companyMessage) {
                     setCompanyResult(data?.message?.companyMessage)
-                    setIsloading(false)
+                    setIsLoading(false)
                 }
                 if (data?.message?.emailMessage) {
                     setEmailResult(data?.message?.emailMessage)
-                    setIsloading(false)
+                    setIsLoading(false)
                 }
                 if (data?.success === true) {
-                    setIsloading(false)
+                    setIsLoading(false)
                     router.push('/personalize')
                     setShow(true)
                 }
                 else {
-                    setIsloading(false)
+                    setIsLoading(false)
                 }
             })
     }
@@ -249,10 +307,11 @@ const index = () => {
                             <Image className='w-8' src={facebook} alt="" />
                             <h1 className='text-gray-900 font-bold'>Facebook</h1>
                         </div>
-                        <div className='w-36 md:w-52 h-12 border rounded-md flex justify-center items-center gap-4'>
+                        <button onClick={() => handleLoginWithGoogle()}
+                            className='w-36 md:w-52 h-12 border rounded-md flex justify-center items-center gap-4'>
                             <Image className='w-8' src={google} alt="" />
                             <h1 className='text-gray-900 font-bold'>Google</h1>
-                        </div>
+                        </button>
                     </div>
                     <h1 className='mt-6 text-sm text-gray-600 text-center'>Already have an account? Click here to <Link href='/login' className='text-primary font-bold'>Log in</Link></h1>
                 </div>

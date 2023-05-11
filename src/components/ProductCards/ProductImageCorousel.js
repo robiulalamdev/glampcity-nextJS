@@ -11,8 +11,18 @@ export default class ProductImageCorousel extends Component {
         super(props);
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
-        console.log(props?.images);
+
+        this.state = {
+            loading: true
+        };
+
+        this.handleImageLoad = this.handleImageLoad.bind(this);
     }
+
+    handleImageLoad() {
+        this.setState({ loading: false });
+    }
+
 
     next() {
         this.slider.slickNext();
@@ -21,6 +31,7 @@ export default class ProductImageCorousel extends Component {
         this.slider.slickPrev();
     }
     render() {
+        const { loading } = this.state;
         const settings = {
             // dots: true,
             infinite: true,
@@ -35,7 +46,15 @@ export default class ProductImageCorousel extends Component {
                 <Slider ref={c => (this.slider = c)} {...settings}>
                     {
                         this.props?.images?.map((img, i) => (
-                            <img key={i} draggable="false" className='w-full h-40 object-cover' src={img} alt="" />
+                            <div className="relative flex justify-center items-center">
+                                <img key={i} draggable="false" className='w-full h-40 object-cover' src={img} alt="" onLoad={this.handleImageLoad} />
+
+                                {
+                                    loading && <div className="flex justify-center items-center w-full h-full bg-gray-100 text-black absolute top-0 text-center">
+                                        <span>Loading...</span>
+                                    </div>
+                                }
+                            </div>
                         ))
                     }
                 </Slider>

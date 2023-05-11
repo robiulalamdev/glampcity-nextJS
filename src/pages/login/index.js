@@ -10,21 +10,79 @@ import { useRouter } from 'next/router';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 
 const index = () => {
-    const { user, userRefetch } = useContext(AuthContext)
+    const { user, userRefetch, logout, signupWithGoogle } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [show, setShow] = useState(false)
-    const [isloading, setIsloading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const [emailResult, setEmailResult] = useState("")
     const [passwordResult, setPasswordResult] = useState("")
 
+    const googleProvider = new GoogleAuthProvider()
+    const [isLoadingGoogle, setIsLoadingGoogle] = useState(false)
+    const from = location.state?.from?.pathname || '/dashboard'
+
     const router = useRouter()
 
+    const handleSaveUser = (newUser) => {
+        setIsLoadingGoogle(true)
+        fetch(`http://localhost:5055/api/user/signup/withsocial`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data?.success === true) {
+                    localStorage.setItem('theglampcity-token', data.token)
+                    setIsLoading(false)
+                }
+                if (data?.token) {
+                    const token = localStorage.getItem('theglampcity-token')
+                    if (token) {
+                        userRefetch()
+                        setIsLoading(false)
+                        router.push('/home')
+                        setShow(true)
+                    }
+                }
+            })
+    }
+
+
+    const handleLoginWithGoogle = () => {
+        signupWithGoogle(googleProvider)
+            .then(result => {
+                const user = result.user
+                const newUser = {
+                    email: user.email,
+                    name: user.displayName,
+                    image: user.photoURL,
+                    createWith: "google",
+                    verified: "true"
+                }
+                const filteredNewUser = Object.fromEntries(
+                    Object.entries(newUser).filter(([key, value]) => value)
+                );
+                if (filteredNewUser) {
+                    handleSaveUser(filteredNewUser);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            }
+            )
+    }
+
+
     const handleLogin = (data) => {
-        setIsloading(true)
+        setIsLoading(true)
         fetch(`http://localhost:5055/api/user/login`, {
             method: 'POST',
             headers: {
@@ -37,23 +95,23 @@ const index = () => {
 
                 if (data?.message?.emailMessage) {
                     setEmailResult(data?.message?.emailMessage)
-                    setIsloading(false)
+                    setIsLoading(false)
                 }
                 if (data?.message?.passwordMessage) {
                     setPasswordResult(data?.message?.passwordMessage)
-                    setIsloading(false)
+                    setIsLoading(false)
                 }
 
 
                 if (data?.success === true) {
                     localStorage.setItem('theglampcity-token', data.token)
-                    setIsloading(false)
+                    setIsLoading(false)
                 }
                 if (data?.token) {
                     const token = localStorage.getItem('theglampcity-token')
                     if (token) {
                         userRefetch()
-                        setIsloading(false)
+                        setIsLoading(false)
                         router.push('/home')
                         setShow(true)
                     }
@@ -102,7 +160,7 @@ const index = () => {
 
                         <button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary hover:bg-darkPrimary duration-200 text-white font-bold'>
                             {
-                                isloading ? <div className='flex items-center gap-2'><h1>Log in</h1><ButtonSpinner className="w-5" /></div> : <h1>Log in</h1>
+                                isLoading ? <div className='flex items-center gap-2'><h1>Log in</h1><ButtonSpinner className="w-5" /></div> : <h1>Log in</h1>
                             }
                         </button>
 
@@ -117,10 +175,11 @@ const index = () => {
                             <Image className='w-8' src={facebook} alt="" />
                             <h1 className='text-gray-900 font-bold'>Facebook</h1>
                         </div>
-                        <div className='w-36 md:w-52 h-12 border rounded-md flex justify-center items-center gap-4'>
+                        <button onClick={() => handleLoginWithGoogle()}
+                            className='w-36 md:w-52 h-12 border rounded-md flex justify-center items-center gap-4'>
                             <Image className='w-8' src={google} alt="" />
                             <h1 className='text-gray-900 font-bold'>Google</h1>
-                        </div>
+                        </button>
                     </div>
                     <h1 className='mt-6 text-sm text-gray-600 text-center'>Don’t have any account? Click here to <Link href='/register' className='text-primary font-bold'>Register</Link></h1>
                 </div>

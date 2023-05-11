@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Drawer from '../MainDrawer/Drawer';
 
 const UserProfileSidebar = () => {
-    const { user } = useContext(AuthContext)
+    const { user, setUser, logout } = useContext(AuthContext)
     const { openUserProfileSidebar } = useSelector((state) => state.authSlice)
     const dispatch = useDispatch()
     const router = useRouter()
@@ -15,6 +15,7 @@ const UserProfileSidebar = () => {
     const handleLogout = () => {
         localStorage.removeItem("theglampcity-token")
         dispatch(setOpenUserProfileSidebar(false))
+        logout()
         setUser(null)
         router.push("/login")
     }
@@ -30,13 +31,17 @@ const UserProfileSidebar = () => {
                 <div
                     className='w-full flex items-center gap-2 border-b px-3 pb-2 sticky z-50 bg-white top-0 cursor-pointer'>
                     <div className='flex items-center justify-center w-10 h-10 bg-blue-600 rounded-full text-white'>
-                        <span className='text-2xl'>{user?.name?.slice(0, 1)}</span>
+                        {
+                            user?.image ? <img className='w-10 h-10 object-cover rounded-full' src={user?.image} alt="" />
+                                :
+                                <span>{user?.name?.slice(0, 1)} </span>
+                        }
                     </div>
                     <div className='flex flex-col items-start'>
                         <span className='text-black uppercase font-bold'>{user?.name}</span>
                         <Link href="/my-account"
                             onClick={() => dispatch(setOpenUserProfileSidebar(false))}
-                            className='text-blue-600 text-sm'>View Profile</Link>
+                            className='text-blue-600 text-xs'>View Profile</Link>
                     </div>
                 </div>
                 <li>
