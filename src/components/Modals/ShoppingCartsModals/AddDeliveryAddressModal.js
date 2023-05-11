@@ -26,7 +26,7 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
             }
 
             // console.log(newData);
-            fetch(`https://server.theglampcity.com/api/address`, {
+            fetch(`http://localhost:5055/api/address`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

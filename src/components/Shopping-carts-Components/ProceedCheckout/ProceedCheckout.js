@@ -11,7 +11,7 @@ const ProceedCheckout = ({ nextHandle }) => {
     const dispatch = useDispatch()
 
     const handleGetCartProducts = () => {
-        fetch(`https://server.theglampcity.com/api/cartProduct/${user?._id}`)
+        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -28,7 +28,7 @@ const ProceedCheckout = ({ nextHandle }) => {
 
     const handleCartProductRemove = (id) => {
         console.log(id);
-        fetch(`https://server.theglampcity.com/api/cartProduct/${id}`, {
+        fetch(`http://localhost:5055/api/cartProduct/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

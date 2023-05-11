@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`https://server.theglampcity.com/api/wishlist/${user?._id}`)
+        fetch(`http://localhost:5055/api/wishlist/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
 
     const handleWishlistRemove = (id) => {
         if (user?._id) {
-            fetch(`https://server.theglampcity.com/api/wishlist/${id}`, {
+            fetch(`http://localhost:5055/api/wishlist/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
         console.log(wishlistProduct);
 
         if (user?._id) {
-            fetch(`https://server.theglampcity.com/api/wishlist`, {
+            fetch(`http://localhost:5055/api/wishlist`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

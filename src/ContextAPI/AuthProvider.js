@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
 
     const userRefetch = () => {
         if (token) {
-            fetch(`https://server.theglampcity.com/api/user`, {
+            fetch(`http://localhost:5055/api/user/userinfo/me`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
                     'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
         if (!user?._id) {
             setLoading(true)
             if (token) {
-                fetch(`https://server.theglampcity.com/api/user`, {
+                fetch(`http://localhost:5055/api/user/userinfo/me`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
                         'Content-Type': 'application/json',
@@ -34,6 +34,7 @@ const AuthProvider = ({ children }) => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        console.log(data);
                         setUser(data);
                         setLoading(false);
                     })

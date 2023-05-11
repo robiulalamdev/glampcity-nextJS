@@ -16,7 +16,7 @@ const ChildrenByProducts = ({ path }) => {
 
 
     const handleAllProductsOfCTG = () => {
-        fetch(`https://server.theglampcity.com/api/products/cat/${path?.name}/${path?.children}`)
+        fetch(`http://localhost:5055/api/products/cat/${path?.name}/${path?.children}`)
             .then(res => res.json())
             .then(data => {
                 setData(data);

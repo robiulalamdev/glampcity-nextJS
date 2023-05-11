@@ -21,6 +21,7 @@ const Navber = () => {
     const { openMyAccountSidebar } = useSelector((state) => state.myAccountSlice)
     const dispatch = useDispatch()
     // const { user } = useAuth()
+    console.log(user);
 
     const { pathname } = useRouter()
 

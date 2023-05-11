@@ -25,7 +25,7 @@ const index = () => {
 
     const handleLogin = (data) => {
         setIsloading(true)
-        fetch(`https://server.theglampcity.com/api/user/login`, {
+        fetch(`http://localhost:5055/api/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

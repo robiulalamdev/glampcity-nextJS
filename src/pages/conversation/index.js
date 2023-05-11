@@ -21,7 +21,7 @@ const Conversation = () => {
     const handleReceiverData = (data) => {
         setCurrentChat(data)
         const userId = data.members.find(id => id !== user?._id)
-        fetch(`https://server.theglampcity.com/api/user/${userId}`,)
+        fetch(`http://localhost:5055/api/user/${userId}`,)
             .then(res => res.json())
             .then(data => {
                 dispatch(setReceiverData(data))
@@ -38,7 +38,7 @@ const Conversation = () => {
 
     // -----------------------
     useEffect(() => {
-        fetch(`https://server.theglampcity.com/api/chat/${user?._id}`)
+        fetch(`http://localhost:5055/api/chat/${user?._id}`)
             .then(res => res.json())
             .then(data => setChats(data))
     })
@@ -73,7 +73,7 @@ const Conversation = () => {
 
 // export async function getServerSideProps() {
 //     // Fetch data from external API
-//     const res = await fetch(`https://server.theglampcity.com/api/chat/${user?._id}`)
+//     const res = await fetch(`http://localhost:5055/api/chat/${user?._id}`)
 //     const data = await res.json()
 //     // Pass data to the page via props
 //     return { props: { data } }

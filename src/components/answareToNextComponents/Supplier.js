@@ -22,7 +22,7 @@ const Supplier = () => {
     const sendData = () => {
         const supplier = [data1, data2, data3, data4, data5, data6, data7, data8].filter(Boolean)
 
-        fetch(`https://server.theglampcity.com/api/user/${user?._id}`, {
+        fetch(`http://localhost:5055/api/user/${user?._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

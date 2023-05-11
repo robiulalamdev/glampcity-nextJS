@@ -15,7 +15,7 @@ const LatestSignelProduct = ({ product }) => {
     const dispatch = useDispatch()
 
     const handleGetWishlist = () => {
-        fetch(`https://server.theglampcity.com/api/wishlist/${user?._id}`)
+        fetch(`http://localhost:5055/api/wishlist/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setWishlistItems(data));
@@ -30,7 +30,7 @@ const LatestSignelProduct = ({ product }) => {
 
     // get cart products
     const handleGetCartProducts = () => {
-        fetch(`https://server.theglampcity.com/api/cartProduct/${user?._id}`)
+        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCartItems(data));
@@ -40,7 +40,7 @@ const LatestSignelProduct = ({ product }) => {
 
     const handleWishlistRemove = (id) => {
         if (user?._id) {
-            fetch(`https://server.theglampcity.com/api/wishlist/${id}`, {
+            fetch(`http://localhost:5055/api/wishlist/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -56,7 +56,7 @@ const LatestSignelProduct = ({ product }) => {
 
     const handleAddWishlist = (product) => {
         if (user?._id) {
-            fetch(`https://server.theglampcity.com/api/wishlist`, {
+            fetch(`http://localhost:5055/api/wishlist`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -87,7 +87,7 @@ const LatestSignelProduct = ({ product }) => {
     // add to cart product
     const handleAddToCart = (product) => {
         if (user?._id) {
-            fetch(`https://server.theglampcity.com/api/cartProduct`, {
+            fetch(`http://localhost:5055/api/cartProduct`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'

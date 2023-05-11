@@ -8,7 +8,7 @@ const ConversationChat = ({ data, currentUser }) => {
     useEffect(() => {
         const userId = data.members.find(id => id !== currentUser?._id)
         if (receiverUser === null) {
-            fetch(`https://server.theglampcity.com/api/user/${userId}`,)
+            fetch(`http://localhost:5055/api/user/${userId}`,)
                 .then(res => res.json())
                 .then(data => {
                     setReceiverUser(data);

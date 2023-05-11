@@ -15,7 +15,7 @@ const SelectLanguageAndCategory = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch(`https://server.theglampcity.com/api/category/show`)
+        fetch(`http://localhost:5055/api/category/show`)
             .then(res => res.json())
             .then(data => {
                 dispatch(setCategories(data))

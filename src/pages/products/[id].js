@@ -21,7 +21,7 @@ const Product = ({ id }) => {
 
     useEffect(() => {
         if (id) {
-            fetch(`https://server.theglampcity.com/api/products/${id}`)
+            fetch(`http://localhost:5055/api/products/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     dispatch(setProduct(data))

@@ -4,7 +4,7 @@
 //     const [user, setUser] = useState(null)
 //     useEffect(() => {
 //         if (user === null) {
-//             fetch(`https://server.theglampcity.com/api/user`, {
+//             fetch(`http://localhost:5055/api/user`, {
 //                 headers: {
 //                     authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
 //                     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export const useAuth = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`https://server.theglampcity.com/api/user`, {
+        fetch(`http://localhost:5055/api/user/userinfo/me`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('theglampcity-token')}`,
                 'Content-Type': 'application/json',

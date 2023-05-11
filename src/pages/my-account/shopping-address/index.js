@@ -15,7 +15,7 @@ const MyShoppingAddress = () => {
     }
 
     const getAddress = () => {
-        fetch(`https://server.theglampcity.com/api/address/${user?._id}`)
+        fetch(`http://localhost:5055/api/address/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 if (data?.status === "success") {

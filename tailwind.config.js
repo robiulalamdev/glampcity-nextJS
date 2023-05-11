@@ -20,6 +20,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+        // serif: ['Inter'],
+      },
       colors: {
         primary: '#724af8',
         darkPrimary: '#3514a6',
