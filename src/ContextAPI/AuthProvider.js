@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const token = typeof window !== 'undefined' && localStorage.getItem("theglampcity-token");
-    const auth = getAuth(app)
+    const auth = getAuth(app);
 
     const userRefetch = () => {
         if (token) {

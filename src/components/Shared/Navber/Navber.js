@@ -9,7 +9,6 @@ import { setOpenAddCartItemsSidebar, setOpenWishlistSidebar } from '@/Slices/con
 import { useDispatch, useSelector } from 'react-redux';
 import WishlistDrawer from '@/components/Drawers/WishlistDrawers/WishlistDrawer';
 import AddCartItemsDrawer from '@/components/Drawers/AddCartItemsDrawer/AddCartItemsDrawer';
-import { useAuth } from '@/Hooks/getAuth';
 import { setOpenUserProfileSidebar } from '@/Slices/authSlice';
 import UserProfileSidebar from '@/components/Drawers/UserProfileSidebar/UserProfileSidebar';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
@@ -20,7 +19,7 @@ const Navber = () => {
     const { wishlistItems, cartItems } = useSelector((state) => state.controllerSlice)
     const { openMyAccountSidebar } = useSelector((state) => state.myAccountSlice)
     const dispatch = useDispatch()
-    console.log(user);
+    // console.log(user);
 
     const { pathname } = useRouter()
 

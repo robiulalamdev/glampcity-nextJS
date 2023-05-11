@@ -10,22 +10,13 @@ import Banner from '../../components/HomeComponents/Banner/Banner'
 import ContactForm from '@/components/HomeComponents/ContactForm/ContactForm';
 import FrequentlyAsk from '@/components/HomeComponents/FrequentlyAsk/FrequentlyAsk';
 import FooterInbox from '@/components/HomeComponents/FooterInbox/FooterInbox';
-import Drawer from '@/components/Drawers/MainDrawer/Drawer';
+import DeleteModal from '@/components/Modals/DeleteModal';
 
 
 const index = () => {
-    const [open, setOpen] = useState(false)
     return (
         <section className=''>
-
-            {/* <button onClick={() => setOpen(true)}>
-                open drawer
-            </button>
-
-            {
-                open && <Drawer />
-            } */}
-
+            <DeleteModal />
             <div className='bg-[#faf8f8]'>
                 <div className='max-w-[1440px] mx-auto px-3 md:px-8'>
                     <Banner />

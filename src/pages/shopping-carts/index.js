@@ -36,11 +36,6 @@ const ShoppingCarts = () => {
         <PrivateRoute>
             <section className='bg-white'>
 
-                {/* <RippleButton className="text-white bg-primary active:bg-darkPrimary hover:bg-darkPrimary w-96" >
-                click button
-            </RippleButton> */}
-
-
                 <div className='max-w-[1440px] mx-auto px-3 md:px-8'>
                     {
                         next === 1 && <MyShoppingCarts nextHandle={nextHandle} />

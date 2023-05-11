@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-// import hrLine from '../../assets/icons/login-register-icons/hrLine.png'
 import facebook from '../../assets/icons/login-register-icons/facebook.png'
 import google from '../../assets/icons/login-register-icons/google.png'
 import arrowDown from '../../assets/icons/login-register-icons/arrow-down.png'
@@ -10,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setRole, setSelectedCountry, setShowPhoneCode } from '@/Slices/loginRegisterSlice';
 import PhoneCodeDropdown from '@/components/LoginRegisterCompo/PhoneCodeDropdown';
 import { useRouter } from 'next/router';
-import { Checkbox } from 'antd';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -278,15 +276,17 @@ const index = () => {
                             {errors.phone && <p className='text-red-600 text-sm'>{errors.phone.message}</p>}
                         </div>
 
-                        <div className='flex items-center cursor-pointer'>
-                            <Checkbox onChange={(e) => setAgree(e.target.checked)}>I have read the <Link className='text-primary' href=''>Privacy Policy</Link> and agree to it. *</Checkbox>
+                        <div className='flex items-center cursor-pointer gap-2'>
+                            <input type="checkbox" name="agree" id="agree" checked={agree ? true : false} />
+                            <label onClick={() => setAgree(!agree)}
+                                className='cursor-pointer' htmlFor="agree">I have read the <Link className='text-primary' href=''>Privacy Policy</Link> and agree to it. *</label>
 
                         </div>
 
                         {
                             agree ? <button type="submit" className='w-36 h-10 mx-auto mt-8 flex justify-center items-center rounded-md bg-primary hover:bg-darkPrimary duration-200 text-white font-bold'>
                                 {
-                                    isloading ? <div className='flex items-center gap-2'><h1>Register</h1><ButtonSpinner className="w-5" /></div> : <h1>Register</h1>
+                                    isLoading ? <div className='flex items-center gap-2'><h1>Register</h1><ButtonSpinner className="w-5" /></div> : <h1>Register</h1>
                                 }
                             </button>
                                 :

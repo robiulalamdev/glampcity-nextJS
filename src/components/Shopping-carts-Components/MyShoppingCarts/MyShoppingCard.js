@@ -1,9 +1,10 @@
-import React from 'react';
-import { Popconfirm } from 'antd';
+import DeleteModal from '@/components/Modals/DeleteModal';
+import React, { useState } from 'react';
 
 
-const MyShoppingCard = ({ data, handleRemove }) => {
-    // console.log(data);
+const MyShoppingCard = ({ data, handleGetCartProducts }) => {
+    const [deleteModal, setDeleteModal] = useState(false)
+
 
     return (
         <div className='w-full h-fit flex justify-between gap-5 items-center border rounded-md p-4'>
@@ -27,18 +28,12 @@ const MyShoppingCard = ({ data, handleRemove }) => {
                 <h1 className='text-black font-semibold text-xl mb-3'>Quantity</h1>
                 <h1 className='text-black font-semibold text-xl mb-3'>1</h1>
 
-                <Popconfirm
-                    title="Delete the Shipping Address"
-                    description="Are you sure to delete this Address?"
-                    className='text-black'
-                    onConfirm={() => handleRemove(data?._id)}
-                    okText="Yes"
-                    cancelText="No"
-                >
-                    <button className='text-[#DB1A10] hover:text-rose-800 font-semibold underline cursor-pointer'>Remove</button>
-                </Popconfirm>
+
+                <button onClick={() => setDeleteModal(true)}
+                    className='text-[#DB1A10] hover:text-rose-800 font-semibold underline cursor-pointer'>Remove</button>
 
             </div>
+            <DeleteModal open={deleteModal} close={setDeleteModal} endpoint={`cartProduct/${data?._id}`} refetch={handleGetCartProducts} />
         </div>
     );
 }

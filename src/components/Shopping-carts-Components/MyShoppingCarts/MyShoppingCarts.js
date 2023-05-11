@@ -18,6 +18,7 @@ const MyShoppingCarts = ({ nextHandle }) => {
     const { user, userRefetch } = useContext(AuthContext)
     const dispatch = useDispatch()
 
+
     const nexPermit = (data) => {
         nextHandle(data)
     }
@@ -38,18 +39,6 @@ const MyShoppingCarts = ({ nextHandle }) => {
     }, [user?._id])
 
 
-    const handleCartProductRemove = (id) => {
-        fetch(`http://localhost:5055/api/cartProduct/${id}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .then(data => {
-                // console.log(data);
-                handleGetCartProducts()
-            })
-    }
-
-
     return (
         <>
             {
@@ -64,8 +53,7 @@ const MyShoppingCarts = ({ nextHandle }) => {
                             <div className='w-full grid lg:grid-cols-3 gap-5'>
                                 <div className=' md:col-span-2 grid grid-cols-1 gap-4' >
                                     {
-                                        cartItems && cartItems?.map((item, i) => <MyShoppingCard key={i} data={item}
-                                            handleRemove={handleCartProductRemove} />)
+                                        cartItems && cartItems?.map((item, i) => <MyShoppingCard key={i} data={item} handleGetCartProducts={handleGetCartProducts} />)
                                     }
                                 </div>
                                 <div className='w-full lg:col-span-1 border rounded-md text-left p-4'>
@@ -130,6 +118,7 @@ const MyShoppingCarts = ({ nextHandle }) => {
                     <span className='text-center font-bold' >No Products</span>
                 </div>
             }
+
         </>
     );
 };

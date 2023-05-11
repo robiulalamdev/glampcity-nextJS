@@ -1,3 +1,4 @@
+"use client";
 import AuthProvider from '@/ContextAPI/AuthProvider'
 import CartBtn from '@/components/Buttons/StickyButtons/CartBtn'
 import PremiumServiceBtn from '@/components/Buttons/StickyButtons/PremiumServiceBtn'
@@ -12,6 +13,7 @@ import { Provider } from 'react-redux'
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from 'next/router'
 import ErrorPage from './404'
+import { ThemeProvider } from '@material-tailwind/react'
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -40,15 +42,17 @@ export default function App({ Component, pageProps }) {
           (
             <Provider store={store}>
               <AuthProvider>
-                <TopNavber />
-                <Navber />
-                {
-                  loading ? < SmallLoader /> : <Component {...pageProps} />
-                }
-                <Footer />
+                <ThemeProvider>
+                  <TopNavber />
+                  <Navber />
+                  {
+                    loading ? < SmallLoader /> : <Component {...pageProps} />
+                  }
+                  <Footer />
 
-                <PremiumServiceBtn />
-                <CartBtn />
+                  <PremiumServiceBtn />
+                  <CartBtn />
+                </ThemeProvider>
               </AuthProvider>
             </Provider>
           )

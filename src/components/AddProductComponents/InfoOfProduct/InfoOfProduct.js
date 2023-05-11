@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import CategoryInfo from './CategoryInfo';
 import TradeTransformation from './TradeTransformation';
 import LogisticsInformation from './LogisticsInformation';
-import { Checkbox } from 'antd';
 
 const InfoOfProduct = ({ selectetdTab, setSelectedTab }) => {
     const [agreeSubmit, setAgreeSubmit] = useState(false)
