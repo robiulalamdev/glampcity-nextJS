@@ -10,10 +10,8 @@ import store from '@/store'
 import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from 'next/router'
 import ErrorPage from './404'
-import { ThemeProvider } from '@material-tailwind/react'
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
@@ -42,17 +40,15 @@ export default function App({ Component, pageProps }) {
           (
             <Provider store={store}>
               <AuthProvider>
-                <ThemeProvider>
-                  <TopNavber />
-                  <Navber />
-                  {
-                    loading ? < SmallLoader /> : <Component {...pageProps} />
-                  }
-                  <Footer />
+                <TopNavber />
+                <Navber />
+                {
+                  loading ? < SmallLoader /> : <Component {...pageProps} />
+                }
+                <Footer />
 
-                  <PremiumServiceBtn />
-                  <CartBtn />
-                </ThemeProvider>
+                <PremiumServiceBtn />
+                <CartBtn />
               </AuthProvider>
             </Provider>
           )

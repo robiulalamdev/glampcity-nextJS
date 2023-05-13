@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import upperArrow from '../../assets/images/create-company-images/upperArrow.png'
 import { setCompanyIntroductionData, setShowTabsData } from '@/Slices/createCompanySlice';
 import { useDispatch, useSelector } from 'react-redux';
-import DatePicker from "react-datepicker";
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -89,7 +88,6 @@ const CompanyIntroduction = () => {
     return (
         <form onSubmit={handleSubmit(handleCompanyDetails)} className=''>
 
-            {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} /> */}
             <div
                 className='grid grid-cols-1 gap-6 border border-primary rounded-xl h-fit w-full mt-6 px-2 py-6 md:px-12'>
 

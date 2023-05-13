@@ -1,6 +1,5 @@
 import PrivateRoute from '@/PrivateRoutes/PrivateRoute';
 import MyAccountSidebar from '@/components/MyAccountComponents/MyAccountMain/MyAccountSidebar';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 const MyAccountMain = ({ children }) => {

@@ -1,12 +1,4 @@
-import {
-    Button,
-    Dialog,
-    DialogBody,
-    DialogFooter,
-    Typography,
-} from "@material-tailwind/react";
-
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 
 export default function DeleteModal({ open, close, endpoint, refetch }) {
@@ -23,26 +15,44 @@ export default function DeleteModal({ open, close, endpoint, refetch }) {
             })
     }
 
-    return (
-        <Dialog open={open} handler={() => close(false)} size="xs">
+    let modalRef = useRef();
+    useEffect(() => {
+        let handler = (e) => {
+            if (!modalRef?.current?.contains(e.target)) {
+                close && close(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        }
+    });
 
-            <DialogBody divider className="grid place-items-center gap-4 w-full">
-                <TrashIcon className="h-10 w-10 text-red-500" />
-                <Typography color="red" variant="h4">
-                    Are You Sure?
-                </Typography>
-                <Typography className="text-center font-normal">
-                    Do You Really Want to Delete these Records? This proccess cannot be undone.
-                </Typography>
-            </DialogBody>
-            <DialogFooter className="space-x-2">
-                <Button variant="gradient" color="red" onClick={() => close(false)}>
-                    close
-                </Button>
-                <Button variant="gradient" color="blue" onClick={() => confirm()}>
-                    Delete
-                </Button>
-            </DialogFooter>
-        </Dialog>
+    return (
+        <>
+            {
+                open && <div className='z-50 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-primary bg-opacity-25 w-full h-full cursor-pointer'>
+                    <div ref={modalRef} className={`w-80 md:w-96 h-fit bg-white shadow-xl p-5 m-5 zoom-in`}>
+                        <div>
+                            <div className="flex flex-col items-center gap-2">
+                                <TrashIcon className="text-red-600 w-8" />
+                                <h1 className="text-center font-bold text-xl">Are You Sure?</h1>
+                            </div>
+                            <p className="text-sm font-sans text-gray-600 text-center mt-4">Do You Really Want to Delete these Records? This proccess cannot be undone.</p>
+                        </div>
+                        <div className="flex justify-end gap-2 mt-4">
+                            <button onClick={() => close(false)}
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Cancel
+                            </button>
+                            <button onClick={() => confirm()}
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Delete
+                            </button>
+                        </div>
+                    </div >
+                </div >
+            }
+        </>
     );
 }

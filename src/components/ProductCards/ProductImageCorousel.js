@@ -1,11 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, lazy } from "react";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "next/image";
-import RippleButton from "@/pages/buttons";
-import { Spinner } from "@material-tailwind/react";
 
 export default class ProductImageCorousel extends Component {
     constructor(props) {
@@ -48,11 +45,11 @@ export default class ProductImageCorousel extends Component {
                     {
                         this.props?.images?.map((img, i) => (
                             <div className="relative flex justify-center items-center">
-                                <img key={i} draggable="false" className='w-full h-40 object-cover' src={img} alt="" onLoad={this.handleImageLoad} />
+                                <img key={i} draggable="false" className='w-full h-40 object-cover' src={img} alt="" onLoad={this.handleImageLoad} onPlay={lazy} />
 
                                 {
                                     loading && <div className="flex justify-center items-center w-full h-full bg-gray-100 text-black absolute top-0 text-center">
-                                        <Spinner />
+
                                     </div>
                                 }
                             </div>

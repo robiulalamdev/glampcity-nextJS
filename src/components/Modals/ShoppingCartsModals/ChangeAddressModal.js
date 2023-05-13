@@ -1,6 +1,4 @@
 import { AuthContext } from '@/ContextAPI/AuthProvider';
-import { useAuth } from '@/Hooks/getAuth';
-import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
