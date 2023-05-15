@@ -108,10 +108,11 @@ const ProductReview = () => {
                 <div className='lg:col-span-3 border rounded-md w-full p-2 md:p-4'>
                     <p className='text-center text-gray-500 mb-4'>For more detailed information including pricing, customization, and shipping</p>
 
-                    <Link href='/messages' className='flex justify-center items-center gap-4 mb-4 w-full h-10 md:h-12 bg-primary hover:bg-darkPrimary duration-150 rounded-[50px]'>
+                    <Link href={`/send-inquiry/${product?._id}`} className='flex justify-center items-center gap-4 mb-4 w-full h-10 md:h-12 bg-primary hover:bg-darkPrimary duration-150 rounded-[50px]'>
                         <Image className='w-6' src={message} alt="" />
                         <span className='text-white'>Contact Supplier</span>
                     </Link>
+
                     <Link href='/conversation' className='flex justify-center items-center gap-4 mb-4 w-full h-10 md:h-12 border border-primary hover:bg-gray-300 text-primary duration-150 rounded-[50px]'>
                         <Image className='w-6' src={comment} alt="" />
                         <span className=''>Contact Supplier</span>
