@@ -22,7 +22,7 @@ const index = () => {
 
     return (
         <main className={`bg-slate-100 h-screen w-full
-        ${fullScreen && "fixed top-0 right-0 bottom-0 left-0 z-[1000] w-full"}`}>
+        ${fullScreen && "fixed top-0 right-0 bottom-0 left-0 z-[1000] w-full bg-primary bg-opacity-50"}`}>
             <div className='max-w-[1440px] mx-auto'>
                 <div className='lg:grid lg:grid-cols-[auto_1fr]'>
                     { }

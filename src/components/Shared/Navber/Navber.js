@@ -75,7 +75,7 @@ const Navber = () => {
                     <div onClick={() => dispatch(setOpenWishlistSidebar(true))} >
                         <div className='relative'>
                             <Image className='w-5' src={love} alt="navberImage" />
-                            <div className='absolute -right-2 -top-3 h-4 w-4 bg-rose-600 rounded-full flex justify-center items-center'>
+                            <div className='absolute -right-2 -top-3 h-4 w-4 bg-red-600 rounded-full flex justify-center items-center'>
                                 <span className='text-white p-1'>
                                     {wishlistItems ? wishlistItems.length : 0}
                                 </span>
@@ -86,7 +86,7 @@ const Navber = () => {
                     <div onClick={() => dispatch(setOpenAddCartItemsSidebar(true))}>
                         <div className='relative'>
                             <Image className='w-5' src={cart} alt="navberImage" />
-                            <div className='absolute -right-2 -top-3 h-4 w-4 bg-rose-600 rounded-full flex justify-center items-center'>
+                            <div className='absolute -right-2 -top-3 h-4 w-4 bg-red-600 rounded-full flex justify-center items-center'>
                                 <span className='text-white p-1'>
                                     {cartItems ? cartItems.length : 0}
                                 </span>

@@ -10,6 +10,7 @@ const AddCartItemsDrawer = () => {
     const { openAddCartItemsSidebar, cartItems } = useSelector((state) => state.controllerSlice)
     const dispatch = useDispatch()
 
+    // console.log(cartItems);
 
     const calculateTotalPrice = () => {
         let totalPrice = 0;
@@ -56,9 +57,9 @@ const AddCartItemsDrawer = () => {
             className="w-full md:w-[420px] h-full bg-white p-4"
         >
 
-            <div className="pointer-events-auto w-full">
+            <div className="pointer-events-auto w-full h-full">
                 <div className="flex h-full flex-col overflow-y-auto">
-                    <div className="flex-1 overflow-y-auto">
+                    <div className="flex-1 h-full overflow-y-auto">
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {cartItems && cartItems?.map((product) => (
                                 <li key={product?.id} className="flex py-6">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     IconButton,
     SpeedDial,
@@ -14,9 +14,30 @@ import {
     PlusIcon,
 } from "@heroicons/react/24/outline";
 import CreateOfferForm from './CreateOfferForm';
+import SelectProductForOffer from './SelectProductForOffer';
+import MyOffers from './OffersPanels/MyOffers';
+import MyRequestOffers from './OffersPanels/MyRequestOffers';
+import { useSelector } from 'react-redux';
+import { AuthContext } from '@/ContextAPI/AuthProvider';
+
+const data = [
+    {
+        label: "Offers",
+        value: "offers"
+    },
+    {
+        label: "Request",
+        value: "request"
+    },
+];
 
 const MessageSendBox = ({ sendMessage }) => {
+    const { user } = useContext(AuthContext)
+    const { receiverData, chatId } = useSelector((state) => state.myAccountSlice)
+    const [totalOffers, setTotalOffers] = useState("0")
     const [messageText, setMessageText] = useState("")
+    const [productId, setProductId] = useState("");
+    const [tab, setTab] = useState("offers")
 
     const [openOffers, setOpenOffers] = useState(false);
     const [openCreateOffer, setOpenCreateOffer] = useState(false);
@@ -29,24 +50,43 @@ const MessageSendBox = ({ sendMessage }) => {
             setOpenOffers(false)
             setOpenCreateOffer(!openCreateOffer)
         }
-
     }
+
+    const handleclose = () => {
+        setProductId("")
+        setOpenCreateOffer(false)
+    }
+
+
     return (
         <div class="p-4">
 
             <Accordion open={openOffers} className='w-full' >
-                <AccordionBody className="min-h-[400px] max-h-[700px] bg-blue-50" >
+                <AccordionBody className="py-0 min-h-[500px] max-h-[700px] bg-blue-50 mt-0 pt-0 border-t" >
+                    <div className='grid grid-cols-2' >
+                        {data.map(({ label, value }) => (
+                            <Button key={value} value={value} onClick={() => setTab(value)}
+                                className={`w-full rounded-none
+                                ${tab === value ? "" : "bg-white text-black"}`} >
+                                {label}
+                            </Button>
+                        ))}
+                    </div>
+
+                    {tab === "offers" && <MyOffers storeId={receiverData?._id} buyerId={user?._id} setTotalOffers={setTotalOffers} />}
+                    {tab === "request" && <MyRequestOffers storeId={receiverData?._id} buyerId={user?._id} />}
 
                 </AccordionBody>
             </Accordion>
             <Accordion open={openCreateOffer} className='w-full' >
-                <AccordionBody className="min-h-[400px] max-h-[700px]  bg-secondary" >
-                    <CreateOfferForm />
+                <AccordionBody className="py-0 min-h-[500px] max-h-[700px]  bg-secondary" >
+                    {productId && <CreateOfferForm productId={productId} setClose={handleclose} />}
+                    {!productId && <SelectProductForOffer handleSelectProduct={setProductId} />}
                 </AccordionBody>
             </Accordion>
 
             <div className='flex items-center gap-2 w-fit h-10'>
-                <Badge content="2">
+                <Badge content={totalOffers}>
                     <Button onClick={() => handleOffer("openoffer")} size='sm' color='green' >Offer</Button>
                 </Badge>
 

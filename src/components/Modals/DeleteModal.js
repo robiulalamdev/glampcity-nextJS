@@ -9,10 +9,11 @@ export default function DeleteModal({ open, close, endpoint, refetch }) {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 refetch && refetch()
                 close(false);
             })
+        close(false);
     }
 
     let modalRef = useRef();
