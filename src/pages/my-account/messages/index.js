@@ -11,7 +11,7 @@ const index = () => {
     const [chatData, setChatData] = useState([]);
     // console.log(user?._id);
     useEffect(() => {
-        fetch(`http://localhost:5055/api/storechat/640c586a9d959d1d04ea94b5`)
+        fetch(`http://localhost:5055/api/storechat/${user?._id}`)
             .then(res => res.json())
             .then(data => {
                 setChatData(data);
