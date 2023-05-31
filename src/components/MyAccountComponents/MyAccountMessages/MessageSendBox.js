@@ -81,7 +81,7 @@ const MessageSendBox = ({ sendMessage }) => {
             <Accordion open={openCreateOffer} className='w-full' >
                 <AccordionBody className="py-0 min-h-[500px] max-h-[700px]  bg-secondary" >
                     {productId && <CreateOfferForm productId={productId} setClose={handleclose} />}
-                    {!productId && <SelectProductForOffer handleSelectProduct={setProductId} />}
+                    {!productId && <SelectProductForOffer storeId={receiverData?._id} handleSelectProduct={setProductId} />}
                 </AccordionBody>
             </Accordion>
 

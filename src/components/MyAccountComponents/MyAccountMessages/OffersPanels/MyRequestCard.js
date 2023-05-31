@@ -93,11 +93,7 @@ const MyRequestCard = ({ data, refetch }) => {
                 <p>Amount: {data?.price}</p>
                 <ButtonGroup className='py-1'>
                     {
-                        data?.requestType === "store" ? <Button onClick={() => setDeleteModal(data?.status === "false" && true)}
-                            className={`py-2 
-                        ${data?.status === "true" ? "bg-blue-gray-600 text-white" : "bg-red-600"}`}>Cancel</Button>
-                            :
-                            <Button onClick={() => setDeleteModal(data?.status === "false" && true)} className="bg-red-600 py-2" >Delete</Button>
+                        data?.requestType === "buyer" && <Button onClick={() => setDeleteModal(data?.status === "false" && true)} className="bg-red-600 py-2" >Delete</Button>
                     }
                     {
                         data?.approved === "true" ? <Button onClick={() => handleAddCart()}
