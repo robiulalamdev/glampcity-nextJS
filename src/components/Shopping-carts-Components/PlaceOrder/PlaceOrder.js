@@ -6,19 +6,23 @@ import AddDeliveryAddressModal from '@/components/Modals/ShoppingCartsModals/Add
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ShoppingAddress from './ShoppingAddress';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import { useSelector } from 'react-redux';
+import { Button } from '@material-tailwind/react';
+import BuyModal from '@/components/Modals/BuyModal';
 
-const PlaceOrder = ({ address, refetch }) => {
+const PlaceOrder = ({ refetch }) => {
     const { user, userRefetch } = useContext(AuthContext)
+    const { myAddress, selectedAddress } = useSelector((state) => state.myAccountSlice)
+    const { cartItems, totalPrice, valid, discount, discountAmount, productPrice } = useSelector((state) => state.controllerSlice)
     const [openModal, setOpenModal] = useState(false)
-    const [allAddress, setAllAddress] = useState(address)
+    const [buyModal, setBuyModal] = useState(false)
     const [show, setShow] = useState(false)
+
     const closeModal = () => {
         setOpenModal(false)
     }
 
-    // console.log(allAddress);
-
-    // console.log(openModal);
+    console.log(selectedAddress);
     return (
         <section className='min-h-screen mt-16 relative'>
 
@@ -38,7 +42,7 @@ const PlaceOrder = ({ address, refetch }) => {
 
                         <div className='grid grid-cols-1 gap-4 w-full' >
                             {
-                                allAddress && allAddress.map((address, i) => <ShoppingAddress key={i} address={address} refetch={refetch} />)
+                                myAddress && myAddress.map((address, i) => <ShoppingAddress key={i} address={address} refetch={refetch} />)
                             }
                         </div>
 
@@ -81,7 +85,7 @@ const PlaceOrder = ({ address, refetch }) => {
                                 </h1>
                             </div>
                         </div>
-                        <div className='border rounded-md p-4'>
+                        {/* <div className='border rounded-md p-4'>
                             <div className='w-full h-fit flex justify-between gap-5 items-center'>
                                 <div className='flex justify-between items-center gap-4'>
                                     <div>
@@ -119,7 +123,7 @@ const PlaceOrder = ({ address, refetch }) => {
                                     <span className='text-xl font-bold text-primary'>$10.00</span>
                                 </h1>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
 
@@ -136,24 +140,31 @@ const PlaceOrder = ({ address, refetch }) => {
                             <h1 className='text-left text-black font-semibold text-xl'>Order Summary</h1>
                             <div className='flex justify-between items-center mt-3'>
                                 <p className='text-gray-500 md:text-xl'>Items Total</p>
-                                <p className='text-xl font-bold text-black'>$20.00</p>
+                                <p className='text-xl font-bold text-black'>${productPrice}</p>
                             </div>
                             <div className='flex justify-between items-center mt-3'>
                                 <p className='text-gray-500 md:text-xl'>Discount</p>
-                                <p className='text-xl font-bold text-black'>$0.00</p>
+                                <p className='text-xl font-bold text-black'>${discountAmount}</p>
                             </div>
                             <div className='flex justify-between items-center mt-3'>
                                 <p className='text-gray-500 md:text-xl'>Delivery Fee</p>
-                                <p className='text-xl font-bold text-black'>$1.00</p>
+                                <p className='text-xl font-bold text-black'>$0.00</p>
                             </div>
                             <div className='flex justify-between items-center mt-3'>
                                 <p className='text-gray-500 md:text-xl'>Total Payment</p>
-                                <p className='text-xl font-bold text-black'>$21.00</p>
+                                <p className='text-xl font-bold text-black'>${totalPrice}</p>
                             </div>
                             <div className='w-full mt-4'>
-                                <button className='flex justify-center items-center w-full h-10 rounded-[50px] bg-primary hover:bg-darkPrimary active:bg-rose-600'>
-                                    <span className='text-white uppercase'>Place order</span>
-                                </button>
+                                {
+                                    selectedAddress?.userId === user?._id ? <Button onClick={() => setBuyModal(true)}
+                                        className='flex justify-center items-center w-full h-10 rounded-[50px] bg-primary hover:bg-darkPrimary active:bg-rose-600'>
+                                        <span className='text-white uppercase'>Place order</span>
+                                    </Button>
+                                        :
+                                        <button disabled className='flex justify-center items-center w-full h-10 rounded-[50px] bg-secondary'>
+                                            <span className='text-white uppercase'>Place order</span>
+                                        </button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -162,10 +173,13 @@ const PlaceOrder = ({ address, refetch }) => {
 
             <div className='flex justify-center items-center'>
                 {
-                    openModal && <AddDeliveryAddressModal closeModal={closeModal} sucsess={setShow} />
+                    openModal && <AddDeliveryAddressModal closeModal={closeModal} sucsess={setShow} refetch={refetch} />
                 }
                 {
                     show && <SuccessAlert show={show} setShow={setShow} textResult="New Address Successfully Added" />
+                }
+                {
+                    buyModal && <BuyModal closeModal={setBuyModal} />
                 }
             </div>
         </section>

@@ -3,7 +3,7 @@ import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
+const AddDeliveryAddressModal = ({ closeModal, sucsess, refetch }) => {
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [deliveryAddress, setDeliveryAddress] = useState('')
@@ -35,6 +35,7 @@ const AddDeliveryAddressModal = ({ closeModal, sucsess }) => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    refetch && refetch()
                     if (data?.status === "success") {
                         sucsess(true)
                         closeModal(false)

@@ -63,9 +63,9 @@ const AddCartItemsDrawer = () => {
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {cartItems && cartItems?.map((product) => (
                                 <li key={product?.id} className="flex py-6">
-                                    <Link href={`/products/${product?.productId}`} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <Link href={`/products/${product?.product?._id}`} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                         <img
-                                            src={product?.image}
+                                            src={product?.product?.images[0]}
                                             alt=''
                                             className="h-full w-full object-cover object-center"
                                         />
@@ -74,7 +74,7 @@ const AddCartItemsDrawer = () => {
                                     <div className="ml-4 flex flex-1 flex-col">
                                         <div>
                                             <div className="flex justify-between text-base font-medium text-gray-900">
-                                                <Link href={`/products/${product?.productId}`}>{product?.title}</Link>
+                                                <Link href={`/products/${product?.product?._id}`}>{product?.product?.title}</Link>
                                                 <p className="ml-4">{product?.price}</p>
                                             </div>
                                             <p className="mt-1 text-sm text-gray-500">blue</p>

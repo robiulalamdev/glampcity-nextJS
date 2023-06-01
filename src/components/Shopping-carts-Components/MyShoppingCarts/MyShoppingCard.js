@@ -10,7 +10,7 @@ const MyShoppingCard = ({ data, handleGetCartProducts }) => {
         <div className='w-full h-fit flex justify-between gap-5 items-center border rounded-md p-4'>
             <div className='flex justify-between items-center gap-4'>
                 <div>
-                    <img className='w-40 h-32' src={data?.images[0]} alt="" />
+                    <img className='w-24 h-24' src={data?.product?.images[0]} alt="" />
                 </div>
                 <div className='text-left'>
                     <h1 className='text-black font-semibold text-xl text-left'>{data?.title}</h1>
@@ -26,7 +26,7 @@ const MyShoppingCard = ({ data, handleGetCartProducts }) => {
             </div>
             <div>
                 <h1 className='text-black font-semibold text-xl mb-3'>Quantity</h1>
-                <h1 className='text-black font-semibold text-xl mb-3'>1</h1>
+                <h1 className='text-black font-semibold text-xl mb-3'>{data?.quantity}</h1>
 
 
                 <button onClick={() => setDeleteModal(true)}

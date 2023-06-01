@@ -13,31 +13,14 @@ import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 import noData from "../../../assets/icons/no-data.png"
 
-const MyShoppingCarts = ({ nextHandle }) => {
+const MyShoppingCarts = ({ nextHandle, handleGetCartProducts }) => {
     const { cartItems } = useSelector((state) => state.controllerSlice)
     const { user, userRefetch } = useContext(AuthContext)
     const dispatch = useDispatch()
 
-
     const nexPermit = (data) => {
         nextHandle(data)
     }
-
-    const handleGetCartProducts = () => {
-        fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
-            .then(res => res.json())
-            .then(data => {
-                dispatch(setCartItems(data));
-            })
-    }
-
-
-    useEffect(() => {
-        if (user?._id) {
-            handleGetCartProducts()
-        }
-    }, [user?._id])
-
 
     return (
         <>

@@ -6,7 +6,11 @@ const initialState = {
     openWishlistSidebar: false,
     openAddCartItemsSidebar: false,
     wishlistItems: [],
-    cartItems: []
+    cartItems: [],
+    valid: false,
+    discount: 0,
+    discountAmount: 0,
+    totalPrice: 0,
 };
 
 export const controllerSlice = createSlice({
@@ -31,6 +35,21 @@ export const controllerSlice = createSlice({
         setCartItems: (state, action) => {
             state.cartItems = action.payload;
         },
+        setValid: (state, action) => {
+            state.valid = action.payload;
+        },
+        setDiscount: (state, action) => {
+            state.discount = action.payload;
+        },
+        setDiscountAmount: (state, action) => {
+            state.discountAmount = action.payload;
+        },
+        setProductPrice: (state, action) => {
+            state.productPrice = action.payload;
+        },
+        setTotalPrice: (state, action) => {
+            state.totalPrice = action.payload;
+        },
     },
 });
 
@@ -40,6 +59,11 @@ export const {
     setOpenWishlistSidebar,
     setOpenAddCartItemsSidebar,
     setWishlistItems,
-    setCartItems
+    setCartItems,
+    setValid,
+    setDiscount,
+    setDiscountAmount,
+    setProductPrice,
+    setTotalPrice,
 } = controllerSlice.actions;
 export default controllerSlice.reducer;

@@ -1,19 +1,36 @@
+import { setDiscount, setDiscountAmount, setProductPrice, setTotalPrice, setValid } from '@/Slices/controllerSlice';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const CalculateProducts = () => {
-    const { cartItems } = useSelector((state) => state.controllerSlice)
-    const [valid, setValid] = useState(false)
+    const { cartItems, valid, discount, totalPrice, productPrice } = useSelector((state) => state.controllerSlice)
+
     const [voucherCode, setVoucherCode] = useState("")
     const [voucherResult, setVoucherResult] = useState("")
-    const [price, setPrice] = useState("")
     const [isLoading, setIsloading] = useState(false)
 
+    const dispatch = useDispatch()
+    console.log(productPrice);
+
+    const price = cartItems.reduce((acc, product) => {
+        return acc + product.price * product.quantity;
+    }, 0);
+
+    dispatch(setProductPrice(price));
+
     const handleDiscountChange = (discount) => {
-        const price = calculateTotalPrice()
-        setPrice(price * (100 - parseInt(discount)) / 100);
+        dispatch(setTotalPrice(price * (100 - parseInt(discount)) / 100))
+
+        const calculateDiscountAmount = () => {
+            const discountAmount = (price * parseInt(discount)) / 100;
+            return discountAmount;
+        };
+
+        const discountAmount = calculateDiscountAmount();
+        dispatch(setDiscountAmount(discountAmount));
     };
+
 
     const handleVoucherValidate = (e) => {
         e.preventDefault()
@@ -25,16 +42,17 @@ const CalculateProducts = () => {
             return setVoucherResult("Enter Your Voucher")
         }
         else {
-            fetch(`http://localhost:5055/api/voucher/validate/${voucherCode}`)
+            fetch(`http://localhost:5055/api/coupon/validation/${voucherCode}/${price}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data?.valid) {
-                        setValid(data?.valid)
+                        dispatch(setValid(data?.valid))
                         handleDiscountChange(data?.discount)
+                        dispatch(setDiscount(data.discount))
                         setVoucherCode("")
                     }
                     if (data?.valid === false) {
-                        setVoucherResult("Voucher Not Valid")
+                        setVoucherResult(data.message)
                         setVoucherCode("")
                     }
                     e.target.reset()
@@ -50,26 +68,12 @@ const CalculateProducts = () => {
     }
 
 
-
-    const calculateTotalPrice = () => {
-        let totalPrice = 0;
-        cartItems.forEach((product) => {
-            totalPrice += product.price;
-        });
-        return totalPrice;
-    };
-
-    // console.log(voucherCode);
-
-
-
-
     return (
         <div>
             <div>
                 <div className='flex justify-between items-center mt-3'>
                     <p className='text-gray-500 text-xl'>Subtotal</p>
-                    <p className='text-xl font-bold text-black'>${calculateTotalPrice()}</p>
+                    <p className='text-xl font-bold text-black'>${price}</p>
                 </div>
 
 
@@ -77,7 +81,6 @@ const CalculateProducts = () => {
                     <input onChange={(e) => handleErrorRemove(e.target.value)}
                         className={`w-full h-10 focus:outline-none px-2
                     ${voucherResult ? "border border-l border-y border-red-500" : "border border-l border-y border-gray-500"}`} type="text" name='code' placeholder='Enter Voucher Code' disabled={valid} />
-
 
                     {
                         voucherCode && !valid ? <button type='submit' disabled={valid}
@@ -98,7 +101,7 @@ const CalculateProducts = () => {
 
                 <div className='flex justify-between items-center mt-3'>
                     <p className='text-gray-500 text-xl'>Total</p>
-                    <p className='text-xl font-bold text-black'>${price ? price : calculateTotalPrice()}</p>
+                    <p className='text-xl font-bold text-black'>${totalPrice ? totalPrice : price}</p>
                 </div>
             </div>
         </div>

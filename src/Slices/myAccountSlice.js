@@ -7,6 +7,8 @@ const initialState = {
 
     receiverData: null,
     chatId: "",
+    myAddress: [],
+    selectedAddress: null,
 };
 
 export const myAccountSlice = createSlice({
@@ -30,6 +32,12 @@ export const myAccountSlice = createSlice({
         setChatId: (state, action) => {
             state.chatId = action.payload;
         },
+        setMyAddress: (state, action) => {
+            state.myAddress = action.payload;
+        },
+        setSelectedAddress: (state, action) => {
+            state.selectedAddress = action.payload;
+        },
     },
 });
 
@@ -40,7 +48,9 @@ export const {
 
     // message action
     setReceiverData,
-    setChatId
+    setChatId,
+    setMyAddress,
+    setSelectedAddress
 
 } = myAccountSlice.actions;
 export default myAccountSlice.reducer;

@@ -34,40 +34,18 @@ const MyRequestCard = ({ data, refetch }) => {
             })
     }
 
-
-    const handleUpdateOffer = () => {
-        handleGetCartProducts()
-        const updateData = {
-            status: "true"
-        }
-        if (data?.status === "false" && data?.approved === "true") {
-            fetch(`http://localhost:5055/api/offer/${data?._id}`, {
-                method: "PATCH",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify(updateData)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    refetch && refetch()
-                })
-        }
-    }
-
-
     const handleAddCart = () => {
         const addCartProduct = {
-            productId: product?._id,
-            userId: user?._id,
-            title: product?.title,
-            description: product?.description,
-            price: data?.price,
-            images: product?.images,
+            product: product?._id,
+            user: user?._id,
+            store: product?.storeId,
+            price: parseInt(data?.price),
+            quantity: parseInt(data?.quantity),
+            offerId: data?._id,
         }
         if (data?.status === "false" && data?.approved === "true") {
 
-            fetch(`http://localhost:5055/api/cartProduct`, {
+            fetch(`http://localhost:5055/api/cartProduct/addtocart/offer`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -77,8 +55,9 @@ const MyRequestCard = ({ data, refetch }) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data?.status === "success") {
-                        handleUpdateOffer()
+                        handleGetCartProducts()
                     }
+                    handleRefetch()
                 })
         }
     }
@@ -107,7 +86,6 @@ const MyRequestCard = ({ data, refetch }) => {
                     }
                 </ButtonGroup>
             </div>
-
 
             {
                 deleteModal && <DeleteModal open={deleteModal} close={setDeleteModal}

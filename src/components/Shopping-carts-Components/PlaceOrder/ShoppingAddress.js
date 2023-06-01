@@ -1,16 +1,21 @@
+import { setSelectedAddress } from '@/Slices/myAccountSlice';
 import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import DeleteModal from '@/components/Modals/DeleteModal';
 import ChangeAddressModal from '@/components/Modals/ShoppingCartsModals/ChangeAddressModal';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ShoppingAddress = ({ address, refetch }) => {
+    const { myAddress, selectedAddress } = useSelector((state) => state.myAccountSlice)
     const [openModal, setOpenModal] = useState(false)
     const [show, setShow] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
+    const dispatch = useDispatch()
 
 
     return (
-        <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4 border rounded-xl md:p-4 p-2 w-full min-h-[100px] h-fit bg-white'>
+        <div onClick={() => dispatch(setSelectedAddress(address))}
+            className={`flex flex-col md:flex-row md:items-center md:justify-between gap-4 border rounded-xl md:p-4 p-2 w-full min-h-[100px] h-fit bg-white ${selectedAddress?._id === address?._id ? "border border-primary" : ""}`}>
 
             <div className='flex-grow'>
                 <div className='flex items-center gap-2' >

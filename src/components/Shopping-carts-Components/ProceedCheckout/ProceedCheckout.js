@@ -6,7 +6,8 @@ import CalculateProducts from '../MyShoppingCarts/CalculateProducts';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
 
 const ProceedCheckout = ({ nextHandle }) => {
-    const { cartItems } = useSelector((state) => state.controllerSlice)
+    const { cartItems, valid, discount, discountAmount } = useSelector((state) => state.controllerSlice)
+
     const { user, userRefetch } = useContext(AuthContext)
     const dispatch = useDispatch()
 
