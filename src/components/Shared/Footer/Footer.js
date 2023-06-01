@@ -15,7 +15,7 @@ const Footer = () => {
     return (
         <>
             {
-                pathname !== "/my-account/messages" &&
+                !pathname.includes("/my-account") &&
                 <footer className='bg-gray-100 px-4 pt-32'>
                     <div className='max-w-[1440px] mx-auto cursor-pointer'>
                         <div className='grid md:grid-cols-3 lg:grid-cols-7 gap-4 gap-y-6 md:gap-y-16'>

@@ -26,6 +26,9 @@ module.exports = withMT({
         // darkPrimary: '#0624c2'
         // primary: '#0029FF',
         secondary: '#F3F3F3',
+      },
+      maxWidth: {
+        'primary': '1480px',
       }
     },
   },

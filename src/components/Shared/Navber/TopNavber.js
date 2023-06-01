@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ni from '../../../assets/icons/navber-icons/ni.png'
 import uk from '../../../assets/icons/navber-icons/uk.png'
+import { useRouter } from 'next/router';
 
 const routes = [
     { _id: "1", title: "All Orders", url: "/all-orders" },
@@ -27,9 +28,9 @@ const countries = [
 ]
 
 const TopNavber = () => {
-
-    return (
-        <nav className='bg-[#E5EAFF57] cursor-pointer'>
+    const { pathname } = useRouter()
+    return (<>{
+        !pathname.includes("/my-account") && <nav className='bg-[#E5EAFF57] cursor-pointer'>
             <div className='flex justify-end items-center gap-6 max-w-[1440px] mx-auto px-4 h-14'>
 
                 <div className="dropdown">
@@ -81,6 +82,8 @@ const TopNavber = () => {
 
             </div>
         </nav >
+    }
+    </>
     );
 };
 

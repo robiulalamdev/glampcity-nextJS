@@ -39,7 +39,7 @@ const Navber = () => {
     });
     return (
         <nav ref={navberRef} className='bg-white py-4 uppercase border-b'>
-            <div className='relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 md:px-8 max-w-[1440px] mx-auto'>
+            <div className='relative cursor-pointer flex justify-between items-center gap-6 lg:gap-10 h-14 px-4 max-w-primary mx-auto'>
                 <div className='flex-grow flex items-center gap-4'>
                     <Link href='/'><Image className='w-10 md:w-16' src={logo} alt="navberImage" /></Link>
 

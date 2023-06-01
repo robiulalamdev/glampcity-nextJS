@@ -7,7 +7,7 @@ const MyAccountMain = ({ children }) => {
     return (
         <PrivateRoute>
             <main className='bg-slate-100 h-screen w-full '>
-                <div className='max-w-[1440px] mx-auto'>
+                <div className='max-w-primary mx-auto'>
                     <div className='grid grid-cols-[auto_1fr]'>
                         {
 
