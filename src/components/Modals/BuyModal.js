@@ -1,13 +1,21 @@
 import { AuthContext } from '@/ContextAPI/AuthProvider';
 import { Button } from '@material-tailwind/react';
+import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 const BuyModal = ({ closeModal, }) => {
     const { user } = useContext(AuthContext)
     const { cartItems, totalPrice, valid, discount, discountAmount, productPrice } = useSelector((state) => state.controllerSlice)
     const { myAddress, selectedAddress } = useSelector((state) => state.myAccountSlice)
     const [products, setProducts] = useState([])
+    const router = useRouter()
+
+    const timestamp = Date.now();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const uniqueCode = `${timestamp}${randomString}`;
+    const unique = uuidv4();
 
     useEffect(() => {
         const getProductDetails = async () => {
@@ -30,10 +38,10 @@ const BuyModal = ({ closeModal, }) => {
     const handlePayment = () => {
 
         const newOrder = {
-            orderNumber: user?._id + "45dfd5454d45f54d",
+            orderNumber: uniqueCode.slice(0, 6) + unique,
             totalPrice: productPrice,
-            totalPayment: totalPrice,
-            toalDiscount: discountAmount,
+            totalPayment: totalPrice ? totalPrice : productPrice,
+            toalDiscount: discountAmount && discountAmount,
             deliveryCharge: 0,
             store: cartItems?.[0].store,
             paymentMethod: "Bkash",
@@ -52,7 +60,8 @@ const BuyModal = ({ closeModal, }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    router.replace("/my-account/orders")
+                    closeModal(false)
                 })
         }
     }

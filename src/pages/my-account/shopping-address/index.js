@@ -15,13 +15,10 @@ const MyShoppingAddress = () => {
     }
 
     const getAddress = () => {
-        fetch(`http://localhost:5055/api/address/${user?._id}`)
+        fetch(`http://localhost:5055/api/address/my-address/${user?._id}`)
             .then(res => res.json())
             .then(data => {
-                if (data?.status === "success") {
-                    // console.log(data.data);
-                    setAllAddress(data.data)
-                }
+                setAllAddress(data)
             })
     }
 

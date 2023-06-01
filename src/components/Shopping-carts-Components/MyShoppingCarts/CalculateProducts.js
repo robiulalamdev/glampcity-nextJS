@@ -11,7 +11,6 @@ const CalculateProducts = () => {
     const [isLoading, setIsloading] = useState(false)
 
     const dispatch = useDispatch()
-    console.log(productPrice);
 
     const price = cartItems.reduce((acc, product) => {
         return acc + product.price * product.quantity;

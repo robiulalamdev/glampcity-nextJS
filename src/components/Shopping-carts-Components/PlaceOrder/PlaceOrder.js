@@ -152,7 +152,7 @@ const PlaceOrder = ({ refetch }) => {
                             </div>
                             <div className='flex justify-between items-center mt-3'>
                                 <p className='text-gray-500 md:text-xl'>Total Payment</p>
-                                <p className='text-xl font-bold text-black'>${totalPrice}</p>
+                                <p className='text-xl font-bold text-black'>${totalPrice ? totalPrice : productPrice}</p>
                             </div>
                             <div className='w-full mt-4'>
                                 {

@@ -24,6 +24,7 @@ const ShoppingCarts = () => {
         fetch(`http://localhost:5055/api/cartProduct/${user?._id}`)
             .then(res => res.json())
             .then(data => {
+                console.log(data, user);
                 dispatch(setCartItems(data));
             })
     }
