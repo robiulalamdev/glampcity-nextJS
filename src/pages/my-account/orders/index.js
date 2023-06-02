@@ -60,6 +60,7 @@ const index = () => {
 
     return (
         <MyAccountMain>
+
             <Card className="h-fit w-screen md:w-full overflow-x-auto">
                 <table className="w-full text-left">
                     <thead>
