@@ -23,7 +23,7 @@ const index = () => {
     const [show, setShow] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
-    // console.log(countries);
+    console.log(selectedCountry);
 
     const [countryResult, setCountryResult] = useState("")
     const [companyResult, setCompanyResult] = useState("")
@@ -90,11 +90,12 @@ const index = () => {
     const handleRegister = (data) => {
         setIsLoading(true)
 
-        if (selectedCountry) {
-            setIsLoading(false)
-            setCountryResult("Please Select Country")
-            return;
-        }
+        // if (selectedCountry) {
+        //     console.log(selectedCountry);
+        //     setIsLoading(false)
+        //     setCountryResult("Please Select Country")
+        //     return;
+        // }
         if (data?.password !== data?.confirmPassword) {
             setIsLoading(false)
             setPasswordResult("Password Not Matched")
@@ -103,14 +104,14 @@ const index = () => {
 
         const newUser = {
             name: data?.firstName + ' ' + data?.lastName,
-            country: data?.country,
+            country: data?.country ? data?.country : selectedCountry,
             email: data?.email,
             phone: data?.phone && data?.phoneCode + data?.phone,
             password: data?.password,
             company: data?.company,
             role: role,
         }
-        // console.log(newUser);
+        console.log(newUser);
         fetch(`http://localhost:5055/api/user/register`, {
             method: 'POST',
             headers: {
@@ -120,7 +121,7 @@ const index = () => {
         })
             .then(res => res.json())
             .then(data => {
-
+                console.log(data);
                 if (data?.message?.companyMessage) {
                     setCompanyResult(data?.message?.companyMessage)
                     setIsLoading(false)
@@ -131,7 +132,7 @@ const index = () => {
                 }
                 if (data?.success === true) {
                     setIsLoading(false)
-                    router.push('/personalize')
+                    router.push('/')
                     setShow(true)
                 }
                 else {
@@ -150,11 +151,11 @@ const index = () => {
 
                     <form onSubmit={handleSubmit(handleRegister)} className='px-6 md:px-12'>
 
-                        <div className="dropdown">
+                        <div className="dropdown z-50">
 
                             <div className='flex flex-col items-start gap-1 mb-3'>
                                 <p className='text-left font-bold text-gray-900'>Your Region<span className='text-primary'>*</span></p>
-                                <input {...register('country', { required: 'Region is required' })}
+                                <input {...register('country')}
                                     onChange={() => setCountryResult("")}
                                     className='w-full h-10 px-3 border rounded focus:outline-primary cursor-pointer'
                                     type="country" name="country" value={selectedCountry} id="dropdown-btn" readOnly placeholder="Select Your Region" />
@@ -177,8 +178,8 @@ const index = () => {
                             </ul>
                         </div>
 
-                        <div className='mb-6 flex flex-col items-start gap-1'>
-                            <label className='text-left font-bold text-gray-900' htmlFor="region" id='region'>Please Select Trade Role</label>
+                        <div className='mb-6 flex flex-col items-start gap-1 z-0'>
+                            <span className='text-left font-bold text-gray-900'>Please Select Trade Role</span>
                             <div className='flex items-center gap-6'>
                                 <div onClick={() => dispatch(setRole('buyer'))} >
                                     <input className='cursor-pointer' checked={role === 'buyer' && true} type="radio" name="role" id="role1" />
