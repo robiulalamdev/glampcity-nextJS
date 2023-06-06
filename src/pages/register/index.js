@@ -13,17 +13,16 @@ import SuccessAlert from '@/components/AlertComponents/SuccessAlert';
 import ButtonSpinner from '@/components/Loaders/ButtonSpinner';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '@/ContextAPI/AuthProvider';
+import { Option, Select } from '@material-tailwind/react';
 
 const index = () => {
     const { userRefetch, signupWithGoogle } = useContext(AuthContext)
-    const { role, selectedCountry, countries, selectedPhoneCode, showPhoneCode } = useSelector((state) => state.loginRegisterSlice)
+    const { role, selectedCountry, selectedPhoneCode, showPhoneCode } = useSelector((state) => state.loginRegisterSlice)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [agree, setAgree] = useState(false)
     const [show, setShow] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
-    console.log(selectedCountry);
 
     const [countryResult, setCountryResult] = useState("")
     const [companyResult, setCompanyResult] = useState("")
@@ -32,6 +31,8 @@ const index = () => {
 
     const googleProvider = new GoogleAuthProvider()
     const [isLoadingGoogle, setIsLoadingGoogle] = useState(false)
+
+    const [country, setCountry] = useState("")
 
     const router = useRouter()
 
@@ -55,7 +56,7 @@ const index = () => {
                     if (token) {
                         userRefetch()
                         setIsLoading(false)
-                        router.push('/home')
+                        router.push('/')
                         setShow(true)
                     }
                 }
@@ -82,20 +83,12 @@ const index = () => {
                 }
             })
             .catch(err => {
-                // console.log(err)
-            }
-            )
+                console.log(err)
+            })
     }
 
     const handleRegister = (data) => {
         setIsLoading(true)
-
-        // if (selectedCountry) {
-        //     console.log(selectedCountry);
-        //     setIsLoading(false)
-        //     setCountryResult("Please Select Country")
-        //     return;
-        // }
         if (data?.password !== data?.confirmPassword) {
             setIsLoading(false)
             setPasswordResult("Password Not Matched")
@@ -104,14 +97,14 @@ const index = () => {
 
         const newUser = {
             name: data?.firstName + ' ' + data?.lastName,
-            country: data?.country ? data?.country : selectedCountry,
+            country: data?.country,
             email: data?.email,
             phone: data?.phone && data?.phoneCode + data?.phone,
             password: data?.password,
             company: data?.company,
             role: role,
         }
-        console.log(newUser);
+        // console.log(newUser);
         fetch(`http://localhost:5055/api/user/register`, {
             method: 'POST',
             headers: {
@@ -132,7 +125,7 @@ const index = () => {
                 }
                 if (data?.success === true) {
                     setIsLoading(false)
-                    router.push('/')
+                    router.push('/login')
                     setShow(true)
                 }
                 else {
@@ -151,32 +144,19 @@ const index = () => {
 
                     <form onSubmit={handleSubmit(handleRegister)} className='px-6 md:px-12'>
 
-                        <div className="dropdown z-50">
-
-                            <div className='flex flex-col items-start gap-1 mb-3'>
-                                <p className='text-left font-bold text-gray-900'>Your Region<span className='text-primary'>*</span></p>
-                                <input {...register('country')}
-                                    onChange={() => setCountryResult("")}
-                                    className='w-full h-10 px-3 border rounded focus:outline-primary cursor-pointer'
-                                    type="country" name="country" value={selectedCountry} id="dropdown-btn" readOnly placeholder="Select Your Region" />
-
-                                {errors.country && !countryResult && <p className='text-red-600 text-sm'>{errors.country.message}</p>}
-                                {countryResult && <p className='text-red-600 text-sm'>{countryResult}</p>}
-                            </div>
-
-                            <ul className="absolute top-full left-0 hidden dropdown_menu dropdown_menu--animated dropdown_menu-6
-                    grid grid-cols-1 bg-slate-50 shadow-xl shadow-gray-900/30 rounded-md w-full">
-                                {
-                                    countries?.map((country, i) => (
-                                        <span key={i} onClick={() => dispatch(setSelectedCountry(country.fullName))}
-                                            className="flex items-center px-2 h-8 w-full hover:bg-primary hover:text-white">
-                                            <span>{country.fullName}</span>
-                                        </span>
-                                    ))
-                                }
-
-                            </ul>
+                        <div className='flex flex-col items-start gap-1 mb-3'>
+                            <label className='text-left font-bold text-gray-900' htmlFor="country" id='country'>Your Region<span className='text-primary'>*</span></label>
+                            <select {...register('country')}
+                                onChange={(e) => setCountry(e.target.value)}
+                                className='w-full h-10 px-3 border rounded focus:outline-primary cursor-pointer'
+                                type="country" name="country" placeholder="Select Your Region">
+                                <option selected value={"United kingdom"} >United kingdom</option>
+                                <option value={"Nigeria"} >Nigeria</option>
+                            </select>
+                            {errors.country && !countryResult && <p className='text-red-600 text-sm'>{errors.country.message}</p>}
+                            {countryResult && <p className='text-red-600 text-sm'>{countryResult}</p>}
                         </div>
+
 
                         <div className='mb-6 flex flex-col items-start gap-1 z-0'>
                             <span className='text-left font-bold text-gray-900'>Please Select Trade Role</span>
@@ -188,10 +168,6 @@ const index = () => {
                                 <div onClick={() => dispatch(setRole('seller'))}>
                                     <input className='cursor-pointer' checked={role === 'seller' && true} type="radio" name="role" id="role2" />
                                     <label className='cursor-pointer text-gray-600 text-sm ml-2' htmlFor="role2" id='role2'>Seller</label>
-                                </div>
-                                <div onClick={() => dispatch(setRole('both'))}>
-                                    <input className='cursor-pointer' checked={role === 'both' && true} type="radio" name="role" id="role3" />
-                                    <label className='cursor-pointer text-gray-600 text-sm ml-2' htmlFor="role3" id='role3'>Both</label>
                                 </div>
                             </div>
                             {role === '' && <p className='text-red-600 text-sm'>Please select Role</p>}
